@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Uganda JobLink</title>
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background: #0A2A6B;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        h1 {
+            margin-bottom: 80px;
+            font-size: 80px;
+            font-weight: bold;
+            opacity: 0; /* start invisible */
+        }
+
+        /* Zoom-in animation */
+        @keyframes zoomIn {
+            0% {
+                transform: scale(0.2);
+                opacity: 0;
+            }
+            60% {
+                transform: scale(1.1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .animate-title {
+            animation: zoomIn 1.2s ease-out forwards;
+        }
+
+        button {
+            padding: 18px 35px;
+            font-size: 22px;
+            border: none;
+            background: #1DBF73;
+            color: white;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <h1 id="title">Uganda JobsLink</h1>
+
+    <button onclick="document.location='index2.html'">OPEN</button>
+
+    <script>
+        window.onload = () => {
+            const title = document.getElementById("title");
+
+            // Add animation class after a short delay
+            setTimeout(() => {
+                title.classList.add("animate-title");
+            }, 200);
+        };
+    </script>
+
+</body>
+</html>
