@@ -2,11 +2,14 @@
 <html>
 <head>
     <title>Uganda JobLink</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
+        /* Stop sideways movement + full screen */
         body {
             margin: 0;
-            height: 10vh;
+            padding: 0;
+            height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -14,84 +17,80 @@
             background: #0A2A6B;
             color: white;
             font-family: Arial, sans-serif;
+            overflow-x: hidden;
         }
-        @media (max-width: 600px) {
-  body {
-    padding: 0px;
-  }
 
-  .container, .box, .section, .card {
-    width: 200%;
-    margin: 0;
-  }
+        /* Space for your logo */
+        .logo-space {
+            height: 120px; /* adjust when you add logo */
+            width: 100%;
+        }
 
-  h1, h2, h3 {
-    font-size: 70px;
-    text-align: center;
-  }
-
-  button, .btn {
-    width: 100%;
-    font-size: 50px;
-    padding: 10px;
-  }
-
-  img {
-    width: 100%;
-    height: auto;
-  }
-}
-
+        /* Title */
         h1 {
-            margin-bottom: 20px;
-            font-size: 32px;
+            margin: 0 0 30px 0;
+            font-size: 40px;
             font-weight: bold;
-            opacity: 0; /* start invisible */
+            opacity: 0;
+            text-align: center;
         }
 
-        /* Zoom-in animation */
+        /* Zoom animation */
         @keyframes zoomIn {
-            0% {
-                transform: scale(0.2);
-                opacity: 0;
-            }
-            60% {
-                transform: scale(1.1);
-                opacity: 1;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 1;
-            }
+            0% { transform: scale(0.2); opacity: 0; }
+            60% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
         .animate-title {
             animation: zoomIn 1.2s ease-out forwards;
         }
 
+        /* Button */
         button {
-            padding: 15px 40px;
-            font-size: 20px;
+            padding: 18px 40px;
+            font-size: 24px;
             border: none;
             background: #1DBF73;
             color: white;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
+            width: 80%;
+            max-width: 320px;
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 600px) {
+            h1 {
+                font-size: 48px;
+            }
+
+            button {
+                font-size: 28px;
+                padding: 20px;
+            }
+
+            .logo-space {
+                height: 140px;
+            }
         }
     </style>
 </head>
 
 <body>
-    
+
+    <!-- Space for your logo -->
+    <div class="logo-space"></div>
+
+    <!-- Title -->
     <h1 id="title">Uganda JobsLink</h1>
 
+    <!-- Button -->
     <button onclick="document.location='index2.html'">OPEN</button>
 
     <script>
         window.onload = () => {
             const title = document.getElementById("title");
-
-            // Add animation class after a short delay
             setTimeout(() => {
                 title.classList.add("animate-title");
             }, 200);
