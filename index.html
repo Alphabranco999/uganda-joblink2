@@ -5,34 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
-        /* Stop sideways movement + full screen */
+        /* Full screen + center everything */
         body {
             margin: 0;
             padding: 0;
             height: 100vh;
             display: flex;
-            justify-content: center;
-            align-items: center;
             flex-direction: column;
+            justify-content: center;   /* centers vertically */
+            align-items: center;       /* centers horizontally */
             background: #0A2A6B;
             color: white;
             font-family: Arial, sans-serif;
             overflow-x: hidden;
+            text-align: center;
         }
 
         /* Space for your logo */
         .logo-space {
-            height: 120px; /* adjust when you add logo */
+            height: 140px; /* adjust when you add your logo */
             width: 100%;
         }
 
         /* Title */
         h1 {
-            margin: 0 0 30px 0;
-            font-size: 40px;
+            margin: 0 0 40px 0;
+            font-size: 50px;   /* BIG title */
             font-weight: bold;
             opacity: 0;
-            text-align: center;
         }
 
         /* Zoom animation */
@@ -46,32 +46,32 @@
             animation: zoomIn 1.2s ease-out forwards;
         }
 
-        /* Button */
+        /* Big centered button */
         button {
-            padding: 18px 40px;
-            font-size: 24px;
+            padding: 22px 40px;
+            font-size: 30px;       /* BIG button text */
             border: none;
             background: #1DBF73;
             color: white;
-            border-radius: 12px;
+            border-radius: 14px;
             cursor: pointer;
             width: 80%;
-            max-width: 320px;
+            max-width: 350px;
         }
 
-        /* Mobile adjustments */
+        /* Extra phone adjustments */
         @media (max-width: 600px) {
             h1 {
-                font-size: 48px;
+                font-size: 55px;
             }
 
             button {
-                font-size: 28px;
-                padding: 20px;
+                font-size: 32px;
+                padding: 24px;
             }
 
             .logo-space {
-                height: 140px;
+                height: 160px;
             }
         }
     </style>
