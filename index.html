@@ -1,85 +1,109 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Uganda JobLink</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<title>Uganda JobLink</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        /* Full screen + center everything */
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;   /* centers vertically */
-            align-items: center;       /* centers horizontally */
-            background: #0A2A6B;
-            color: white;
-            font-family: Arial, sans-serif;
-            overflow-x: hidden;
-            text-align: center;
-        }
+<style>
+    /* Full screen + center everything */
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;   /* vertical center */
+        align-items: center;       /* horizontal center */
+        background: linear-gradient(135deg, #0A2A6B, #003F8A);
+        font-family: 'Arial', sans-serif;
+        color: white;
+        overflow-x: hidden;
+        text-align: center;
+    }
 
-        /* Space for your logo */
+    /* Logo placeholder */
+    .logo-space {
+        width: 160px;
+        height: 160px;
+        margin-bottom: 30px;
+        background: url('YOUR_LOGO_HERE.png') no-repeat center center;
+        background-size: contain;
+    }
+
+    /* Title */
+    h1 {
+        margin: 0 0 40px 0;
+        font-size: 48px;
+        font-weight: bold;
+        letter-spacing: 1px;
+        opacity: 0;
+        color: #ffffff;
+        text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    }
+
+    /* Zoom animation */
+    @keyframes zoomIn {
+        0% { transform: scale(0.2); opacity: 0; }
+        60% { transform: scale(1.1); opacity: 1; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+
+    .animate-title {
+        animation: zoomIn 1.2s ease-out forwards;
+    }
+
+    /* Button */
+    button {
+        padding: 20px 0;
+        font-size: 26px;
+        font-weight: bold;
+        border: none;
+        border-radius: 14px;
+        width: 80%;
+        max-width: 320px;
+        background: #1DBF73;
+        color: white;
+        cursor: pointer;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+        transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    }
+
+    button:hover {
+        background: #17a361;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 18px rgba(0,0,0,0.3);
+    }
+
+    button:active {
+        transform: scale(0.98);
+        box-shadow: 0 5px 12px rgba(0,0,0,0.25);
+    }
+
+    /* Responsive for small screens */
+    @media (max-width: 600px) {
         .logo-space {
-            height: 140px; /* adjust when you add your logo */
-            width: 100%;
+            width: 140px;
+            height: 140px;
+            margin-bottom: 25px;
         }
 
-        /* Title */
         h1 {
-            margin: 0 0 40px 0;
-            font-size: 50px;   /* BIG title */
-            font-weight: bold;
-            opacity: 0;
+            font-size: 42px;
+            margin-bottom: 30px;
         }
 
-        /* Zoom animation */
-        @keyframes zoomIn {
-            0% { transform: scale(0.2); opacity: 0; }
-            60% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .animate-title {
-            animation: zoomIn 1.2s ease-out forwards;
-        }
-
-        /* Big centered button */
         button {
-            padding: 22px 40px;
-            font-size: 30px;       /* BIG button text */
-            border: none;
-            background: #1DBF73;
-            color: white;
-            border-radius: 14px;
-            cursor: pointer;
-            width: 80%;
-            max-width: 350px;
+            font-size: 24px;
+            padding: 18px 0;
         }
-
-        /* Extra phone adjustments */
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 55px;
-            }
-
-            button {
-                font-size: 32px;
-                padding: 24px;
-            }
-
-            .logo-space {
-                height: 160px;
-            }
-        }
-    </style>
+    }
+</style>
 </head>
 
 <body>
 
-    <!-- Space for your logo -->
+    <!-- Logo placeholder -->
     <div class="logo-space"></div>
 
     <!-- Title -->
