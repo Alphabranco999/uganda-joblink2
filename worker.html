@@ -357,7 +357,9 @@ textarea {
 </div>
 
 <script>
-function validateForm() {
+function validateForm(event) {
+    if (event) event.preventDefault();
+
     let name = document.getElementById("name").value.trim();
     let age = document.getElementById("age").value.trim();
     let phone = document.getElementById("phone").value.trim();
@@ -380,6 +382,8 @@ function validateForm() {
         document.getElementById("popupSuccess").style.display = "none";
     }, 3000);
 }
+
+
 </script>
 
 </body>
