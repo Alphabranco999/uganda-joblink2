@@ -379,7 +379,41 @@ input, select {
 </div>
 
 <script>
+function validateForm() {
+    let name = document.getElementById("name").value.trim();
+    let age = document.getElementById("age").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let emergency = document.getElementById("emergency").value.trim();
+    let location = document.getElementById("location").value.trim();
+    let education = document.getElementById("education").value;
+    let english = document.getElementById("english").value;
+    let jobs = document.querySelectorAll(".job:checked");
 
+    if (
+        !name ||
+        !age ||
+        !phone ||
+        !emergency ||
+        !location ||
+        !education ||
+        !english ||
+        jobs.length === 0
+    ) {
+        document.getElementById("popupError").style.display = "flex";
+
+        setTimeout(function () {
+            document.getElementById("popupError").style.display = "none";
+        }, 2500);
+
+        return;
+    }
+
+    document.getElementById("popupSuccess").style.display = "flex";
+
+    setTimeout(function () {
+        document.getElementById("popupSuccess").style.display = "none";
+    }, 3000);
+}
 </script>
 
 </body>
