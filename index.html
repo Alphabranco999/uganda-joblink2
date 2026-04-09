@@ -6,43 +6,45 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-    /* Full screen + center everything */
     body {
         margin: 0;
         padding: 0;
         height: 100vh;
         display: flex;
         flex-direction: column;
-        justify-content: center;   /* vertical center */
-        align-items: center;       /* horizontal center */
+        justify-content: center;
+        align-items: center;
         background: linear-gradient(135deg, #0A2A6B, #003F8A);
         font-family: 'Arial', sans-serif;
         color: white;
-        overflow-x: hidden;
         text-align: center;
     }
 
-    /* Logo placeholder */
-    .logo-space {
+    /* Logo fade-in */
+    .logo-space img {
         width: 160px;
         height: 160px;
-        margin-bottom: 30px;
-        background: url('') no-repeat center center;
-        background-size: contain;
+        object-fit: contain;
+        opacity: 0;
+        animation: fadeIn 1.2s ease-out forwards;
+        animation-delay: 0.2s;
+        margin-bottom: 25px;
     }
 
-    /* Title */
+    @keyframes fadeIn {
+        0% { opacity: 0; transform: scale(0.8); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+
+    /* Title animation */
     h1 {
-        margin: 0 0 40px 0;
-        font-size: 48px;
+        margin: 0 0 35px 0;
+        font-size: 46px;
         font-weight: bold;
-        letter-spacing: 1px;
         opacity: 0;
-        color: #ffffff;
         text-shadow: 0 4px 8px rgba(0,0,0,0.3);
     }
 
-    /* Zoom animation */
     @keyframes zoomIn {
         0% { transform: scale(0.2); opacity: 0; }
         60% { transform: scale(1.1); opacity: 1; }
@@ -53,10 +55,10 @@
         animation: zoomIn 1.2s ease-out forwards;
     }
 
-    /* Button */
+    /* Button slide-up */
     button {
-        padding: 20px 0;
-        font-size: 26px;
+        padding: 18px 0;
+        font-size: 24px;
         font-weight: bold;
         border: none;
         border-radius: 14px;
@@ -66,36 +68,56 @@
         color: white;
         cursor: pointer;
         box-shadow: 0 6px 15px rgba(0,0,0,0.25);
-        transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+        opacity: 0;
+        transform: translateY(40px);
+        animation: slideUp 1s ease-out forwards;
+        animation-delay: 1.2s;
+    }
+
+    @keyframes slideUp {
+        0% { opacity: 0; transform: translateY(40px); }
+        100% { opacity: 1; transform: translateY(0); }
     }
 
     button:hover {
         background: #17a361;
         transform: translateY(-3px);
-        box-shadow: 0 8px 18px rgba(0,0,0,0.3);
     }
 
     button:active {
-        transform: scale(0.98);
-        box-shadow: 0 5px 12px rgba(0,0,0,0.25);
+        transform: scale(0.97);
     }
 
-    /* Responsive for small screens */
+    /* Loading spinner */
+    .spinner {
+        margin-top: 20px;
+        width: 40px;
+        height: 40px;
+        border: 4px solid rgba(255,255,255,0.3);
+        border-top-color: #1DBF73;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        opacity: 0;
+        animation-delay: 1.4s;
+        animation-fill-mode: forwards;
+    }
+
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+
     @media (max-width: 600px) {
-        .logo-space {
-            width: 140px;
-            height: 140px;
-            margin-bottom: 25px;
+        .logo-space img {
+            width: 130px;
+            height: 130px;
         }
 
         h1 {
-            font-size: 42px;
-            margin-bottom: 30px;
+            font-size: 40px;
         }
 
         button {
-            font-size: 24px;
-            padding: 18px 0;
+            font-size: 22px;
         }
     }
 </style>
@@ -103,21 +125,21 @@
 
 <body>
 
-    <!-- Logo placeholder -->
-    <div class="logo-space"><img src="image_1775753963503.jpeg" alt=Uganda jobsLink Logo</div>
+    <div class="logo-space">
+        <img src="image_1775753963503.jpeg" alt="Uganda JobsLink Logo">
+    </div>
 
-    <!-- Title -->
     <h1 id="title">Uganda JobsLink</h1>
 
-    <!-- Button -->
     <button onclick="document.location='index2.html'">OPEN</button>
+
+    <div class="spinner"></div>
 
     <script>
         window.onload = () => {
-            const title = document.getElementById("title");
             setTimeout(() => {
-                title.classList.add("animate-title");
-            }, 200);
+                document.getElementById("title").classList.add("animate-title");
+            }, 300);
         };
     </script>
 
