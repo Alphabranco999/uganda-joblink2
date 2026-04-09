@@ -19,22 +19,23 @@
         color: white;
         text-align: center;
     }
+.logo-space img {
+    width: 200px;   /* increased from 160px */
+    height: 200px;  /* increased from 160px */
+    object-fit: contain;
+    opacity: 0;
+    animation: fadeIn 1.2s ease-out forwards;
+    animation-delay: 0.2s;
+    margin-bottom: 28px;
+}
 
-    /* Logo fade-in */
+   
+@media (max-width: 600px) {
     .logo-space img {
-        width: 160px;
-        height: 160px;
-        object-fit: contain;
-        opacity: 0;
-        animation: fadeIn 1.2s ease-out forwards;
-        animation-delay: 0.2s;
-        margin-bottom: 25px;
+        width: 170px;
+        height: 170px;
     }
-
-    @keyframes fadeIn {
-        0% { opacity: 0; transform: scale(0.8); }
-        100% { opacity: 1; transform: scale(1); }
-    }
+}
 
     /* Title animation */
     h1 {
