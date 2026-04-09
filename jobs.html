@@ -380,16 +380,13 @@ input, select {
 
 <script>
 function validateForm() {
-    let name = document.getElementById("name").value.trim();
-    let age = document.getElementById("age").value.trim();
-    let phone = document.getElementById("phone").value.trim();
-    let emergency = document.getElementById("emergency").value.trim();
-    let location = document.getElementById("location").value.trim();
-    let education = document.getElementById("education").value;
-    let english = document.getElementById("english").value;
+    let name = document.getElementById("name")?.value.trim();
+    let phone = document.getElementById("phone")?.value.trim();
+    let location = document.getElementById("location")?.value.trim();
+    let workers = document.getElementById("workers")?.value.trim();
     let jobs = document.querySelectorAll(".job:checked");
 
-    if (!name || !age || !phone || !emergency || !location || !education || !english || jobs.length === 0) {
+    if (!name || !phone || !location || !workers || jobs.length === 0) {
         document.getElementById("popupError").style.display = "flex";
         setTimeout(() => {
             document.getElementById("popupError").style.display = "none";
