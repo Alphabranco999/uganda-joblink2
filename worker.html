@@ -398,7 +398,40 @@ function validateForm(event) {
     }, 3000);
 }
 
+document.getElementById("submitBtn").addEventListener("click", validateForm);
 
+function showPopup(id, duration = 3000) {
+    const popup = document.getElementById(id);
+    popup.classList.add("show");
+
+    // auto hide
+    setTimeout(() => {
+        popup.classList.remove("show");
+    }, duration);
+
+    // click to close
+    popup.addEventListener("click", () => {
+        popup.classList.remove("show");
+    });
+}
+
+function validateForm() {
+    let name = document.getElementById("name").value.trim();
+    let age = document.getElementById("age").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let emergency = document.getElementById("emergency").value.trim();
+    let location = document.getElementById("location").value.trim();
+    let education = document.getElementById("education").value;
+    let english = document.getElementById("english").value;
+    let jobs = document.querySelectorAll(".job:checked");
+
+    if (!name || !age || !phone || !emergency || !location || !education || !english || jobs.length === 0) {
+        showPopup("popupError", 2500);
+        return;
+    }
+
+    showPopup("popupSuccess", 3000);
+}
 </script>
 
 </body>
