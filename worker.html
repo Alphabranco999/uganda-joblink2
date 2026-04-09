@@ -417,15 +417,12 @@ function showPopup(id, duration = 3000) {
 
 function validateForm() {
     let name = document.getElementById("name").value.trim();
-    let age = document.getElementById("age").value.trim();
     let phone = document.getElementById("phone").value.trim();
-    let emergency = document.getElementById("emergency").value.trim();
     let location = document.getElementById("location").value.trim();
-    let education = document.getElementById("education").value;
-    let english = document.getElementById("english").value;
+    let workers = document.getElementById("workers").value.trim();
     let jobs = document.querySelectorAll(".job:checked");
 
-    if (!name || !age || !phone || !emergency || !location || !education || !english || jobs.length === 0) {
+    if (!name || !phone || !location || !workers || jobs.length === 0) {
         showPopup("popupError", 2500);
         return;
     }
