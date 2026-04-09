@@ -5,12 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jobslink Uganda</title>
 
+<!-- GOOGLE MATERIAL ICONS -->
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+
 <style>
-    /* GLOBAL */
+/* GLOBAL */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #eef2f7;
+    background: linear-gradient(135deg, #e8eef7, #dce6f5);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -20,20 +23,20 @@ body {
 /* HEADER */
 header {
     background: linear-gradient(135deg, #0057b7, #003f8a);
-    padding: 20px;
+    padding: 22px;
     text-align: center;
     color: white;
-    font-size: 24px;
+    font-size: 26px;
     font-weight: bold;
-    border-radius: 0 0 15px 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    border-radius: 0 0 18px 18px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
 
 /* CONTAINER */
 .container {
     width: 92%;
     max-width: 500px;
-    margin: 15px auto;
+    margin: 20px auto;
     text-align: center;
     flex: 1;
 }
@@ -41,40 +44,45 @@ header {
 /* CARD BOX */
 .box {
     background: white;
-    padding: 25px 20px;
+    padding: 28px 20px;
     border-radius: 18px;
-    margin: 20px 0;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-    transition: 0.2s ease;
+    margin: 22px 0;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    transition: 0.25s ease;
     text-decoration: none;
     color: #000;
     display: block;
 }
 
-/* TAP EFFECT (mobile friendly) */
+/* Hover / Tap */
+.box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+}
+
 .box:active {
     transform: scale(0.97);
 }
 
 /* ICON */
 .icon {
-    font-size: 55px;
+    font-size: 60px;
     color: #0057b7;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 /* TITLE */
 .box h2 {
     margin: 0;
-    font-size: 20px;
-    color: #0057b7;
+    font-size: 22px;
+    color: #003f8a;
     font-weight: bold;
 }
 
 /* TEXT */
 .box p {
     font-size: 15px;
-    margin-top: 6px;
+    margin-top: 8px;
     color: #555;
 }
 
@@ -82,33 +90,33 @@ header {
 .about {
     margin-top: 30px;
     background: white;
-    padding: 18px;
-    border-radius: 14px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
     text-align: left;
     font-size: 15px;
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 .about h3 {
     margin-top: 0;
-    color: #0057b7;
-    font-size: 18px;
+    color: #003f8a;
+    font-size: 19px;
 }
 
 /* WHATSAPP BUTTON */
 .whatsapp-btn {
-    margin-top: 20px;
+    margin-top: 25px;
     display: block;
     background: #25D366;
     color: white;
-    padding: 14px;
+    padding: 15px;
     text-align: center;
-    border-radius: 12px;
+    border-radius: 14px;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: bold;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
     transition: 0.2s;
 }
 
@@ -119,20 +127,20 @@ header {
 /* MOBILE OPTIMIZATION */
 @media (max-width: 600px) {
     header {
-        font-size: 22px;
+        font-size: 23px;
         padding: 18px;
     }
 
     .box {
-        padding: 22px 15px;
+        padding: 24px 16px;
     }
 
     .icon {
-        font-size: 50px;
+        font-size: 52px;
     }
 
     .box h2 {
-        font-size: 18px;
+        font-size: 19px;
     }
 
     .box p {
@@ -158,13 +166,13 @@ header {
 <div class="container">
 
     <a href="worker.html" class="box">
-        <div class="icon">👤</div>
+        <span class="material-icons-round icon">engineering</span>
         <h2>Looking for a Worker</h2>
-        <p>Find skilled workers across Uganda</p>
+        <p>Find skilled and trusted workers across Uganda</p>
     </a>
 
     <a href="jobs.html" class="box">
-        <div class="icon">👥</div>
+        <span class="material-icons-round icon">work</span>
         <h2>Looking for Jobs</h2>
         <p>Discover job opportunities near you</p>
     </a>
