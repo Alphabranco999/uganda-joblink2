@@ -5,15 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jobslink Uganda</title>
 
-<!-- GOOGLE MATERIAL ICONS -->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+<!-- GOOGLE MATERIAL SYMBOLS -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
 
 <style>
 /* GLOBAL */
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #e8eef7, #dce6f5);
+    background: linear-gradient(135deg, #f5f9ff, #e8eef7);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -30,13 +30,49 @@ header {
     font-weight: bold;
     border-radius: 0 0 18px 18px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    animation: dropDown 0.7s ease-out;
+}
+
+@keyframes dropDown {
+    from { transform: translateY(-40px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* TOP LOGO */
+.logo {
+    width: 120px;
+    height: 120px;
+    border-radius: 20px;
+    object-fit: cover;
+    margin: 25px auto 10px;
+    display: block;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.85); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* SECTION LABEL */
+.section-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #003f8a;
+    margin: 10px 0 5px;
+    text-align: left;
+    width: 92%;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* CONTAINER */
 .container {
     width: 92%;
     max-width: 500px;
-    margin: 20px auto;
+    margin: 10px auto;
     text-align: center;
     flex: 1;
 }
@@ -46,12 +82,18 @@ header {
     background: white;
     padding: 28px 20px;
     border-radius: 18px;
-    margin: 22px 0;
+    margin: 18px 0;
     box-shadow: 0 6px 20px rgba(0,0,0,0.12);
     transition: 0.25s ease;
     text-decoration: none;
     color: #000;
     display: block;
+    animation: slideUp 0.7s ease-out;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* Hover / Tap */
@@ -66,6 +108,7 @@ header {
 
 /* ICON */
 .icon {
+    font-family: 'Material Symbols Rounded';
     font-size: 60px;
     color: #0057b7;
     margin-bottom: 12px;
@@ -96,6 +139,7 @@ header {
     text-align: left;
     font-size: 15px;
     line-height: 1.6;
+    animation: fadeIn 1s ease-out;
 }
 
 .about h3 {
@@ -104,57 +148,45 @@ header {
     font-size: 19px;
 }
 
-/* WHATSAPP BUTTON */
-.whatsapp-btn {
-    margin-top: 25px;
-    display: block;
+/* FLOATING WHATSAPP BUTTON */
+.floating-whatsapp {
+    position: fixed;
+    bottom: 22px;
+    right: 22px;
     background: #25D366;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: white;
-    padding: 15px;
-    text-align: center;
-    border-radius: 14px;
+    font-size: 32px;
     text-decoration: none;
-    font-size: 17px;
-    font-weight: bold;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.18);
-    transition: 0.2s;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+    animation: popIn 0.8s ease-out;
 }
 
-.whatsapp-btn:active {
-    transform: scale(0.96);
+@keyframes popIn {
+    from { transform: scale(0.4); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 12px;
+    font-size: 13px;
+    color: #666;
+    margin-top: 20px;
 }
 
 /* MOBILE OPTIMIZATION */
 @media (max-width: 600px) {
-    header {
-        font-size: 23px;
-        padding: 18px;
-    }
-
-    .box {
-        padding: 24px 16px;
-    }
-
-    .icon {
-        font-size: 52px;
-    }
-
-    .box h2 {
-        font-size: 19px;
-    }
-
-    .box p {
-        font-size: 14px;
-    }
-
-    .about {
-        font-size: 14px;
-    }
-
-    .whatsapp-btn {
-        font-size: 15px;
-        padding: 13px;
-    }
+    header { font-size: 23px; }
+    .icon { font-size: 52px; }
+    .box h2 { font-size: 19px; }
+    .box p { font-size: 14px; }
 }
 </style>
 </head>
@@ -163,16 +195,20 @@ header {
 
 <header>Joblink Uganda</header>
 
+<img src="image_1775753963503.jpeg" class="logo" alt="App Logo">
+
+<div class="section-title">Services</div>
+
 <div class="container">
 
     <a href="worker.html" class="box">
-        <span class="material-icons-round icon">engineering</span>
+        <span class="icon">engineering</span>
         <h2>Looking for a Worker</h2>
         <p>Find skilled and trusted workers across Uganda</p>
     </a>
 
     <a href="jobs.html" class="box">
-        <span class="material-icons-round icon">work</span>
+        <span class="icon">work</span>
         <h2>Looking for Jobs</h2>
         <p>Discover job opportunities near you</p>
     </a>
@@ -189,11 +225,14 @@ header {
         </p>
     </div>
 
-    <a class="whatsapp-btn" href="https://wa.me/256771759797" target="_blank">
-        Chat With Us on WhatsApp
-    </a>
-
 </div>
+
+<!-- FLOATING WHATSAPP BUTTON -->
+<a href="https://wa.me/256771759797" target="_blank" class="floating-whatsapp">
+    <span class="material-symbols-rounded">chat</span>
+</a>
+
+<footer>© 2025 Joblink Uganda — All Rights Reserved</footer>
 
 </body>
 </html>
