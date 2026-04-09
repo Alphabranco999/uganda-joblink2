@@ -175,39 +175,34 @@ textarea {
 .bottom-back:hover {
     background: #004a9c;
 }
-
-/* POPUP */
 #popup {
     display: none;
     position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: white;
+    top: 0; 
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
     justify-content: center;
     align-items: center;
     z-index: 9999;
 }
 
 #popupBox {
-    padding: 25px 35px;
-    border-radius: 12px;
-    text-align: center;
-    font-size: 22px;
-    animation: pop 0.4s ease;
+    padding: 20px 30px;
+    background: white;
+    border-radius: 10px;
+    font-size: 20px;
     font-weight: bold;
+    color: white;
 }
+ 
 
 @keyframes pop {
     0% { transform: scale(0.5); opacity: 0; }
     100% { transform: scale(1); opacity: 1; }
 }   
  
-
-
- 
-
-
-  
 
 </style>
 </head>
@@ -343,12 +338,11 @@ textarea {
 
 </div>
 
-
-
 <div id="popup">
-    <div id="popupBox">
-        Submitted. Wait for a company call
-    </div>
+    <div id="popupBox">ya</div>
+</div>
+
+
 </div>
 
 <script>
@@ -368,16 +362,21 @@ function showPopup() {
         }
     });
 
+    // ERROR
     if (!name || !phone || !location || !workers || !jobSelected) {
         document.getElementById("popupBox").innerText = "Some required fields are still empty";
-         document.getElementById("popupBox").style.backgroundColor="Red";
-    } else {
-        document.getElementById("popupBox").innerText = "Submitted. Wait for a company call"; 
-        document.getElementById("popupBox").style.backgroundColor="green";
+        document.getElementById("popupBox").style.backgroundColor = "red";
+    } 
+    // SUCCESS
+    else {
+        document.getElementById("popupBox").innerText = "Submitted. Wait for a company call";
+        document.getElementById("popupBox").style.backgroundColor = "green";
     }
 
+    // SHOW POPUP
     document.getElementById("popup").style.display = "flex";
 
+    // HIDE AFTER 3 SECONDS
     setTimeout(() => {
         document.getElementById("popup").style.display = "none";
     }, 3000);
