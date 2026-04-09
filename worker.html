@@ -343,50 +343,45 @@ textarea {
     <button class="submit-btn" onclick="showPopup()">Submit Request</button>
 
 </div>
-
-<div id="popup">
-    <div id="popupBox">ya</div>
+<!-- SUCCESS POPUP -->
+<div id="popupSuccess">
+    <div id="popupBoxSuccess">
+        Submitted. Wait for a company call
+    </div>
 </div>
 
-
+<!-- ERROR POPUP -->
+<div id="popupError">
+    <div id="popupBoxError">
+        Some required fields are still empty
+    </div>
 </div>
 
 <script>
-function showPopup() {
-
+function validateForm() {
     let name = document.getElementById("name").value.trim();
+    let age = document.getElementById("age").value.trim();
     let phone = document.getElementById("phone").value.trim();
+    let emergency = document.getElementById("emergency").value.trim();
     let location = document.getElementById("location").value.trim();
-    let workers = document.getElementById("workers").value.trim();
+    let education = document.getElementById("education").value;
+    let english = document.getElementById("english").value;
+    let jobs = document.querySelectorAll(".job:checked");
 
-    let jobs = document.querySelectorAll('input[type="checkbox"]');
-    let jobSelected = false;
-
-    jobs.forEach(job => {
-        if (job.checked) {
-            jobSelected = true;
-        }
-    });
-
-    // ERROR
-    if (!name || !phone || !location || !workers || !jobSelected) {
-        document.getElementById("popupBox").innerText = "Some required fields are still empty";
-        document.getElementById("popupBox").style.backgroundColor = "red";
-    } 
-    // SUCCESS
-    else {
-        document.getElementById("popupBox").innerText = "Submitted. Wait for a company call";
-        document.getElementById("popupBox").style.backgroundColor = "green";
+    if (!name || !age || !phone || !emergency || !location || !education || !english || jobs.length === 0) {
+        document.getElementById("popupError").style.display = "flex";
+        setTimeout(() => {
+            document.getElementById("popupError").style.display = "none";
+        }, 2500);
+        return;
     }
 
-    // SHOW POPUP
-    document.getElementById("popup").style.display = "flex";
-
-    // HIDE AFTER 3 SECONDS
+    document.getElementById("popupSuccess").style.display = "flex";
     setTimeout(() => {
-        document.getElementById("popup").style.display = "none";
+        document.getElementById("popupSuccess").style.display = "none";
     }, 3000);
 }
 </script>
+
 </body>
 </html>
