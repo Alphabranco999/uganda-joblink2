@@ -6,175 +6,205 @@
 <title>Employer Registration - Joblink Uganda</title>
 </head>
 <style>
+ /* RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* BODY */
+body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background: #ffffff;
+    font-family: Arial, sans-serif;
+}
+
+/* MOBILE VIEW */
+@media (max-width: 600px) {
     body {
-      margin: 0;
-        padding: 0;
-        width: 100;
-      
-    }
-    @media (max-width: 600px) {
-  body {
-    padding: 10px;
-  }
-
-  .container, .box, .section, .card {
-    width: 100%;
-    margin: 0 auto;
-  }
-
-  h1, h2, h3 {
-    font-size: 22px;
-    text-align: center;
-  }
-
-  button, .btn {
-    width: 100%;
-    font-size: 18px;
-    padding: 14px;
-  }
-
-  img {
-    width: 100%;
-    height: auto;
-  }
-}
-
-    header {
-        background: #0057b7;
-        padding: 20px;
-        text-align: center;
-        color: white;
-        font-size: 22px;
-        font-weight: bold;
+        padding: 10px;
     }
 
-    .container {
-     width: 100%;
-        max-width: 420px;
+    .container, .box, .section, .card {
+        width: 100%;
         margin: 0 auto;
-        padding: 10px;
     }
 
-    label {
-        font-weight: bold;
-        color: #0057b7;
-        display: block;
-        margin-top: 18px;
-        font-size: 16px;
-    }
-
-    input, select, textarea {
-        width: 100%;
-        padding: 12px;
-        font-size: 16px;
-    
-        
-    }
-
-    textarea {
-        height: 100px;
-        resize: none;
-    }
-
-    .job-category {
-        margin-top: 25px;
-        padding: 18px;
-        background: #f5f7fc;
-        border-radius: 14px;
-        border-left: 6px solid #0057b7;
-    }
-
-    .job-category h4 {
-        margin: 0 0 14px 0;
-        color: #0057b7;
-        font-size: 19px;
-        font-weight: bold;
-    }
-
-    .job-list {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-    }
-
-    .job-item {
-        background: white;
-        padding: 10px;
-        border-radius: 10px;
-        border: 1px solid #d9d9d9;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        font-size: 15px;
-    }
-
-    .job-item input {
-        width: 18px;
-        height: 18px;
-    }
-
-    .submit-btn {
-        margin-top: 35px;
-        width: 100%;
-        background: #0057b7;
-        color: white;
-        padding: 16px;
-        border: none;
-        border-radius: 10px;
-        font-size: 18px;
-        font-weight: bold;
-        cursor: pointer;
-    }
-
-    .submit-btn:hover {
-        background: #004a9c;
-    }
-
-    .bottom-back {
-        background: #0057b7;
-        color: white;
-        padding: 18px;
+    h1, h2, h3 {
+        font-size: 22px;
         text-align: center;
+    }
+
+    button, .btn {
+        width: 100%;
         font-size: 18px;
-        font-weight: bold;
-        text-decoration: none;
-        display: block;
-        border-radius: 0;
-        margin-top: 30px;
+        padding: 14px;
     }
 
-    .bottom-back:hover {
-        background: #004a9c;
+    img {
+        width: 100%;
+        height: auto;
     }
-
-    #popup {
-        display:none;
-        position:fixed;
-        top:0; left:0;
-        width:100%; height:100%;
-        background:white;
-        justify-content:center;
-        align-items:center;
-        z-index:9999;
-    }
-
-    #popupBox {
-        
-        padding:25px 35px;
-        border-radius:12px;
-        text-align:center;
-        font-size:22px;
-        
-        animation: pop 0.4s ease;
-        font-weight:bold;
-    }
-
-    @keyframes pop {
-        0% { transform: scale(0.5); opacity:0; }
-        100% { transform: scale(1); opacity:1; }
-    }
-    
 }
+
+/* HEADER */
+header {
+    background: #0057b7;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    border-radius: 0 0 12px 12px;
+}
+
+/* MAIN CONTAINER */
+.container {
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+/* LABELS */
+label {
+    font-weight: bold;
+    color: #0057b7;
+    display: block;
+    margin-top: 18px;
+    font-size: 16px;
+}
+
+/* INPUTS */
+input, select, textarea {
+    width: 100%;
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    margin-top: 6px;
+    background: white;
+}
+
+/* TEXTAREA */
+textarea {
+    height: 100px;
+    resize: none;
+}
+
+/* CATEGORY BOX */
+.job-category {
+    margin-top: 25px;
+    padding: 18px;
+    background: #f5f7fc;
+    border-radius: 14px;
+    border-left: 6px solid #0057b7;
+}
+
+/* CATEGORY TITLE */
+.job-category h4 {
+    margin-bottom: 14px;
+    color: #0057b7;
+    font-size: 19px;
+    font-weight: bold;
+}
+
+/* CHECKBOX GRID */
+.job-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+/* CHECKBOX ITEM */
+.job-item {
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #d9d9d9;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 15px;
+}
+
+/* CHECKBOX SIZE */
+.job-item input {
+    width: 18px;
+    height: 18px;
+}
+
+/* SUBMIT BUTTON */
+.submit-btn {
+    margin-top: 35px;
+    width: 100%;
+    background: #0057b7;
+    color: white;
+    padding: 16px;
+    border: none;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background: #004a9c;
+}
+
+/* BACK BUTTON */
+.bottom-back {
+    background: #0057b7;
+    color: white;
+    padding: 18px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    display: block;
+    margin-top: 30px;
+}
+
+.bottom-back:hover {
+    background: #004a9c;
+}
+
+/* POPUP */
+#popup {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: white;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+#popupBox {
+    padding: 25px 35px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 22px;
+    animation: pop 0.4s ease;
+    font-weight: bold;
+}
+
+@keyframes pop {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}   
+ 
+
+
+ 
+
+
+  
+
 </style>
 </head>
 
