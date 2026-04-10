@@ -12,20 +12,20 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: #f5f9ff;
+    background: #f2f6ff;
     overflow-x: hidden;
 }
 
 /* HEADER */
 header {
     background: linear-gradient(135deg, #0057b7, #003f8a);
-    padding: 20px;
+    padding: 22px;
     text-align: center;
     color: white;
-    font-size: 26px;
+    font-size: 27px;
     font-weight: bold;
-    border-radius: 0 0 20px 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    border-radius: 0 0 28px 28px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
     animation: dropDown 0.7s ease-out;
 }
 
@@ -34,12 +34,19 @@ header {
     to { transform: translateY(0); opacity: 1; }
 }
 
-/* HERO IMAGE */
+/* HERO IMAGE WRAPPER */
+.hero-wrapper {
+    width: 100%;
+    overflow: hidden;
+    border-radius: 0 0 30px 30px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    animation: fadeIn 1s ease-out;
+}
+
 .hero {
     width: 100%;
     height: auto;
     display: block;
-    animation: fadeIn 1s ease-out;
 }
 
 @keyframes fadeIn {
@@ -53,7 +60,7 @@ header {
     font-weight: bold;
     color: #003f8a;
     text-align: center;
-    margin: 25px auto 10px;
+    margin: 28px auto 12px;
     padding-bottom: 6px;
     width: fit-content;
     border-bottom: 3px solid #0057b7;
@@ -69,10 +76,10 @@ header {
 /* CARD BOX */
 .box {
     background: white;
-    padding: 25px 20px;
-    border-radius: 18px;
-    margin: 18px 0;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+    padding: 26px 22px;
+    border-radius: 20px;
+    margin: 20px 0;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.12);
     text-decoration: none;
     color: #000;
     display: block;
@@ -86,20 +93,37 @@ header {
 }
 
 .box:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.18);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(0,0,0,0.18);
 }
 
+/* GLOWING ICON */
 .icon {
     font-family: 'Material Symbols Rounded';
-    font-size: 60px;
+    font-size: 58px;
     color: #0057b7;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+    0% {
+        text-shadow: 0 0 0px rgba(0, 87, 183, 0.4);
+        transform: scale(1);
+    }
+    50% {
+        text-shadow: 0 0 14px rgba(0, 87, 183, 0.9);
+        transform: scale(1.06);
+    }
+    100% {
+        text-shadow: 0 0 0px rgba(0, 87, 183, 0.4);
+        transform: scale(1);
+    }
 }
 
 .box h2 {
     margin: 0;
-    font-size: 22px;
+    font-size: 21px;
     color: #003f8a;
     font-weight: bold;
 }
@@ -112,11 +136,11 @@ header {
 
 /* ABOUT */
 .about {
-    margin-top: 30px;
+    margin-top: 35px;
     background: white;
-    padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+    padding: 22px;
+    border-radius: 18px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
     font-size: 15px;
     line-height: 1.6;
 }
@@ -148,10 +172,10 @@ header {
 /* FOOTER */
 footer {
     text-align: center;
-    padding: 12px;
+    padding: 14px;
     font-size: 13px;
     color: #666;
-    margin-top: 20px;
+    margin-top: 25px;
 }
 </style>
 </head>
@@ -160,8 +184,10 @@ footer {
 
 <header>Joblink Uganda</header>
 
-<!-- FULL-WIDTH HERO IMAGE -->
-<img class="hero" src="image_888.jpg" alt="JobsLink Uganda">
+<!-- HERO IMAGE WITH CURVED BOTTOM -->
+<div class="hero-wrapper">
+    <img class="hero" src="image_888.jpg" alt="JobsLink Uganda">
+</div>
 
 <div class="section-title">Services</div>
 
