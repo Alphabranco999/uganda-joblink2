@@ -34,19 +34,13 @@ header {
     to { transform: translateY(0); opacity: 1; }
 }
 
-/* HERO IMAGE WRAPPER */
-.hero-wrapper {
-    width: 100%;
-    overflow: hidden;
-    border-radius: 0 0 30px 30px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
-    animation: fadeIn 1s ease-out;
-}
-
+/* HERO IMAGE (FREE, NO BOX) */
 .hero {
     width: 100%;
     height: auto;
     display: block;
+    margin: 0;
+    animation: fadeIn 1s ease-out;
 }
 
 @keyframes fadeIn {
@@ -85,6 +79,7 @@ header {
     display: block;
     animation: slideUp 0.7s ease-out;
     transition: 0.25s ease;
+    text-align: center; /* CENTER EVERYTHING */
 }
 
 @keyframes slideUp {
@@ -97,12 +92,15 @@ header {
     box-shadow: 0 12px 28px rgba(0,0,0,0.18);
 }
 
-/* GLOWING ICON */
+/* GLOWING ICON CENTERED */
 .icon {
     font-family: 'Material Symbols Rounded';
     font-size: 58px;
     color: #0057b7;
     margin-bottom: 10px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     animation: glowPulse 2s ease-in-out infinite;
 }
 
@@ -184,10 +182,8 @@ footer {
 
 <header>Joblink Uganda</header>
 
-<!-- HERO IMAGE WITH CURVED BOTTOM -->
-<div class="hero-wrapper">
-    <img class="hero" src="image_888.jpg" alt="JobsLink Uganda">
-</div>
+<!-- FREE IMAGE (NO BOX) -->
+<img class="hero" src="image_888.jpg" alt="JobsLink Uganda">
 
 <div class="section-title">Services</div>
 
