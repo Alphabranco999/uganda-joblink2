@@ -26,7 +26,6 @@
         flex-direction: column;
         align-items: center;
         width: 100%;
-        max-width: 420px;
         transform: translateY(-20px);
     }
 
@@ -38,9 +37,9 @@
         background: #ffffff;
         border-radius: 20px;
         overflow: hidden;
-        box-shadow: 0 0 30px rgba(255,255,255,0.35);
         opacity: 0;
         animation: imageEnter 1.4s ease-out forwards;
+        box-shadow: 0 0 30px rgba(255,255,255,0.35);
     }
 
     @keyframes imageEnter {
@@ -55,40 +54,33 @@
         object-fit: cover;
     }
 
-    /* AUTO-SCALE TEXT TO FIT ANDROID SCREENS */
+    /* AUTO SHRINK TEXT TO FIT ANY ANDROID SCREEN */
     .welcome-wrapper {
-        transform-origin: center;
-        display: inline-block;
         width: 100%;
-        text-align: center;
+        display: flex;
+        justify-content: center;
+        transform-origin: center;
     }
 
-    @media (max-width: 420px) {
-        .welcome-wrapper { transform: scale(0.90); }
-    }
+    /* This forces the text to fit ANY screen */
+    @media (max-width: 450px) { .welcome-wrapper { transform: scale(0.90); } }
+    @media (max-width: 400px) { .welcome-wrapper { transform: scale(0.80); } }
+    @media (max-width: 360px) { .welcome-wrapper { transform: scale(0.70); } }
+    @media (max-width: 330px) { .welcome-wrapper { transform: scale(0.60); } }
 
-    @media (max-width: 380px) {
-        .welcome-wrapper { transform: scale(0.82); }
-    }
-
-    @media (max-width: 350px) {
-        .welcome-wrapper { transform: scale(0.75); }
-    }
-
-    /* FALL + BOUNCE + SETTLE */
+    /* FALL + BOUNCE + LAND */
     .welcome span {
         display: inline-block;
         opacity: 0;
         transform: translateY(-40px);
-        animation: dropBounceSettle 0.85s ease-out forwards;
-        animation-fill-mode: forwards !important;
+        animation: dropBounceLand 0.75s ease-out forwards;
     }
 
-    @keyframes dropBounceSettle {
+    @keyframes dropBounceLand {
         0%   { opacity: 0; transform: translateY(-40px); }
-        55%  { opacity: 1; transform: translateY(0); }
-        75%  { transform: translateY(-12px); }
-        100% { transform: translateY(0); }
+        55%  { opacity: 1; transform: translateY(0); }      /* hit baseline */
+        75%  { transform: translateY(-10px); }               /* bounce */
+        100% { transform: translateY(0); }                   /* land */
     }
 
     .welcome {
