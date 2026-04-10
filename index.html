@@ -57,7 +57,7 @@
         object-fit: cover;
     }
 
-    /* ANDROID-FRIENDLY FALL + BOUNCE LETTERS */
+    /* ANDROID-FRIENDLY FALL + BOUNCE + SETTLE LETTERS */
     .welcome {
         display: inline-block;
         margin-top: -5px;
@@ -81,15 +81,15 @@
         display: inline-block;
         opacity: 0;
         transform: translateY(-35px);
-        animation: dropBounce 0.7s cubic-bezier(.34,1.56,.64,1) forwards;
+        animation: dropBounceSettle 0.75s cubic-bezier(.34,1.56,.64,1) forwards;
     }
 
-    /* FALL + BOUNCE ANIMATION */
-    @keyframes dropBounce {
-        0% { opacity: 0; transform: translateY(-35px); }
-        60% { opacity: 1; transform: translateY(0); }
-        80% { transform: translateY(-8px); }
-        100% { transform: translateY(0); }
+    /* FALL → BOUNCE → SETTLE */
+    @keyframes dropBounceSettle {
+        0%   { opacity: 0; transform: translateY(-35px); }
+        55%  { opacity: 1; transform: translateY(0); }      /* hit baseline */
+        75%  { transform: translateY(-10px); }               /* bounce up */
+        100% { transform: translateY(0); }                   /* settle back */
     }
 
     /* LOADING TEXT */
@@ -187,7 +187,7 @@
         <img src="image_666.png" alt="Uganda JobsLink">
     </div>
 
-    <!-- FALL + BOUNCE LETTERS -->
+    <!-- FALL + BOUNCE + SETTLE LETTERS -->
     <h2 class="welcome">
         <span style="animation-delay:0.05s">C</span>
         <span style="animation-delay:0.10s">o</span>
