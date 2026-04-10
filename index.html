@@ -54,19 +54,12 @@
         object-fit: cover;
     }
 
-    /* AUTO SHRINK TEXT TO FIT ANY ANDROID SCREEN */
-    .welcome-wrapper {
-        width: 100%;
-        display: flex;
-        justify-content: center;
+    /* AUTO-FIT CONTAINER */
+    #fit-box {
+        display: inline-block;
         transform-origin: center;
+        white-space: nowrap;
     }
-
-    /* This forces the text to fit ANY screen */
-    @media (max-width: 450px) { .welcome-wrapper { transform: scale(0.90); } }
-    @media (max-width: 400px) { .welcome-wrapper { transform: scale(0.80); } }
-    @media (max-width: 360px) { .welcome-wrapper { transform: scale(0.70); } }
-    @media (max-width: 330px) { .welcome-wrapper { transform: scale(0.60); } }
 
     /* FALL + BOUNCE + LAND */
     .welcome span {
@@ -78,17 +71,17 @@
 
     @keyframes dropBounceLand {
         0%   { opacity: 0; transform: translateY(-40px); }
-        55%  { opacity: 1; transform: translateY(0); }      /* hit baseline */
-        75%  { transform: translateY(-10px); }               /* bounce */
-        100% { transform: translateY(0); }                   /* land */
+        55%  { opacity: 1; transform: translateY(0); }
+        75%  { transform: translateY(-10px); }
+        100% { transform: translateY(0); }
     }
 
     .welcome {
         font-size: 22px;
         font-weight: 700;
-        white-space: nowrap;
         text-shadow: 0 0 12px rgba(255,255,255,0.45);
         letter-spacing: 0.3px;
+        white-space: nowrap;
     }
 
     /* LOADING TEXT */
@@ -184,8 +177,8 @@
         <img src="image_666.png" alt="Uganda JobsLink">
     </div>
 
-    <!-- AUTO-SCALE WRAPPER -->
-    <div class="welcome-wrapper">
+    <!-- AUTO-FIT BOX -->
+    <div id="fit-box">
         <h2 class="welcome">
             <span style="animation-delay:0.05s">C</span>
             <span style="animation-delay:0.10s">o</span>
@@ -239,24 +232,38 @@
 </div>
 
 <script>
-    window.onload = () => {
-        setTimeout(() => {
-            let percent = 0;
-            let counter = setInterval(() => {
-                percent++;
-                document.getElementById("percent").innerText = percent + "%";
+/* AUTO-SHRINK TEXT TO FIT ANY SCREEN */
+function fitText() {
+    const box = document.getElementById("fit-box");
+    let scale = 1;
 
-                if (percent >= 100) {
-                    clearInterval(counter);
-                    document.body.classList.add("fade-out");
+    while (box.scrollWidth > window.innerWidth - 20) {
+        scale -= 0.02;
+        box.style.transform = "scale(" + scale + ")";
+        if (scale <= 0.45) break;
+    }
+}
 
-                    setTimeout(() => {
-                        window.location.href = "index2.html";
-                    }, 900);
-                }
-            }, 40);
-        }, 2000);
-    };
+window.onload = () => {
+    fitText();
+
+    setTimeout(() => {
+        let percent = 0;
+        let counter = setInterval(() => {
+            percent++;
+            document.getElementById("percent").innerText = percent + "%";
+
+            if (percent >= 100) {
+                clearInterval(counter);
+                document.body.classList.add("fade-out");
+
+                setTimeout(() => {
+                    window.location.href = "index2.html";
+                }, 900);
+            }
+        }, 40);
+    }, 2000);
+};
 </script>
 
 </body>
