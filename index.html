@@ -21,7 +21,6 @@
         overflow: hidden;
     }
 
-    /* WRAPPER */
     .wrapper {
         display: flex;
         flex-direction: column;
@@ -31,7 +30,7 @@
         transform: translateY(-20px);
     }
 
-    /* IMAGE BOX WITH 3D ANIMATION */
+    /* IMAGE BOX */
     .image-box {
         width: 90%;
         max-width: 400px;
@@ -42,7 +41,6 @@
         box-shadow: 0 0 30px rgba(255,255,255,0.35);
         opacity: 0;
         animation: imageEnter 1.4s ease-out forwards;
-        transform-style: preserve-3d;
     }
 
     @keyframes imageEnter {
@@ -57,7 +55,7 @@
         object-fit: cover;
     }
 
-    /* ANDROID-FRIENDLY FALL + BOUNCE + SETTLE LETTERS */
+    /* FALL + BOUNCE + SETTLE (ANDROID FIXED) */
     .welcome {
         display: inline-block;
         margin-top: -5px;
@@ -65,14 +63,12 @@
         font-weight: 700;
         color: #FFFFFF;
         text-shadow: 0 0 12px rgba(255,255,255,0.45);
-        letter-spacing: 0.3px;
         white-space: nowrap;
     }
 
     @media (max-width: 380px) {
         .welcome {
             font-size: 19px;
-            letter-spacing: 0.2px;
             transform: scale(0.95);
         }
     }
@@ -80,16 +76,17 @@
     .welcome span {
         display: inline-block;
         opacity: 0;
-        transform: translateY(-35px);
-        animation: dropBounceSettle 0.75s cubic-bezier(.34,1.56,.64,1) forwards;
+        transform: translateY(-40px);
+        animation: dropBounceSettle 0.85s ease-out forwards;
+        animation-fill-mode: forwards !important;
     }
 
-    /* FALL → BOUNCE → SETTLE */
+    /* FINAL FIX — LETTERS ALWAYS RETURN TO BASELINE */
     @keyframes dropBounceSettle {
-        0%   { opacity: 0; transform: translateY(-35px); }
+        0%   { opacity: 0; transform: translateY(-40px); }
         55%  { opacity: 1; transform: translateY(0); }      /* hit baseline */
-        75%  { transform: translateY(-10px); }               /* bounce up */
-        100% { transform: translateY(0); }                   /* settle back */
+        75%  { transform: translateY(-12px); }               /* bounce up */
+        100% { transform: translateY(0) !important; }        /* settle back */
     }
 
     /* LOADING TEXT */
@@ -121,7 +118,6 @@
         100% { content: '...'; }
     }
 
-    /* PERCENTAGE */
     .percent {
         font-size: 16px;
         margin-top: 6px;
@@ -135,7 +131,6 @@
         to { opacity: 1; }
     }
 
-    /* PROGRESS BAR */
     .progress-container {
         width: 80%;
         height: 12px;
@@ -187,7 +182,7 @@
         <img src="image_666.png" alt="Uganda JobsLink">
     </div>
 
-    <!-- FALL + BOUNCE + SETTLE LETTERS -->
+    <!-- FIXED FALL + BOUNCE + SETTLE -->
     <h2 class="welcome">
         <span style="animation-delay:0.05s">C</span>
         <span style="animation-delay:0.10s">o</span>
