@@ -15,13 +15,13 @@ body {
     justify-content: center;
     align-items: center;
     background: #001A33;
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, sans-serif;
     color: white;
     text-align: center;
     overflow: hidden;
 }
 
-/* FADE OUT EFFECT */
+/* FADE OUT */
 .fade-out {
     animation: fadeOutScreen 0.8s ease forwards;
 }
@@ -38,20 +38,19 @@ body {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    transform: translateY(-20px);
 }
 
-/* IMAGE BOX */
+/* IMAGE */
 .image-box {
     width: 90%;
     max-width: 400px;
     height: 260px;
-    background: #ffffff;
+    background: #fff;
     border-radius: 20px;
     overflow: hidden;
     opacity: 0;
     animation: imageEnter 1.2s ease-out forwards;
-    box-shadow: 0 0 30px rgba(255,255,255,0.35);
+    box-shadow: 0 0 30px rgba(255,255,255,0.3);
 }
 
 @keyframes imageEnter {
@@ -66,44 +65,54 @@ body {
     object-fit: cover;
 }
 
-/* AUTO-FIT CONTAINER */
+/* TEXT CONTAINER */
 #fit-box {
     display: inline-block;
     transform-origin: center;
     white-space: nowrap;
 }
 
-/* SMOOTH FALL + QUICK LAND */
+/* LETTER ANIMATION (FIXED) */
 .welcome span {
     display: inline-block;
     opacity: 0;
-    transform: translateY(-50px);
-    animation: dropBounceLand 0.6s ease-out forwards;
+    transform: translateY(-60px);
+    animation: dropStay 0.7s cubic-bezier(0.25, 1.5, 0.5, 1) forwards;
 }
 
-@keyframes dropBounceLand {
-    0%   { opacity: 0; transform: translateY(-50px); }
-    60%  { opacity: 1; transform: translateY(5px); }
-    80%  { transform: translateY(-3px); }
-    100% { transform: translateY(0); }
+@keyframes dropStay {
+    0% {
+        opacity: 0;
+        transform: translateY(-60px);
+    }
+    70% {
+        opacity: 1;
+        transform: translateY(8px);
+    }
+    85% {
+        transform: translateY(-3px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-/* TEXT STYLE */
+/* IMPROVED TEXT SIZE (SLIGHTLY BIGGER) */
 .welcome {
-    font-size: 20px;
-    font-weight: 600;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    font-size: 24px; /* increased a bit */
+    font-weight: 700;
     letter-spacing: 1px;
-    white-space: nowrap;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.4);
 }
 
-/* LOADING TEXT */
+/* LOADING */
 .loading-text {
     font-size: 14px;
     margin-top: 20px;
     opacity: 0;
     animation: fadeInText 1s ease-out forwards;
-    animation-delay: 1.4s;
+    animation-delay: 1.5s;
     color: #D0D8E0;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -126,12 +135,13 @@ body {
     100% { content: '...'; }
 }
 
+/* PERCENT */
 .percent {
     font-size: 15px;
     margin-top: 6px;
     opacity: 0;
     animation: fadeInPercent 1s ease-out forwards;
-    animation-delay: 1.6s;
+    animation-delay: 1.7s;
 }
 
 @keyframes fadeInPercent {
@@ -139,6 +149,7 @@ body {
     to { opacity: 1; }
 }
 
+/* PROGRESS BAR */
 .progress-container {
     width: 80%;
     height: 10px;
@@ -148,8 +159,7 @@ body {
     overflow: hidden;
     opacity: 0;
     animation: fadeInBar 1s ease-out forwards;
-    animation-delay: 1.8s;
-    box-shadow: 0 0 12px rgba(255,255,255,0.25);
+    animation-delay: 1.9s;
 }
 
 @keyframes fadeInBar {
@@ -163,7 +173,7 @@ body {
     background: linear-gradient(90deg, #00FFA3, #00D4FF, #0084FF);
     background-size: 300% 100%;
     animation: loadBar 3.5s ease-out forwards, glowShift 3s linear infinite;
-    animation-delay: 2s;
+    animation-delay: 2.1s;
     border-radius: 20px;
 }
 
@@ -193,7 +203,7 @@ body {
     <div id="fit-box">
         <h2 class="welcome">
 
-            <!-- Faster animation sequence -->
+            <!-- SAME TEXT, JUST FASTER TIMING -->
             <!-- Connecting -->
             <span style="animation-delay:0.03s">C</span>
             <span style="animation-delay:0.06s">o</span>
@@ -245,14 +255,13 @@ body {
     <div class="percent" id="percent">0%</div>
 
     <div class="progress-container">
-        <div class="progress-bar" id="bar"></div>
+        <div class="progress-bar"></div>
     </div>
 
 </div>
 
 <script>
 
-/* AUTO-SHRINK TEXT */
 function fitText() {
     const box = document.getElementById("fit-box");
     let scale = 1;
