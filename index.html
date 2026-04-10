@@ -13,7 +13,7 @@
         height: 100vh;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
+        justify-content: center; /* CENTER EVERYTHING */
         align-items: center;
 
         background: #001A33;
@@ -27,10 +27,9 @@
     .image-box {
         width: 85%;
         max-width: 380px;
-        height: 200px;
+        height: 180px; /* slightly reduced height */
         background: #ffffff;
         border-radius: 18px;
-        margin-top: 35px;
         overflow: hidden;
         box-shadow: 0 0 25px rgba(255,255,255,0.35);
         opacity: 0;
@@ -38,7 +37,7 @@
     }
 
     @keyframes fadeBox {
-        from { opacity: 0; transform: translateY(-30px); }
+        from { opacity: 0; transform: translateY(-20px); }
         to { opacity: 1; transform: translateY(0); }
     }
 
@@ -54,7 +53,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 25px;
+        margin-top: 15px; /* reduced spacing */
     }
 
     /* SUBTITLE */
@@ -75,8 +74,8 @@
 
     /* TITLE */
     h1 {
-        margin: 10px 0 20px 0;
-        font-size: 32px;
+        margin: 8px 0 10px 0; /* reduced spacing */
+        font-size: 30px;
         font-weight: bold;
         opacity: 0;
         animation: zoomIn 1.2s ease-out forwards;
@@ -92,8 +91,8 @@
 
     /* UNIQUE LOADING TEXT */
     .loading-text {
-        font-size: 18px;
-        margin-top: 20px;
+        font-size: 17px;
+        margin-top: 10px; /* pulled up */
         opacity: 0;
         animation: fadeInText 1s ease-out forwards;
         animation-delay: 2s;
@@ -107,7 +106,6 @@
         to { opacity: 1; }
     }
 
-    /* PULSE DOTS */
     .dots::after {
         content: '';
         animation: dots 1.5s infinite;
@@ -122,8 +120,8 @@
 
     /* PERCENTAGE */
     .percent {
-        font-size: 20px;
-        margin-top: 8px;
+        font-size: 18px;
+        margin-top: 5px; /* tighter spacing */
         opacity: 0;
         animation: fadeInPercent 1s ease-out forwards;
         animation-delay: 2.2s;
@@ -137,12 +135,12 @@
 
     /* UNIQUE PROGRESS BAR */
     .progress-container {
-        width: 80%;
-        max-width: 320px;
-        height: 14px;
+        width: 75%;
+        max-width: 300px;
+        height: 12px;
         background: rgba(255,255,255,0.12);
         border-radius: 30px;
-        margin-top: 18px;
+        margin-top: 10px; /* pulled up */
         overflow: hidden;
         opacity: 0;
         animation: fadeInBar 1s ease-out forwards;
