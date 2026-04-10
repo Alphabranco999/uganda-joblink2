@@ -15,16 +15,14 @@
         flex-direction: column;
         align-items: center;
 
-        /* DEEP NAVY BACKGROUND */
         background: #001A33;
-
         font-family: 'Arial', sans-serif;
         color: white;
         text-align: center;
         overflow: hidden;
     }
 
-    /* TOP IMAGE COVERING UPPER PART */
+    /* TOP IMAGE */
     .top-image {
         width: 100%;
         height: 45vh;
@@ -32,7 +30,6 @@
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-
         animation: fadeInTop 1.2s ease-out forwards;
         opacity: 0;
     }
@@ -42,11 +39,11 @@
         to { opacity: 1; transform: translateY(0); }
     }
 
-    /* TAGLINE BELOW IMAGE */
+    /* QUOTE */
     .welcome {
         font-size: 24px;
         font-weight: bold;
-        margin-top: -20px;
+        margin-top: 15px;
         opacity: 0;
         color: #ffffff;
         text-shadow: 0 3px 8px rgba(0,0,0,0.3);
@@ -176,7 +173,7 @@
     <!-- TOP IMAGE -->
     <div class="top-image"></div>
 
-    <!-- TAGLINE -->
+    <!-- QUOTE -->
     <h2 class="welcome">Connecting Workers and Employers</h2>
 
     <!-- TITLE -->
@@ -219,7 +216,7 @@
                     }, 900);
                 }
             }, 40);
-        }, 2000); // 2-second delay
+        }, 2000);
     };
 </script>
 
