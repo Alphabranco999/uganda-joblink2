@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jobslink Uganda</title>
 
-<!-- GOOGLE MATERIAL SYMBOLS -->
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded" rel="stylesheet" />
 
 <style>
@@ -13,22 +12,19 @@
 body {
     margin: 0;
     font-family: Arial, sans-serif;
-    background: linear-gradient(135deg, #f5f9ff, #e8eef7);
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+    background: #f5f9ff;
     overflow-x: hidden;
 }
 
 /* HEADER */
 header {
     background: linear-gradient(135deg, #0057b7, #003f8a);
-    padding: 22px;
+    padding: 20px;
     text-align: center;
     color: white;
     font-size: 26px;
     font-weight: bold;
-    border-radius: 0 0 18px 18px;
+    border-radius: 0 0 20px 20px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.25);
     animation: dropDown 0.7s ease-out;
 }
@@ -38,23 +34,22 @@ header {
     to { transform: translateY(0); opacity: 1; }
 }
 
-/* TOP LOGO */
-.logo {
+/* HERO IMAGE */
+.hero {
     width: 100%;
     height: auto;
     display: block;
-    margin: 20px auto;
+    animation: fadeIn 1s ease-out;
 }
 
-
 @keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.85); }
-    to { opacity: 1; transform: scale(1); }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 /* SECTION TITLE */
 .section-title {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: bold;
     color: #003f8a;
     text-align: center;
@@ -62,8 +57,6 @@ header {
     padding-bottom: 6px;
     width: fit-content;
     border-bottom: 3px solid #0057b7;
-    letter-spacing: 0.5px;
-    animation: fadeIn 0.8s ease-out;
 }
 
 /* CONTAINER */
@@ -71,22 +64,20 @@ header {
     width: 92%;
     max-width: 500px;
     margin: 10px auto;
-    text-align: center;
-    flex: 1;
 }
 
 /* CARD BOX */
 .box {
     background: white;
-    padding: 28px 20px;
+    padding: 25px 20px;
     border-radius: 18px;
     margin: 18px 0;
     box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-    transition: 0.25s ease;
     text-decoration: none;
     color: #000;
     display: block;
     animation: slideUp 0.7s ease-out;
+    transition: 0.25s ease;
 }
 
 @keyframes slideUp {
@@ -94,17 +85,11 @@ header {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Hover / Tap */
 .box:hover {
     transform: translateY(-4px);
     box-shadow: 0 10px 25px rgba(0,0,0,0.18);
 }
 
-.box:active {
-    transform: scale(0.97);
-}
-
-/* ICON */
 .icon {
     font-family: 'Material Symbols Rounded';
     font-size: 60px;
@@ -112,7 +97,6 @@ header {
     margin-bottom: 12px;
 }
 
-/* TITLE */
 .box h2 {
     margin: 0;
     font-size: 22px;
@@ -120,7 +104,6 @@ header {
     font-weight: bold;
 }
 
-/* TEXT */
 .box p {
     font-size: 15px;
     margin-top: 8px;
@@ -134,19 +117,11 @@ header {
     padding: 20px;
     border-radius: 16px;
     box-shadow: 0 4px 14px rgba(0,0,0,0.12);
-    text-align: left;
     font-size: 15px;
     line-height: 1.6;
-    animation: fadeIn 1s ease-out;
 }
 
-.about h3 {
-    margin-top: 0;
-    color: #003f8a;
-    font-size: 19px;
-}
-
-/* FLOATING WHATSAPP BUTTON */
+/* WHATSAPP BUTTON */
 .floating-whatsapp {
     position: fixed;
     bottom: 22px;
@@ -178,14 +153,6 @@ footer {
     color: #666;
     margin-top: 20px;
 }
-
-/* MOBILE OPTIMIZATION */
-@media (max-width: 600px) {
-    header { font-size: 23px; }
-    .icon { font-size: 52px; }
-    .box h2 { font-size: 19px; }
-    .box p { font-size: 14px; }
-}
 </style>
 </head>
 
@@ -193,9 +160,8 @@ footer {
 
 <header>Joblink Uganda</header>
 
-<img class="logo" src="image_888.jpg" alt="Uganda JobsLink Logo">
-
-
+<!-- FULL-WIDTH HERO IMAGE -->
+<img class="hero" src="image_888.jpg" alt="JobsLink Uganda">
 
 <div class="section-title">Services</div>
 
@@ -227,7 +193,6 @@ footer {
 
 </div>
 
-<!-- FLOATING WHATSAPP BUTTON -->
 <a href="https://wa.me/256771759797" target="_blank" class="floating-whatsapp">
     <span class="material-symbols-rounded">chat</span>
 </a>
