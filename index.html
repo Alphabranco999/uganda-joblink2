@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Uganda JobLink</title>
+<title>Uganda JobsLink</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
@@ -15,37 +15,53 @@
         justify-content: center;
         align-items: center;
 
-        /* NEW ANDROID-STYLE BACKGROUND */
-        background: radial-gradient(circle at top, #1A73E8, #003F8A 70%);
-        
+        background: linear-gradient(145deg, #003F8A, #0057D9, #1A73E8);
+        background-size: 300% 300%;
+        animation: bgMove 12s ease infinite;
+
         font-family: 'Arial', sans-serif;
         color: white;
         text-align: center;
+        overflow: hidden;
     }
 
-    /* Logo */
+    @keyframes bgMove {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+
+    /* 3D ROTATING LOGO */
     .logo-space img {
-        width: 500px;
-        height: 500px;
+        width: 260px;
+        height: 260px;
         object-fit: contain;
         opacity: 0;
-        animation: fadeIn 1.2s ease-out forwards;
-        animation-delay: 0.2s;
-        margin-bottom: 28px;
+        animation: fadeIn 0.5s ease-out forwards, rotate3D 3s ease-out forwards;
+        animation-delay: 0.2s, 0.2s;
+        margin-bottom: 25px;
+        filter: drop-shadow(0 6px 12px rgba(0,0,0,0.35));
+        transform-style: preserve-3d;
     }
 
     @keyframes fadeIn {
-        0% { opacity: 0; transform: scale(0.8); }
+        0% { opacity: 0; transform: scale(0.7); }
         100% { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes rotate3D {
+        0% { transform: rotateY(0deg) scale(0.9); }
+        50% { transform: rotateY(180deg) scale(1.05); }
+        100% { transform: rotateY(360deg) scale(1); }
     }
 
     /* Title */
     h1 {
-        margin: 0 0 35px 0;
-        font-size: 46px;
+        margin: 0 0 20px 0;
+        font-size: 42px;
         font-weight: bold;
         opacity: 0;
-        text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        text-shadow: 0 4px 10px rgba(0,0,0,0.35);
     }
 
     @keyframes zoomIn {
@@ -58,61 +74,105 @@
         animation: zoomIn 1.2s ease-out forwards;
     }
 
-    /* Button */
-    button {
-        padding: 18px 0;
-        font-size: 24px;
-        font-weight: bold;
-        border: none;
-        border-radius: 14px;
-        width: 80%;
-        max-width: 320px;
-        background: #1DBF73;
-        color: white;
-        cursor: pointer;
-        box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+    /* Loading Text Animation */
+    .loading-text {
+        font-size: 20px;
+        margin-top: 10px;
         opacity: 0;
-        transform: translateY(40px);
-        animation: slideUp 1s ease-out forwards;
+        animation: fadeInText 1s ease-out forwards;
         animation-delay: 1.2s;
     }
 
-    @keyframes slideUp {
-        0% { opacity: 0; transform: translateY(40px); }
-        100% { opacity: 1; transform: translateY(0); }
+    @keyframes fadeInText {
+        from { opacity: 0; }
+        to { opacity: 1; }
     }
 
-    /* Spinner */
-    .spinner {
-        margin-top: 20px;
-        width: 40px;
-        height: 40px;
-        border: 4px solid rgba(255,255,255,0.3);
-        border-top-color: #1DBF73;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
+    .dots::after {
+        content: '';
+        animation: dots 1.5s infinite;
+    }
+
+    @keyframes dots {
+        0% { content: ''; }
+        33% { content: '.'; }
+        66% { content: '..'; }
+        100% { content: '...'; }
+    }
+
+    /* Percentage Counter */
+    .percent {
+        font-size: 22px;
+        margin-top: 8px;
         opacity: 0;
+        animation: fadeInPercent 1s ease-out forwards;
         animation-delay: 1.4s;
-        animation-fill-mode: forwards;
     }
 
-    @keyframes spin {
-        to { transform: rotate(360deg); }
+    @keyframes fadeInPercent {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    /* Multi-color Progress Bar */
+    .progress-container {
+        width: 80%;
+        max-width: 320px;
+        height: 14px;
+        background: rgba(255,255,255,0.25);
+        border-radius: 10px;
+        margin-top: 20px;
+        overflow: hidden;
+        opacity: 0;
+        animation: fadeInBar 1s ease-out forwards;
+        animation-delay: 1.5s;
+    }
+
+    @keyframes fadeInBar {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    .progress-bar {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, #1DBF73, #FFD700, #FF5733, #1A73E8);
+        background-size: 300% 100%;
+        animation: loadBar 4s ease-out forwards, colorShift 4s linear infinite;
+        animation-delay: 1.6s;
+    }
+
+    @keyframes loadBar {
+        0% { width: 0%; }
+        30% { width: 40%; }
+        60% { width: 75%; }
+        100% { width: 100%; }
+    }
+
+    @keyframes colorShift {
+        0% { background-position: 0% 50%; }
+        100% { background-position: 100% 50%; }
+    }
+
+    /* Fade-out transition */
+    .fade-out {
+        animation: fadeOutScreen 1s ease forwards;
+    }
+
+    @keyframes fadeOutScreen {
+        from { opacity: 1; }
+        to { opacity: 0; transform: scale(1.05); }
     }
 
     /* Mobile */
     @media (max-width: 600px) {
         .logo-space img {
-            width: 170px;
-            height: 170px;
+            width: 180px;
+            height: 180px;
         }
 
         h1 {
-            font-size: 40px;
-        }
-
-        button {
-            font-size: 22px;
+            font-size: 34px;
         }
     }
 </style>
@@ -126,17 +186,41 @@
 
     <h1 id="title">Uganda JobsLink</h1>
 
-    <button onclick="document.location='index2.html'">OPEN</button>
+    <div class="loading-text"><span class="dots">Loading</span></div>
 
-    <div class="spinner"></div>
+    <div class="percent" id="percent">0%</div>
 
-    <script>
-        window.onload = () => {
-            setTimeout(() => {
-                document.getElementById("title").classList.add("animate-title");
-            }, 300);
-        };
-    </script>
+    <div class="progress-container">
+        <div class="progress-bar" id="bar"></div>
+    </div>
+
+<script>
+    window.onload = () => {
+
+        // Title animation
+        setTimeout(() => {
+            document.getElementById("title").classList.add("animate-title");
+        }, 300);
+
+        // Percentage counter
+        let percent = 0;
+        let counter = setInterval(() => {
+            percent++;
+            document.getElementById("percent").innerText = percent + "%";
+
+            if (percent >= 100) {
+                clearInterval(counter);
+
+                // Fade out transition
+                document.body.classList.add("fade-out");
+
+                setTimeout(() => {
+                    window.location.href = "index2.html";
+                }, 900);
+            }
+        }, 40);
+    };
+</script>
 
 </body>
 </html>
