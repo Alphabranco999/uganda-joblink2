@@ -34,12 +34,11 @@ header {
     to { transform: translateY(0); opacity: 1; }
 }
 
-/* HERO IMAGE (FREE, NO BOX) */
+/* HERO IMAGE */
 .hero {
     width: 100%;
     height: auto;
     display: block;
-    margin: 0;
     animation: fadeIn 1s ease-out;
 }
 
@@ -77,9 +76,9 @@ header {
     text-decoration: none;
     color: #000;
     display: block;
+    text-align: center;
     animation: slideUp 0.7s ease-out;
     transition: 0.25s ease;
-    text-align: center; /* CENTER EVERYTHING */
 }
 
 @keyframes slideUp {
@@ -92,55 +91,54 @@ header {
     box-shadow: 0 12px 28px rgba(0,0,0,0.18);
 }
 
-/* GLOWING ICON CENTERED */
+/* GLOWING ICON */
 .icon {
     font-family: 'Material Symbols Rounded';
     font-size: 58px;
     color: #0057b7;
     margin-bottom: 10px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
     animation: glowPulse 2s ease-in-out infinite;
 }
 
 @keyframes glowPulse {
-    0% {
-        text-shadow: 0 0 0px rgba(0, 87, 183, 0.4);
-        transform: scale(1);
-    }
-    50% {
-        text-shadow: 0 0 14px rgba(0, 87, 183, 0.9);
-        transform: scale(1.06);
-    }
-    100% {
-        text-shadow: 0 0 0px rgba(0, 87, 183, 0.4);
-        transform: scale(1);
-    }
+    0% { text-shadow: 0 0 0px rgba(0,87,183,0.4); transform: scale(1); }
+    50% { text-shadow: 0 0 14px rgba(0,87,183,0.9); transform: scale(1.06); }
+    100% { text-shadow: 0 0 0px rgba(0,87,183,0.4); transform: scale(1); }
 }
 
-.box h2 {
-    margin: 0;
-    font-size: 21px;
+/* ABOUT SECTION */
+.about {
+    margin-top: 40px;
+    background: white;
+    padding: 28px 22px;
+    border-radius: 22px;
+    box-shadow: 0 8px 22px rgba(0,0,0,0.10);
+    animation: fadeIn 1s ease-out;
+}
+
+.about-icon {
+    font-size: 48px;
+    color: #0057b7;
+    display: block;
+    text-align: center;
+    margin-bottom: 10px;
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+.about h3 {
+    text-align: center;
+    font-size: 22px;
     color: #003f8a;
+    margin-bottom: 15px;
     font-weight: bold;
 }
 
-.box p {
+.about p {
     font-size: 15px;
-    margin-top: 8px;
-    color: #555;
-}
-
-/* ABOUT */
-.about {
-    margin-top: 35px;
-    background: white;
-    padding: 22px;
-    border-radius: 18px;
-    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
-    font-size: 15px;
-    line-height: 1.6;
+    color: #444;
+    line-height: 1.7;
+    margin-bottom: 12px;
+    text-align: center;
 }
 
 /* WHATSAPP BUTTON */
@@ -175,25 +173,6 @@ footer {
     color: #666;
     margin-top: 25px;
 }
-
-    .about {
-    margin-top: 35px;
-    background: white;
-    padding: 25px;
-    border-radius: 20px;
-    box-shadow: 0 8px 22px rgba(0,0,0,0.12);
-    font-size: 15px;
-    line-height: 1.7;
-    animation: fadeIn 1s ease-out;
-}
-
-.about h3 {
-    text-align: center;
-    font-size: 22px;
-    color: #003f8a;
-    margin-bottom: 15px;
-}
-
 </style>
 </head>
 
@@ -201,7 +180,6 @@ footer {
 
 <header>Joblink Uganda</header>
 
-<!-- FREE IMAGE (NO BOX) -->
 <img class="hero" src="image_888.jpg" alt="JobsLink Uganda">
 
 <div class="section-title">Services</div>
@@ -219,21 +197,26 @@ footer {
         <h2>Looking for Jobs</h2>
         <p>Discover job opportunities near you</p>
     </a>
-<div class="about">
-    <h3>About Us</h3>
-    <p>
-        Joblink Uganda is a digital platform designed to connect employers with skilled workers across all regions of Uganda.  
-        We make job searching simple, fast, and accessible for everyone — from local workers to professional job seekers.
-    </p>
-    <p>
-        Our mission is to bridge the gap between talent and opportunity by providing a trusted space where people can find real jobs and employers can find reliable workers.
-    </p>
-    <p>
-        We believe in empowering communities, supporting local talent, and creating opportunities that improve livelihoods across Uganda.
-    </p>
-</div>
 
-    
+    <!-- BEAUTIFUL ABOUT US SECTION -->
+    <div class="about">
+        <span class="about-icon material-symbols-rounded">info</span>
+        <h3>About Us</h3>
+
+        <p>
+            Joblink Uganda is a digital platform that connects employers with skilled workers across all regions of Uganda.
+            We make job searching simple, fast, and accessible for everyone — from local workers to professional job seekers.
+        </p>
+
+        <p>
+            Our mission is to bridge the gap between talent and opportunity by providing a trusted space where people can find real jobs and employers can find reliable workers.
+        </p>
+
+        <p>
+            We believe in empowering communities, supporting local talent, and creating opportunities that improve livelihoods across Uganda.
+        </p>
+    </div>
+
 </div>
 
 <a href="https://wa.me/256771759797" target="_blank" class="floating-whatsapp">
