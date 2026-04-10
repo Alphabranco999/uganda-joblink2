@@ -28,22 +28,22 @@
         align-items: center;
         width: 100%;
         max-width: 420px;
-        transform: translateY(-35px); /* LIFT EVERYTHING UP */
+        transform: translateY(-35px); /* lift everything */
     }
 
     /* WHITE GLOWING IMAGE BOX */
     .image-box {
-        width: 90%;              /* left/right spacing */
+        width: 90%;
         max-width: 400px;
-        height: 240px;           /* INCREASED HEIGHT */
+        height: 240px; /* increased height */
         background: #ffffff;
         border-radius: 18px;
         overflow: hidden;
         box-shadow: 0 0 25px rgba(255,255,255,0.35);
         opacity: 0;
         animation: fadeBox 1.2s ease-out forwards;
-        transform: translateY(-40px); /* PULL IMAGE UP MORE */
-        margin-bottom: 15px;     /* spacing below image */
+        transform: translateY(-40px); /* pull image up */
+        margin-bottom: 18px;
     }
 
     @keyframes fadeBox {
@@ -57,42 +57,28 @@
         object-fit: cover;
     }
 
-    /* SUBTITLE */
+    /* MAIN SUBTITLE (NOW THE MAIN TITLE) */
     .welcome {
-        font-size: 19px;
-        font-weight: 600;
+        font-size: 24px;              /* bigger */
+        font-weight: 700;             /* bolder */
         margin-top: 0;
         opacity: 0;
         animation: fadeWelcome 1.2s ease-out forwards;
         animation-delay: 0.6s;
-        color: #E0E8F0;
+        color: #FFFFFF;
+        text-shadow: 0 0 12px rgba(255,255,255,0.35); /* glow */
+        letter-spacing: 0.5px;
     }
 
     @keyframes fadeWelcome {
-        from { opacity: 0; transform: translateY(8px); }
+        from { opacity: 0; transform: translateY(10px); }
         to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* TITLE */
-    h1 {
-        margin: 6px 0 10px 0;
-        font-size: 29px;
-        font-weight: bold;
-        opacity: 0;
-        animation: zoomIn 1.2s ease-out forwards;
-        animation-delay: 1s;
-    }
-
-    @keyframes zoomIn {
-        0% { transform: scale(0.85); opacity: 0; }
-        60% { transform: scale(1.05); opacity: 1; }
-        100% { transform: scale(1); opacity: 1; }
     }
 
     /* LOADING TEXT */
     .loading-text {
         font-size: 16px;
-        margin-top: 8px;
+        margin-top: 12px;
         opacity: 0;
         animation: fadeInText 1s ease-out forwards;
         animation-delay: 1.6s;
@@ -184,9 +170,8 @@
         <img src="image_666.png" alt="Uganda JobsLink">
     </div>
 
+    <!-- MAIN TITLE NOW -->
     <h2 class="welcome">Connecting Workers and Employers</h2>
-
-    <h1 id="title">Uganda JobsLink</h1>
 
     <div class="loading-text"><span class="dots">Loading</span></div>
 
