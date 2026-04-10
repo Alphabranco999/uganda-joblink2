@@ -15,20 +15,13 @@
         justify-content: center;
         align-items: center;
 
-        background: linear-gradient(145deg, #003F8A, #0057D9, #1A73E8);
-        background-size: 300% 300%;
-        animation: bgMove 12s ease infinite;
+        /* CLEAN WHITE BACKGROUND */
+        background: #ffffff;
 
         font-family: 'Arial', sans-serif;
-        color: white;
+        color: #003F8A;
         text-align: center;
         overflow: hidden;
-    }
-
-    @keyframes bgMove {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
     }
 
     /* IMPROVED 3D ROTATING LOGO */
@@ -42,7 +35,7 @@
         margin-bottom: 25px;
 
         /* Soft glow behind logo */
-        filter: drop-shadow(0 0 25px rgba(255,255,255,0.35));
+        filter: drop-shadow(0 0 25px rgba(0,0,0,0.25));
         transform-style: preserve-3d;
     }
 
@@ -63,7 +56,7 @@
         font-size: 42px;
         font-weight: bold;
         opacity: 0;
-        text-shadow: 0 4px 10px rgba(0,0,0,0.35);
+        text-shadow: 0 4px 10px rgba(0,0,0,0.15);
     }
 
     @keyframes zoomIn {
@@ -82,7 +75,7 @@
         margin-top: 10px;
         opacity: 0;
         animation: fadeInText 1s ease-out forwards;
-        animation-delay: 1.2s;
+        animation-delay: 4s; /* AFTER 3 SEC DELAY */
     }
 
     @keyframes fadeInText {
@@ -108,7 +101,7 @@
         margin-top: 8px;
         opacity: 0;
         animation: fadeInPercent 1s ease-out forwards;
-        animation-delay: 1.4s;
+        animation-delay: 4.2s; /* AFTER 3 SEC DELAY */
     }
 
     @keyframes fadeInPercent {
@@ -121,13 +114,13 @@
         width: 80%;
         max-width: 320px;
         height: 14px;
-        background: rgba(255,255,255,0.25);
+        background: rgba(0,0,0,0.1);
         border-radius: 10px;
         margin-top: 20px;
         overflow: hidden;
         opacity: 0;
         animation: fadeInBar 1s ease-out forwards;
-        animation-delay: 1.5s;
+        animation-delay: 4.4s; /* AFTER 3 SEC DELAY */
     }
 
     @keyframes fadeInBar {
@@ -141,7 +134,7 @@
         background: linear-gradient(90deg, #1DBF73, #FFD700, #FF5733, #1A73E8);
         background-size: 300% 100%;
         animation: loadBar 4s ease-out forwards, colorShift 4s linear infinite;
-        animation-delay: 1.6s;
+        animation-delay: 4.6s; /* AFTER 3 SEC DELAY */
     }
 
     @keyframes loadBar {
@@ -204,23 +197,25 @@
             document.getElementById("title").classList.add("animate-title");
         }, 300);
 
-        // Percentage counter
-        let percent = 0;
-        let counter = setInterval(() => {
-            percent++;
-            document.getElementById("percent").innerText = percent + "%";
+        // Start loading AFTER 3 seconds
+        setTimeout(() => {
+            let percent = 0;
+            let counter = setInterval(() => {
+                percent++;
+                document.getElementById("percent").innerText = percent + "%";
 
-            if (percent >= 100) {
-                clearInterval(counter);
+                if (percent >= 100) {
+                    clearInterval(counter);
 
-                // Fade out transition
-                document.body.classList.add("fade-out");
+                    // Fade out transition
+                    document.body.classList.add("fade-out");
 
-                setTimeout(() => {
-                    window.location.href = "index2.html";
-                }, 900);
-            }
-        }, 40);
+                    setTimeout(() => {
+                        window.location.href = "index2.html";
+                    }, 900);
+                }
+            }, 40);
+        }, 3000); // 3-second delay before loading starts
     };
 </script>
 
