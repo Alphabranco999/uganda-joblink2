@@ -3,18 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="theme-color" content="#0057b7">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content=width=device-width,initial-scale=1">
 <title>Worker Registration - Joblink Uganda</title>
 </head>
-
 <style>
-/* (ALL YOUR CSS — UNCHANGED) */
+  /* GLOBAL RESET */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* PERFECT MOBILE VIEW */
 html, body {
     width: 100%;
     margin: 0;
@@ -25,13 +25,15 @@ html, body {
     justify-content: center;
 }
 
+/* MAIN PAGE WRAPPER */
 .container {
     width: 100%;
-    max-width: 420px;
+    max-width: 420px;   /* Perfect for Android */
     margin: 0 auto;
     padding: 15px;
 }
 
+/* HEADER */
 header {
     background: #0057b7;
     padding: 20px;
@@ -42,6 +44,7 @@ header {
     border-radius: 0 0 12px 12px;
 }
 
+/* LABELS */
 label {
     font-weight: bold;
     color: #0057b7;
@@ -50,6 +53,7 @@ label {
     font-size: 15px;
 }
 
+/* INPUTS */
 input, select {
     width: 100%;
     padding: 12px;
@@ -60,6 +64,7 @@ input, select {
     background: white;
 }
 
+/* CATEGORY BOX */
 .job-category {
     margin-top: 25px;
     padding: 18px;
@@ -68,6 +73,7 @@ input, select {
     border-left: 6px solid #0057b7;
 }
 
+/* CATEGORY TITLE */
 .job-category h4 {
     margin-bottom: 14px;
     color: #0057b7;
@@ -75,12 +81,14 @@ input, select {
     font-weight: bold;
 }
 
+/* CHECKBOX GRID */
 .job-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
 }
 
+/* CHECKBOX ITEM */
 .job-item {
     background: white;
     padding: 10px;
@@ -92,11 +100,13 @@ input, select {
     font-size: 15px;
 }
 
+/* CHECKBOX SIZE */
 .job-item input {
     width: 18px;
     height: 18px;
 }
 
+/* SUBMIT BUTTON */
 .submit-btn {
     margin-top: 35px;
     width: 100%;
@@ -114,6 +124,7 @@ input, select {
     background: #004a9c;
 }
 
+/* BACK BUTTON */
 .bottom-back {
     background: #0057b7;
     color: white;
@@ -130,6 +141,7 @@ input, select {
     background: #004a9c;
 }
 
+/* POPUPS */
 #popupSuccess, #popupError {
     display:none;
     position:fixed;
@@ -162,6 +174,7 @@ input, select {
     100% { transform: scale(1); opacity:1; }
 }
 
+/* MOBILE TWEAKS */
 @media (max-width: 600px) {
     h1, h2, h3 {
         font-size: 20px;
@@ -179,57 +192,178 @@ input, select {
         height: auto;
     }
 }
-</style>
+  
 
+
+    
+
+    
+      
+       
+  
+
+
+        
+        
+     
+   
+</head>
+</style>
 <body>
 
 <header>Worker Registration</header>
 
 <div class="container">
 
-<!-- (ALL YOUR FORM CONTENT — UNCHANGED) -->
+    <label>Full Name</label>
+    <input id="name" type="text" placeholder="Enter your two names">
 
-<label>Full Name</label>
-<input id="name" type="text" placeholder="Enter your two names">
+    <label>Age</label>
+    <input id="age" type="number" placeholder="Enter your age">
 
-<label>Age</label>
-<input id="age" type="number" placeholder="Enter your age">
+    <label>Telephone Number (+256)</label>
+    <input id="phone" type="tel" placeholder="+256 7XX XXX XXX">
 
-<label>Telephone Number (+256)</label>
-<input id="phone" type="tel" placeholder="+256 7XX XXX XXX">
+    <label>Emergency Contact (+256)</label>
+    <input id="emergency" type="tel" placeholder="+256 7XX XXX XXX">
 
-<label>Emergency Contact (+256)</label>
-<input id="emergency" type="tel" placeholder="+256 7XX XXX XXX">
+    <label>Location</label>
+    <input id="location" type="text" placeholder="Enter your district or town">
 
-<label>Location</label>
-<input id="location" type="text" placeholder="Enter your district or town">
+    <label>Education Level</label>
+    <select id="education">
+        <option value="">Select education level</option>
+        <option>None</option>
+        <option>Primary</option>
+        <option>O-Level</option>
+        <option>A-Level</option>
+        <option>Certificate</option>
+        <option>Diploma</option>
+        <option>Degree</option>
+        <option>Masters</option>
+    </select>
 
-<label>Education Level</label>
-<select id="education">
-<option value="">Select education level</option>
-<option>None</option>
-<option>Primary</option>
-<option>O-Level</option>
-<option>A-Level</option>
-<option>Certificate</option>
-<option>Diploma</option>
-<option>Degree</option>
-<option>Masters</option>
-</select>
+    <label>Do You Speak English?</label>
+    <select id="english">
+        <option value="">Choose option</option>
+        <option>Yes</option>
+        <option>No</option>
+        <option>A little</option>
+    </select>
 
-<label>Do You Speak English?</label>
-<select id="english">
-<option value="">Choose option</option>
-<option>Yes</option>
-<option>No</option>
-<option>A little</option>
-</select>
+    <!-- JOB LIST (UNCHANGED) -->
+     <div class="job-category">
+        <h4>Hospitality & Service</h4>
+        <div class="job-list">
+            <label class="job-item"><input type="checkbox" class="job"> Waiter / Waitress</label>
+            <label class="job-item"><input type="checkbox" class="job"> Cashier</label>
+            <label class="job-item"><input type="checkbox" class="job"> Receptionist</label>
+            <label class="job-item"><input type="checkbox" class="job"> Hotel Staff</label>
+            <label class="job-item"><input type="checkbox" class="job"> Barista</label>
+            <label class="job-item"><input type="checkbox" class="job"> Bartender</label>
+            <label class="job-item"><input type="checkbox" class="job"> Room Attendant</label>
+            <label class="job-item"><input type="checkbox" class="job"> Chef Assistant</label>
+            <label class="job-item"><input type="checkbox" class="job"> Maid</label>
+        </div>
+    </div>
+    <div class="job-category">
+        <h4>Construction & Skilled Work</h4>
+        <div class="job-list">
+            <label class="job-item"><input type="checkbox" class="job"> Builder</label>
+            <label class="job-item"><input type="checkbox" class="job"> Electrician</label>
+            <label class="job-item"><input type="checkbox" class="job"> Plumber</label>
+            <label class="job-item"><input type="checkbox" class="job"> Welder</label>
+            <label class="job-item"><input type="checkbox" class="job"> Carpenter</label>
+            <label class="job-item"><input type="checkbox" class="job"> Painter</label>
+            <label class="job-item"><input type="checkbox" class="job"> Mason</label>
+            <label class="job-item"><input type="checkbox" class="job"> Roofer</label>
+            <label class="job-item"><input type="checkbox" class="job"> Tiler</label>
+            <label class="job-item"><input type="checkbox" class="job"> Steel Fixer</label>
+        </div>
+    </div>
 
-<!-- (ALL JOB SECTIONS REMAIN EXACTLY SAME) -->
+    <div class="job-category">
+        <h4>Technical & Mechanical</h4>
+        <div class="job-list">
+            <label class="job-item"><input type="checkbox" class="job"> Mechanic</label>
+            <label class="job-item"><input type="checkbox" class="job"> Driver</label>
+            <label class="job-item"><input type="checkbox" class="job"> Boda Rider</label>
+            <label class="job-item"><input type="checkbox" class="job"> IT Technician</label>
+            <label class="job-item"><input type="checkbox" class="job"> Phone Repair</label>
+            <label class="job-item"><input type="checkbox" class="job"> Computer Repair</label>
+            <label class="job-item"><input type="checkbox" class="job"> Solar Technician</label>
+            <label class="job-item"><input type="checkbox" class="job"> CCTV Installer</label>
+        </div>
+    </div>
+
+    
+
+    <div class="job-category">
+        <h4>Shops & Business</h4>
+        <div class="job-list">
+            <label class="job-item"><input type="checkbox" class="job"> Shop Attendant</label>
+            <label class="job-item"><input type="checkbox" class="job"> Mobile Money Agent</label>
+            <label class="job-item"><input type="checkbox" class="job"> Sales Person</label>
+            <label class="job-item"><input type="checkbox" class="job"> Store Keeper</label>
+            <label class="job-item"><input type="checkbox" class="job"> Stock Controller</label>
+            <label class="job-item"><input type="checkbox" class="job"> Cashier</label>
+        </div>
+    </div>
+
+    <div class="job-category">
+        <h4>Domestic & Home Services</h4>
+        <div class="job-list">
+            <label class="job-item"><input type="checkbox" class="job"> House Maid</label>
+            <label class="job-item"><input type="checkbox" class="job"> Cleaner</label>
+            <label class="job-item"><input type="checkbox" class="job"> Cook / Chef</label>
+            <label class="job-item"><input type="checkbox" class="job"> Gardener</label>
+            <label class="job-item"><input type="checkbox" class="job"> Baby Sitter</label>
+            <label class="job-item"><input type="checkbox" class="job"> Laundry Worker</label>
+            <label class="job-item"><input type="checkbox" class="job"> Caregiver</label>
+        </div>
+    </div>
+
+    <div class="job-category">
+        <h4>Beauty & Personal Care</h4>
+        <div class="job-list">
+            <label class="job-item"><input type="checkbox" class="job"> Barber</label>
+            <label class="job-item"><input type="checkbox" class="job"> Hairdresser</label>
+            <label class="job-item"><input type="checkbox" class="job"> Makeup Artist</label>
+            <label class="job-item"><input type="checkbox" class="job"> Nail Technician</label>
+            <label class="job-item"><input type="checkbox" class="job"> Spa Therapist</label>
+        </div>
+    </div>
+
+    <div class="job-category">
+        <h4>Security & Outdoor</h4>
+        <div class="job-list">
+            <label class="job-item"><input type="checkbox" class="job"> Security Guard</label>
+            <label class="job-item"><input type="checkbox" class="job"> Bouncer</label>
+            <label class="job-item"><input type="checkbox" class="job"> Farm Worker</label>
+            <label class="job-item"><input type="checkbox" class="job"> Delivery / Courier</label>
+            <label class="job-item"><input type="checkbox" class="job"> Water Supplier</label>
+            <label class="job-item"><input type="checkbox" class="job"> Garbage Collector</label>
+        </div>
+    </div>
+
+    <div class="job-category">
+        <h4>Education & Office Work</h4>
+        <div class="job-list">
+            <label class="job-item"><input type="checkbox" class="job"> Teacher</label>
+            <label class="job-item"><input type="checkbox" class="job"> Office Assistant</label>
+            <label class="job-item"><input type="checkbox" class="job"> Secretary</label>
+            <label class="job-item"><input type="checkbox" class="job"> Data Entrant</label>
+            <label class="job-item"><input type="checkbox" class="job"> Call Center Agent</label>
+            <label class="job-item"><input type="checkbox" class="job"> Messenger</label>
+            <label class="job-item"><input type="checkbox" class="job"> Any Other Work</label>
+        </div>
+    </div>
 
 <button class="submit-btn" onclick="validateForm()">Submit Details</button>
 
 </div>
+
+
 
 <!-- SUCCESS POPUP -->
 <div id="popupSuccess">
@@ -277,11 +411,9 @@ function validateForm() {
 
     document.getElementById("popupSuccess").style.display = "flex";
 
-    /* ✅ NEW: REDIRECT AFTER 1 SECOND */
     setTimeout(function () {
         document.getElementById("popupSuccess").style.display = "none";
-        window.location.href = "index.html"; // change if needed
-    }, 1000);
+    }, 3000);
 }
 </script>
 
