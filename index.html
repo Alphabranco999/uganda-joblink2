@@ -55,24 +55,27 @@
         object-fit: cover;
     }
 
-    /* FALL + BOUNCE + SETTLE (ANDROID FIXED) */
-    .welcome {
+    /* AUTO-SCALE TEXT TO FIT ANDROID SCREENS */
+    .welcome-wrapper {
+        transform-origin: center;
         display: inline-block;
-        margin-top: -5px;
-        font-size: 22px;
-        font-weight: 700;
-        color: #FFFFFF;
-        text-shadow: 0 0 12px rgba(255,255,255,0.45);
-        white-space: nowrap;
+        width: 100%;
+        text-align: center;
+    }
+
+    @media (max-width: 420px) {
+        .welcome-wrapper { transform: scale(0.90); }
     }
 
     @media (max-width: 380px) {
-        .welcome {
-            font-size: 19px;
-            transform: scale(0.95);
-        }
+        .welcome-wrapper { transform: scale(0.82); }
     }
 
+    @media (max-width: 350px) {
+        .welcome-wrapper { transform: scale(0.75); }
+    }
+
+    /* FALL + BOUNCE + SETTLE */
     .welcome span {
         display: inline-block;
         opacity: 0;
@@ -81,12 +84,19 @@
         animation-fill-mode: forwards !important;
     }
 
-    /* FINAL FIX — LETTERS ALWAYS RETURN TO BASELINE */
     @keyframes dropBounceSettle {
         0%   { opacity: 0; transform: translateY(-40px); }
-        55%  { opacity: 1; transform: translateY(0); }      /* hit baseline */
-        75%  { transform: translateY(-12px); }               /* bounce up */
-        100% { transform: translateY(0) !important; }        /* settle back */
+        55%  { opacity: 1; transform: translateY(0); }
+        75%  { transform: translateY(-12px); }
+        100% { transform: translateY(0); }
+    }
+
+    .welcome {
+        font-size: 22px;
+        font-weight: 700;
+        white-space: nowrap;
+        text-shadow: 0 0 12px rgba(255,255,255,0.45);
+        letter-spacing: 0.3px;
     }
 
     /* LOADING TEXT */
@@ -182,47 +192,49 @@
         <img src="image_666.png" alt="Uganda JobsLink">
     </div>
 
-    <!-- FIXED FALL + BOUNCE + SETTLE -->
-    <h2 class="welcome">
-        <span style="animation-delay:0.05s">C</span>
-        <span style="animation-delay:0.10s">o</span>
-        <span style="animation-delay:0.15s">n</span>
-        <span style="animation-delay:0.20s">n</span>
-        <span style="animation-delay:0.25s">e</span>
-        <span style="animation-delay:0.30s">c</span>
-        <span style="animation-delay:0.35s">t</span>
-        <span style="animation-delay:0.40s">i</span>
-        <span style="animation-delay:0.45s">n</span>
-        <span style="animation-delay:0.50s">g</span>
+    <!-- AUTO-SCALE WRAPPER -->
+    <div class="welcome-wrapper">
+        <h2 class="welcome">
+            <span style="animation-delay:0.05s">C</span>
+            <span style="animation-delay:0.10s">o</span>
+            <span style="animation-delay:0.15s">n</span>
+            <span style="animation-delay:0.20s">n</span>
+            <span style="animation-delay:0.25s">e</span>
+            <span style="animation-delay:0.30s">c</span>
+            <span style="animation-delay:0.35s">t</span>
+            <span style="animation-delay:0.40s">i</span>
+            <span style="animation-delay:0.45s">n</span>
+            <span style="animation-delay:0.50s">g</span>
 
-        <span style="animation-delay:0.55s">&nbsp;</span>
+            <span style="animation-delay:0.55s">&nbsp;</span>
 
-        <span style="animation-delay:0.60s">W</span>
-        <span style="animation-delay:0.65s">o</span>
-        <span style="animation-delay:0.70s">r</span>
-        <span style="animation-delay:0.75s">k</span>
-        <span style="animation-delay:0.80s">e</span>
-        <span style="animation-delay:0.85s">r</span>
-        <span style="animation-delay:0.90s">s</span>
+            <span style="animation-delay:0.60s">W</span>
+            <span style="animation-delay:0.65s">o</span>
+            <span style="animation-delay:0.70s">r</span>
+            <span style="animation-delay:0.75s">k</span>
+            <span style="animation-delay:0.80s">e</span>
+            <span style="animation-delay:0.85s">r</span>
+            <span style="animation-delay:0.90s">s</span>
 
-        <span style="animation-delay:0.95s">&nbsp;</span>
+            <span style="animation-delay:0.95s">&nbsp;</span>
 
-        <span style="animation-delay:1.00s">a</span>
-        <span style="animation-delay:1.05s">n</span>
-        <span style="animation-delay:1.10s">d</span>
+            <span style="animation-delay:1.00s">a</span>
+            <span style="animation-delay:1.05s">n</span>
+            <span style="animation-delay:1.10s">d</span>
 
-        <span style="animation-delay:1.15s">&nbsp;</span>
+            <span style="animation-delay:1.15s">&nbsp;</span>
 
-        <span style="animation-delay:1.20s">E</span>
-        <span style="animation-delay:1.25s">m</span>
-        <span style="animation-delay:1.30s">p</span>
-        <span style="animation-delay:1.35s">l</span>
-        <span style="animation-delay:1.40s">o</span>
-        <span style="animation-delay:1.45s">y</span>
-        <span style="animation-delay:1.50s">e</span>
-        <span style="animation-delay:1.55s">r</span>
-        <span style="animation-delay:1.60s">s</span>
-    </h2>
+            <span style="animation-delay:1.20s">E</span>
+            <span style="animation-delay:1.25s">m</span>
+            <span style="animation-delay:1.30s">p</span>
+            <span style="animation-delay:1.35s">l</span>
+            <span style="animation-delay:1.40s">o</span>
+            <span style="animation-delay:1.45s">y</span>
+            <span style="animation-delay:1.50s">e</span>
+            <span style="animation-delay:1.55s">r</span>
+            <span style="animation-delay:1.60s">s</span>
+        </h2>
+    </div>
 
     <div class="loading-text"><span class="dots">Loading</span></div>
 
