@@ -7,164 +7,177 @@
 
 <style>
 
-    body {
-        margin: 0;
-        padding: 0;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: #001A33;
-        font-family: 'Arial', sans-serif;
-        color: white;
-        text-align: center;
-        overflow: hidden;
-    }
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #001A33;
+    font-family: 'Arial', sans-serif;
+    color: white;
+    text-align: center;
+    overflow: hidden;
+}
 
-    .wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        transform: translateY(-20px);
-    }
+/* FADE OUT EFFECT */
+.fade-out {
+    animation: fadeOutScreen 0.8s ease forwards;
+}
 
-    /* IMAGE BOX */
-    .image-box {
-        width: 90%;
-        max-width: 400px;
-        height: 260px;
-        background: #ffffff;
-        border-radius: 20px;
-        overflow: hidden;
+@keyframes fadeOutScreen {
+    to {
         opacity: 0;
-        animation: imageEnter 1.4s ease-out forwards;
-        box-shadow: 0 0 30px rgba(255,255,255,0.35);
+        transform: scale(0.95);
     }
+}
 
-    @keyframes imageEnter {
-        0% { opacity: 0; transform: translateY(-80px) scale(0.6) rotateX(25deg); }
-        60% { opacity: 1; transform: translateY(-30px) scale(1.08); }
-        100% { opacity: 1; transform: translateY(-40px) scale(1); }
-    }
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    transform: translateY(-20px);
+}
 
-    .image-box img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
+/* IMAGE BOX */
+.image-box {
+    width: 90%;
+    max-width: 400px;
+    height: 260px;
+    background: #ffffff;
+    border-radius: 20px;
+    overflow: hidden;
+    opacity: 0;
+    animation: imageEnter 1.2s ease-out forwards;
+    box-shadow: 0 0 30px rgba(255,255,255,0.35);
+}
 
-    /* AUTO-FIT CONTAINER */
-    #fit-box {
-        display: inline-block;
-        transform-origin: center;
-        white-space: nowrap;
-    }
+@keyframes imageEnter {
+    0% { opacity: 0; transform: translateY(-80px) scale(0.7); }
+    70% { opacity: 1; transform: translateY(-20px) scale(1.05); }
+    100% { opacity: 1; transform: translateY(-30px) scale(1); }
+}
 
-    /* FALL + BOUNCE + LAND */
-    .welcome span {
-        display: inline-block;
-        opacity: 0;
-        transform: translateY(-40px);
-        animation: dropBounceLand 0.75s ease-out forwards;
-    }
+.image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-    @keyframes dropBounceLand {
-        0%   { opacity: 0; transform: translateY(-40px); }
-        55%  { opacity: 1; transform: translateY(0); }
-        75%  { transform: translateY(-10px); }
-        100% { transform: translateY(0); }
-    }
+/* AUTO-FIT CONTAINER */
+#fit-box {
+    display: inline-block;
+    transform-origin: center;
+    white-space: nowrap;
+}
 
-    .welcome {
-        font-size: 22px;
-        font-weight: 700;
-        text-shadow: 0 0 12px rgba(255,255,255,0.45);
-        letter-spacing: 0.3px;
-        white-space: nowrap;
-    }
+/* SMOOTH FALL + QUICK LAND */
+.welcome span {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(-50px);
+    animation: dropBounceLand 0.6s ease-out forwards;
+}
 
-    /* LOADING TEXT */
-    .loading-text {
-        font-size: 16px;
-        margin-top: 25px;
-        opacity: 0;
-        animation: fadeInText 1s ease-out forwards;
-        animation-delay: 1.8s;
-        color: #D0D8E0;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-    }
+@keyframes dropBounceLand {
+    0%   { opacity: 0; transform: translateY(-50px); }
+    60%  { opacity: 1; transform: translateY(5px); }
+    80%  { transform: translateY(-3px); }
+    100% { transform: translateY(0); }
+}
 
-    @keyframes fadeInText {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
+/* TEXT STYLE */
+.welcome {
+    font-size: 20px;
+    font-weight: 600;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
 
-    .dots::after {
-        content: '';
-        animation: dots 1.5s infinite;
-    }
+/* LOADING TEXT */
+.loading-text {
+    font-size: 14px;
+    margin-top: 20px;
+    opacity: 0;
+    animation: fadeInText 1s ease-out forwards;
+    animation-delay: 1.4s;
+    color: #D0D8E0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
 
-    @keyframes dots {
-        0% { content: ''; }
-        33% { content: '.'; }
-        66% { content: '..'; }
-        100% { content: '...'; }
-    }
+@keyframes fadeInText {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 
-    .percent {
-        font-size: 16px;
-        margin-top: 6px;
-        opacity: 0;
-        animation: fadeInPercent 1s ease-out forwards;
-        animation-delay: 2s;
-    }
+.dots::after {
+    content: '';
+    animation: dots 1.5s infinite;
+}
 
-    @keyframes fadeInPercent {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
+@keyframes dots {
+    0% { content: ''; }
+    33% { content: '.'; }
+    66% { content: '..'; }
+    100% { content: '...'; }
+}
 
-    .progress-container {
-        width: 80%;
-        height: 12px;
-        background: rgba(255,255,255,0.15);
-        border-radius: 20px;
-        margin-top: 12px;
-        overflow: hidden;
-        opacity: 0;
-        animation: fadeInBar 1s ease-out forwards;
-        animation-delay: 2.2s;
-        box-shadow: 0 0 12px rgba(255,255,255,0.25);
-    }
+.percent {
+    font-size: 15px;
+    margin-top: 6px;
+    opacity: 0;
+    animation: fadeInPercent 1s ease-out forwards;
+    animation-delay: 1.6s;
+}
 
-    @keyframes fadeInBar {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
+@keyframes fadeInPercent {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 
-    .progress-bar {
-        height: 100%;
-        width: 0%;
-        background: linear-gradient(90deg, #00FFA3, #00D4FF, #0084FF);
-        background-size: 300% 100%;
-        animation: loadBar 4s ease-out forwards, glowShift 3s linear infinite;
-        animation-delay: 2.4s;
-        border-radius: 20px;
-    }
+.progress-container {
+    width: 80%;
+    height: 10px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 20px;
+    margin-top: 12px;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeInBar 1s ease-out forwards;
+    animation-delay: 1.8s;
+    box-shadow: 0 0 12px rgba(255,255,255,0.25);
+}
 
-    @keyframes loadBar {
-        0% { width: 0%; }
-        30% { width: 40%; }
-        60% { width: 75%; }
-        100% { width: 100%; }
-    }
+@keyframes fadeInBar {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
 
-    @keyframes glowShift {
-        0% { background-position: 0% 50%; }
-        100% { background-position: 100% 50%; }
-    }
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #00FFA3, #00D4FF, #0084FF);
+    background-size: 300% 100%;
+    animation: loadBar 3.5s ease-out forwards, glowShift 3s linear infinite;
+    animation-delay: 2s;
+    border-radius: 20px;
+}
+
+@keyframes loadBar {
+    0% { width: 0%; }
+    30% { width: 45%; }
+    60% { width: 80%; }
+    100% { width: 100%; }
+}
+
+@keyframes glowShift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
 
 </style>
 </head>
@@ -177,47 +190,53 @@
         <img src="image_666.png" alt="Uganda JobsLink">
     </div>
 
-    <!-- AUTO-FIT BOX -->
     <div id="fit-box">
         <h2 class="welcome">
-            <span style="animation-delay:0.05s">C</span>
-            <span style="animation-delay:0.10s">o</span>
-            <span style="animation-delay:0.15s">n</span>
-            <span style="animation-delay:0.20s">n</span>
-            <span style="animation-delay:0.25s">e</span>
-            <span style="animation-delay:0.30s">c</span>
-            <span style="animation-delay:0.35s">t</span>
-            <span style="animation-delay:0.40s">i</span>
-            <span style="animation-delay:0.45s">n</span>
-            <span style="animation-delay:0.50s">g</span>
 
-            <span style="animation-delay:0.55s">&nbsp;</span>
+            <!-- Faster animation sequence -->
+            <!-- Connecting -->
+            <span style="animation-delay:0.03s">C</span>
+            <span style="animation-delay:0.06s">o</span>
+            <span style="animation-delay:0.09s">n</span>
+            <span style="animation-delay:0.12s">n</span>
+            <span style="animation-delay:0.15s">e</span>
+            <span style="animation-delay:0.18s">c</span>
+            <span style="animation-delay:0.21s">t</span>
+            <span style="animation-delay:0.24s">i</span>
+            <span style="animation-delay:0.27s">n</span>
+            <span style="animation-delay:0.30s">g</span>
 
-            <span style="animation-delay:0.60s">W</span>
-            <span style="animation-delay:0.65s">o</span>
-            <span style="animation-delay:0.70s">r</span>
-            <span style="animation-delay:0.75s">k</span>
-            <span style="animation-delay:0.80s">e</span>
-            <span style="animation-delay:0.85s">r</span>
-            <span style="animation-delay:0.90s">s</span>
+            <span style="animation-delay:0.33s">&nbsp;</span>
 
-            <span style="animation-delay:0.95s">&nbsp;</span>
+            <!-- Workers -->
+            <span style="animation-delay:0.36s">W</span>
+            <span style="animation-delay:0.39s">o</span>
+            <span style="animation-delay:0.42s">r</span>
+            <span style="animation-delay:0.45s">k</span>
+            <span style="animation-delay:0.48s">e</span>
+            <span style="animation-delay:0.51s">r</span>
+            <span style="animation-delay:0.54s">s</span>
 
-            <span style="animation-delay:1.00s">a</span>
-            <span style="animation-delay:1.05s">n</span>
-            <span style="animation-delay:1.10s">d</span>
+            <span style="animation-delay:0.57s">&nbsp;</span>
 
-            <span style="animation-delay:1.15s">&nbsp;</span>
+            <!-- and -->
+            <span style="animation-delay:0.60s">a</span>
+            <span style="animation-delay:0.63s">n</span>
+            <span style="animation-delay:0.66s">d</span>
 
-            <span style="animation-delay:1.20s">E</span>
-            <span style="animation-delay:1.25s">m</span>
-            <span style="animation-delay:1.30s">p</span>
-            <span style="animation-delay:1.35s">l</span>
-            <span style="animation-delay:1.40s">o</span>
-            <span style="animation-delay:1.45s">y</span>
-            <span style="animation-delay:1.50s">e</span>
-            <span style="animation-delay:1.55s">r</span>
-            <span style="animation-delay:1.60s">s</span>
+            <span style="animation-delay:0.69s">&nbsp;</span>
+
+            <!-- Employers -->
+            <span style="animation-delay:0.72s">E</span>
+            <span style="animation-delay:0.75s">m</span>
+            <span style="animation-delay:0.78s">p</span>
+            <span style="animation-delay:0.81s">l</span>
+            <span style="animation-delay:0.84s">o</span>
+            <span style="animation-delay:0.87s">y</span>
+            <span style="animation-delay:0.90s">e</span>
+            <span style="animation-delay:0.93s">r</span>
+            <span style="animation-delay:0.96s">s</span>
+
         </h2>
     </div>
 
@@ -232,7 +251,8 @@
 </div>
 
 <script>
-/* AUTO-SHRINK TEXT TO FIT ANY SCREEN */
+
+/* AUTO-SHRINK TEXT */
 function fitText() {
     const box = document.getElementById("fit-box");
     let scale = 1;
@@ -240,7 +260,7 @@ function fitText() {
     while (box.scrollWidth > window.innerWidth - 20) {
         scale -= 0.02;
         box.style.transform = "scale(" + scale + ")";
-        if (scale <= 0.45) break;
+        if (scale <= 0.5) break;
     }
 }
 
@@ -259,11 +279,12 @@ window.onload = () => {
 
                 setTimeout(() => {
                     window.location.href = "index2.html";
-                }, 900);
+                }, 800);
             }
-        }, 40);
-    }, 2000);
+        }, 30);
+    }, 1500);
 };
+
 </script>
 
 </body>
