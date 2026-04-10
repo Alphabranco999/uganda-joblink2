@@ -23,21 +23,29 @@
         overflow: hidden;
     }
 
-    /* TOP IMAGE */
-    .top-image {
-        width: 100%;
-        height: 38vh;
-        background-image: url('image_666.png'); /* UPDATED HERE */
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        animation: fadeInTop 1.2s ease-out forwards;
+    /* WHITE GLOWING IMAGE BOX */
+    .image-box {
+        width: 85%;
+        max-width: 380px;
+        height: 200px;
+        background: #ffffff;
+        border-radius: 18px;
+        margin-top: 35px;
+        overflow: hidden;
+        box-shadow: 0 0 25px rgba(255,255,255,0.35);
         opacity: 0;
+        animation: fadeBox 1.2s ease-out forwards;
     }
 
-    @keyframes fadeInTop {
-        from { opacity: 0; transform: translateY(-40px); }
+    @keyframes fadeBox {
+        from { opacity: 0; transform: translateY(-30px); }
         to { opacity: 1; transform: translateY(0); }
+    }
+
+    .image-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
 
     /* MAIN CONTENT WRAPPER */
@@ -46,7 +54,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 30px;
+        margin-top: 25px;
     }
 
     /* SUBTITLE */
@@ -82,7 +90,7 @@
         100% { transform: scale(1); opacity: 1; }
     }
 
-    /* LOADING TEXT */
+    /* UNIQUE LOADING TEXT */
     .loading-text {
         font-size: 18px;
         margin-top: 20px;
@@ -90,7 +98,8 @@
         animation: fadeInText 1s ease-out forwards;
         animation-delay: 2s;
         color: #D0D8E0;
-        letter-spacing: 0.5px;
+        letter-spacing: 1px;
+        text-transform: uppercase;
     }
 
     @keyframes fadeInText {
@@ -98,6 +107,7 @@
         to { opacity: 1; }
     }
 
+    /* PULSE DOTS */
     .dots::after {
         content: '';
         animation: dots 1.5s infinite;
@@ -125,19 +135,19 @@
         to { opacity: 1; }
     }
 
-    /* IMPROVED PROGRESS BAR */
+    /* UNIQUE PROGRESS BAR */
     .progress-container {
         width: 80%;
         max-width: 320px;
         height: 14px;
-        background: rgba(255,255,255,0.15);
-        border-radius: 20px;
-        margin-top: 15px;
+        background: rgba(255,255,255,0.12);
+        border-radius: 30px;
+        margin-top: 18px;
         overflow: hidden;
         opacity: 0;
         animation: fadeInBar 1s ease-out forwards;
         animation-delay: 2.4s;
-        box-shadow: 0 0 10px rgba(255,255,255,0.15);
+        box-shadow: 0 0 12px rgba(255,255,255,0.25);
     }
 
     @keyframes fadeInBar {
@@ -148,11 +158,11 @@
     .progress-bar {
         height: 100%;
         width: 0%;
-        background: linear-gradient(90deg, #1DBF73, #FFD700, #FF5733, #1A73E8);
+        background: linear-gradient(90deg, #00FFA3, #00D4FF, #0084FF);
         background-size: 300% 100%;
-        animation: loadBar 4s ease-out forwards, colorShift 4s linear infinite;
+        animation: loadBar 4s ease-out forwards, glowShift 3s linear infinite;
         animation-delay: 2.6s;
-        border-radius: 20px;
+        border-radius: 30px;
     }
 
     @keyframes loadBar {
@@ -162,7 +172,7 @@
         100% { width: 100%; }
     }
 
-    @keyframes colorShift {
+    @keyframes glowShift {
         0% { background-position: 0% 50%; }
         100% { background-position: 100% 50%; }
     }
@@ -182,8 +192,10 @@
 
 <body>
 
-    <!-- TOP IMAGE -->
-    <div class="top-image"></div>
+    <!-- WHITE GLOWING IMAGE BOX -->
+    <div class="image-box">
+        <img src="image_666.png" alt="Uganda JobsLink">
+    </div>
 
     <!-- CENTERED CONTENT -->
     <div class="content">
@@ -200,7 +212,7 @@
         <!-- PERCENT -->
         <div class="percent" id="percent">0%</div>
 
-        <!-- PROGRESS BAR -->
+        <!-- UNIQUE PROGRESS BAR -->
         <div class="progress-container">
             <div class="progress-bar" id="bar"></div>
         </div>
