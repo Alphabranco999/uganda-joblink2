@@ -426,6 +426,15 @@ function validateForm() {
         window.location.href = "index2.html";
     }, 3000);
 }
+  function showPopup(id, duration = 3000) {
+    const popup = document.getElementById(id);
+    popup.style.display = "flex";
+
+    setTimeout(() => {
+        popup.style.display = "none";
+    }, duration);
+}
+
 </script>
 </body>
 </html>
