@@ -402,22 +402,30 @@ function validateForm() {
 
     // ⭐ SEND DATA TO GOOGLE SHEETS ⭐
     fetch("https://script.google.com/macros/s/AKfycbxfjPuz_5EHMR2-Fq-oXrZvUovrsaNFhW_42gkFHEv34wlt4Afu-CXmxUQ6H8pFmnMl/exec", {
-        method: "POST",
-        body: JSON.stringify({
-            fullname: name,
-            phone: phone,
-            location: location,
-            workers: workers,
-            jobs: selectedJobs.join(", ")
-        })
+    method: "POST",
+    body: JSON.stringify({
+        fullname: name,
+        phone: phone,
+        location: location,
+        workers: workers,
+        jobs: selectedJobs.join(", ")
     })
-    .then(res => res.text())
-    .then(response => console.log("Server:", response))
-    .catch(err => {
-        showPopup("popupError", 2500);
-        document.querySelector("#popupBoxError").innerText = "Server error. Try again.";
-        console.error("Error:", err);
-    });
+})
+.then(res => res.text())
+.then(response => {
+    console.log("Server:", response);
+
+    showPopup("popupSuccess", 3000);
+
+    setTimeout(() => {
+        window.location.href = "index2.html";
+    }, 3000);
+})
+.catch(err => {
+    showPopup("popupError", 2500);
+    document.querySelector("#popupBoxError").innerText = "Server error. Try again.";
+    console.error("Error:", err);
+});
 
     // SUCCESS POPUP
     showPopup("popupSuccess", 3000);
@@ -426,17 +434,19 @@ function validateForm() {
         window.location.href = "index2.html";
     }, 3000);
 }
-  function showPopup(id, duration = 3000) {
+ function showPopup(id, duration = 3000) {
     const popup = document.getElementById(id);
-    popup.style.display = "flex";
+    popup.classList.add("show");
 
     setTimeout(() => {
-        popup.style.display = "none";
+        popup.classList.remove("show");
     }, duration);
 }
-  document.getElementById("submitBtn").addEventListener("click", validateForm);
-
-
+  if (workers <= 0) {
+    showPopup("popupError", 2500);
+    document.querySelector("#popupBoxError").innerText = "Enter valid number of workers";
+    return;
+}
 </script>
 </body>
 </html>
