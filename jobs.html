@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="theme-color" content="#0057b7">
-    <meta name="viewport" content=width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">   
 <title>Worker Registration - Joblink Uganda</title>
 </head>
 <style>
@@ -347,7 +347,7 @@ input, select {
         </div>
     </div>
 
-<button class="submit-btn" onclick="validateForm()">Submit Details</button>
+<button id="submitBtn" class="submit-btn">Submit Details</button>
 
 </div>
 
@@ -368,12 +368,16 @@ input, select {
 </div>
 
 <script>
+<script>
 let isSubmitting = false;
+
+document.getElementById("submitBtn").addEventListener("click", validateForm);
 
 function validateForm() {
 
-    // 🔴 PREVENT DOUBLE SUBMIT
+    // 🚫 prevent double submit
     if (isSubmitting) return;
+
     isSubmitting = true;
 
     const btn = document.getElementById("submitBtn");
@@ -388,19 +392,18 @@ function validateForm() {
     let education = document.getElementById("education").value;
     let english = document.getElementById("english").value;
 
+    // collect jobs
     let selectedJobs = [];
     document.querySelectorAll(".job:checked").forEach(j => {
         selectedJobs.push(j.parentElement.innerText.trim());
     });
 
-    // 🔴 RESET BORDERS
-    document.getElementById("name").style.border = "1px solid #ccc";
-    document.getElementById("age").style.border = "1px solid #ccc";
-    document.getElementById("phone").style.border = "1px solid #ccc";
-    document.getElementById("emergency").style.border = "1px solid #ccc";
-    document.getElementById("location").style.border = "1px solid #ccc";
+    // reset borders
+    ["name","age","phone","emergency","location"].forEach(id => {
+        document.getElementById(id).style.border = "1px solid #ccc";
+    });
 
-    // ❌ VALIDATION
+    // validation
     if (
         !name ||
         !age ||
@@ -411,45 +414,27 @@ function validateForm() {
         !english ||
         selectedJobs.length === 0
     ) {
+
         if (!name) document.getElementById("name").style.border = "2px solid red";
         if (!age) document.getElementById("age").style.border = "2px solid red";
         if (!phone) document.getElementById("phone").style.border = "2px solid red";
         if (!emergency) document.getElementById("emergency").style.border = "2px solid red";
         if (!location) document.getElementById("location").style.border = "2px solid red";
 
-        document.getElementById("popupBoxError").innerText = "Some required fields are still empty";
-        document.getElementById("popupError").style.display = "flex";
+        showError("Some required fields are still empty");
 
-        setTimeout(() => {
-            document.getElementById("popupError").style.display = "none";
-        }, 2500);
-
-        // 🔴 UNLOCK BUTTON
-        isSubmitting = false;
-        btn.disabled = false;
-        btn.innerText = "Submit Details";
-
+        resetButton();
         return;
     }
 
-    // 🌐 INTERNET CHECK
+    // internet check
     if (!navigator.onLine) {
-        document.getElementById("popupBoxError").innerText = "Good internet connection required";
-        document.getElementById("popupError").style.display = "flex";
-
-        setTimeout(() => {
-            document.getElementById("popupError").style.display = "none";
-        }, 2500);
-
-        // 🔴 UNLOCK BUTTON
-        isSubmitting = false;
-        btn.disabled = false;
-        btn.innerText = "Submit Details";
-
+        showError("No internet connection");
+        resetButton();
         return;
     }
 
-    // 🚀 SEND DATA
+    // send data
     fetch("YOUR_GOOGLE_SCRIPT_URL", {
         method: "POST",
         body: JSON.stringify({
@@ -464,31 +449,38 @@ function validateForm() {
         })
     })
     .then(res => res.text())
-    .then(response => {
-
-        console.log("Server:", response);
-
+    .then(() => {
         document.getElementById("popupSuccess").style.display = "flex";
 
         setTimeout(() => {
             window.location.href = "index2.html";
-        }, 3000);
-    })
-    .catch(err => {
-
-        document.getElementById("popupBoxError").innerText = "Server error. Try again.";
-        document.getElementById("popupError").style.display = "flex";
-
-        // 🔴 UNLOCK BUTTON
-        isSubmitting = false;
-        btn.disabled = false;
-        btn.innerText = "Submit Details";
-
-        setTimeout(() => {
-            document.getElementById("popupError").style.display = "none";
         }, 2500);
+    })
+    .catch(() => {
+        showError("Server error. Try again.");
+        resetButton();
     });
 }
+
+// show error popup
+function showError(msg) {
+    document.getElementById("popupBoxError").innerText = msg;
+    document.getElementById("popupError").style.display = "flex";
+
+    setTimeout(() => {
+        document.getElementById("popupError").style.display = "none";
+    }, 2500);
+}
+
+// reset button after error
+function resetButton() {
+    isSubmitting = false;
+
+    const btn = document.getElementById("submitBtn");
+    btn.disabled = false;
+    btn.innerText = "Submit Details";
+}
+</script>
 </script>
 
 
