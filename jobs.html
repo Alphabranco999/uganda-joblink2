@@ -210,6 +210,69 @@ input, select {
 </head>
 </style>
 <body>
+    <form id="workerForm">
+  <h3>Worker Registration</h3>
+
+  <input name="fullname" placeholder="Full Name" required>
+  <input name="age" type="number" placeholder="Age" required>
+  <input name="telephone" placeholder="Telephone Number" required>
+  <input name="emergency" placeholder="Emergency Number" required>
+  <input name="location" placeholder="Location" required>
+
+  <select name="education" required>
+    <option value="">Education Level</option>
+    <option>Primary</option>
+    <option>O-Level</option>
+    <option>A-Level</option>
+    <option>Certificate</option>
+    <option>Diploma</option>
+    <option>Degree</option>
+  </select>
+
+  <label>Do you speak English?</label>
+  <select name="english" required>
+    <option value="">Choose</option>
+    <option>Yes</option>
+    <option>No</option>
+  </select>
+
+  <label>Select Jobs You Want:</label>
+  <div>
+    <label><input type="checkbox" name="jobs" value="House Help"> House Help</label><br>
+    <label><input type="checkbox" name="jobs" value="Cleaner"> Cleaner</label><br>
+    <label><input type="checkbox" name="jobs" value="Cook"> Cook</label><br>
+    <label><input type="checkbox" name="jobs" value="Security"> Security</label><br>
+    <label><input type="checkbox" name="jobs" value="Driver"> Driver</label><br>
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+document.getElementById("workerForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  let jobs = [];
+  document.querySelectorAll("input[name='jobs']:checked").forEach(j => jobs.push(j.value));
+
+  fetch("WORKER_SCRIPT_URL", {
+    method: "POST",
+    body: JSON.stringify({
+      fullname: this.fullname.value,
+      age: this.age.value,
+      telephone: this.telephone.value,
+      emergency: this.emergency.value,
+      location: this.location.value,
+      education: this.education.value,
+      english: this.english.value,
+      jobs: jobs.join(", ")
+    })
+  })
+  .then(r => r.text())
+  .then(alert);
+});
+</script>
+
 
 <header>Worker Registration</header>
 
