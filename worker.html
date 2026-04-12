@@ -392,10 +392,20 @@ function validateForm() {
         selectedJobs.push(j.parentElement.innerText.trim());
     });
 
-    if (!name || !phone || !location || !workers || selectedJobs.length === 0) {
-        showPopup("popupError", 2500);
-        document.querySelector("#popupBoxError").innerText = "Some required fields are still empty";
-        return;
+  if (!name || !phone || !location || !workers || selectedJobs.length === 0) {
+
+    // Highlight empty fields
+    document.getElementById("name").style.border = name ? "1px solid #ccc" : "2px solid red";
+    document.getElementById("phone").style.border = phone ? "1px solid #ccc" : "2px solid red";
+    document.getElementById("location").style.border = location ? "1px solid #ccc" : "2px solid red";
+    document.getElementById("workers").style.border = workers ? "1px solid #ccc" : "2px solid red";
+
+    // Show one popup message
+    document.getElementById("popupBoxError").innerText = "Some required fields are still empty";
+    showPopup("popupError", 2500);
+
+    return;
+}
     }
 
     if (!navigator.onLine) {
