@@ -369,7 +369,6 @@ input, select {
 
 <script>
 
-<script>
 function validateForm() {
     let name = document.getElementById("name").value.trim();
     let age = document.getElementById("age").value.trim();
@@ -435,81 +434,10 @@ function validateForm() {
         document.getElementById("popupSuccess").style.display = "none";
     }, 3000);
 }
+
 </script>
 
 
-    
-function validateForm() {
-
-<script>
-function validateForm() {
-    let name = document.getElementById("name").value.trim();
-    let age = document.getElementById("age").value.trim();
-    let phone = document.getElementById("phone").value.trim();
-    let emergency = document.getElementById("emergency").value.trim();
-    let location = document.getElementById("location").value.trim();
-    let education = document.getElementById("education").value;
-    let english = document.getElementById("english").value;
-
-    // Collect selected jobs
-    let jobs = [];
-    document.querySelectorAll(".job:checked").forEach(j => {
-        jobs.push(j.parentElement.innerText.trim());
-    });
-
-    // VALIDATION
-    if (
-        !name ||
-        !age ||
-        !phone ||
-        !emergency ||
-        !location ||
-        !education ||
-        !english ||
-        jobs.length === 0
-    ) {
-        document.getElementById("popupError").style.display = "flex";
-
-        setTimeout(function () {
-            document.getElementById("popupError").style.display = "none";
-        }, 2500);
-
-        return;
-    }
-
-    // SEND DATA TO GOOGLE SHEETS
-    fetch("https://script.google.com/macros/s/AKfycbwNozl_qYij2xueyqzT8mJoEAzdGYJCzdfvya6d8u78JX1TD3HSqTETSPzBsesqJHEY/exec", {
-        method: "POST",
-        body: JSON.stringify({
-            fullname: name,
-            age: age,
-            phone: phone,
-            emergency: emergency,
-            location: location,
-            education: education,
-            english: english,
-            jobs: jobs.join(", ")
-        })
-    })
-    .then(res => res.text())
-    .then(response => {
-        console.log("Server response:", response);
-    })
-    .catch(err => console.error("Error:", err));
-
-    // SHOW SUCCESS POPUP
-    document.getElementById("popupSuccess").style.display = "flex";
-
-    // AFTER 3 SECONDS → GO TO index2.html
-    setTimeout(function () {
-        window.location.href = "index2.html";
-    }, 3000);
-
-    setTimeout(function () {
-        document.getElementById("popupSuccess").style.display = "none";
-    }, 3000);
-}
-</script>
 
 
 </body>
