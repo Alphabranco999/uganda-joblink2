@@ -374,12 +374,20 @@ textarea {
 </div>
 
 </div>
- <script>
-  function validateForm() {
+<script>
+function validateForm() {
+
+    const btn = document.getElementById("submitBtn");
+
     let name = document.getElementById("name").value.trim();
     let phone = document.getElementById("phone").value.trim();
     let location = document.getElementById("location").value.trim();
     let workers = document.getElementById("workers").value.trim();
+
+    let selectedJobs = [];
+    document.querySelectorAll(".job:checked").forEach(j => {
+        selectedJobs.push(j.parentElement.innerText.trim());
+    });
 
     if (workers <= 0) {
         document.getElementById("popupBoxError").innerText = "Enter valid number of workers";
@@ -387,14 +395,7 @@ textarea {
         return;
     }
 
-    let selectedJobs = [];
-    document.querySelectorAll(".job:checked").forEach(j => {
-        selectedJobs.push(j.parentElement.innerText.trim());
-    });
-
     if (!name || !phone || !location || !workers || selectedJobs.length === 0) {
-
-        // Highlight empty fields
         document.getElementById("name").style.border = name ? "1px solid #ccc" : "2px solid red";
         document.getElementById("phone").style.border = phone ? "1px solid #ccc" : "2px solid red";
         document.getElementById("location").style.border = location ? "1px solid #ccc" : "2px solid red";
@@ -402,13 +403,19 @@ textarea {
 
         document.getElementById("popupBoxError").innerText = "Some required fields are still empty";
         showPopup("popupError", 2500);
-
         return;
     }
+
+    // ✅ CHANGE BUTTON TEXT HERE
+    btn.innerText = "Submitting......";
+    btn.disabled = true;
 
     if (!navigator.onLine) {
         document.getElementById("popupBoxError").innerText = "Good internet connection required";
         showPopup("popupError", 2500);
+
+        btn.innerText = "Submit Details";
+        btn.disabled = false;
         return;
     }
 
@@ -433,6 +440,10 @@ textarea {
     .catch(err => {
         document.getElementById("popupBoxError").innerText = "Server error. Try again.";
         showPopup("popupError", 2500);
+
+        // reset button on error
+        btn.innerText = "Submit Details";
+        btn.disabled = false;
     });
 }
 
@@ -446,7 +457,6 @@ function showPopup(id, duration = 3000) {
 }
 
 document.getElementById("submitBtn").addEventListener("click", validateForm);
-
- </script>
+</script>
 </body>
 </html>
