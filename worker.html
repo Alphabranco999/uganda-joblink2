@@ -229,6 +229,48 @@ textarea {
 </style>
 </head>
 <body>
+ <form id="bossForm">
+  <h3>Employer Request</h3>
+
+  <input name="fullname" placeholder="Full Name" required>
+  <input name="telephone" placeholder="Telephone Number" required>
+  <input name="location" placeholder="Location" required>
+  <input name="workers" type="number" placeholder="How many workers do you want?" required>
+
+  <label>Select Job Type:</label>
+  <div>
+    <label><input type="checkbox" name="jobtype" value="House Help"> House Help</label><br>
+    <label><input type="checkbox" name="jobtype" value="Cleaner"> Cleaner</label><br>
+    <label><input type="checkbox" name="jobtype" value="Cook"> Cook</label><br>
+    <label><input type="checkbox" name="jobtype" value="Security"> Security</label><br>
+    <label><input type="checkbox" name="jobtype" value="Driver"> Driver</label><br>
+  </div>
+
+  <button type="submit">Submit</button>
+</form>
+
+<script>
+document.getElementById("bossForm").addEventListener("submit", function(e){
+  e.preventDefault();
+
+  let jobtypes = [];
+  document.querySelectorAll("input[name='jobtype']:checked").forEach(j => jobtypes.push(j.value));
+
+  fetch("BOSS_SCRIPT_URL", {
+    method: "POST",
+    body: JSON.stringify({
+      fullname: this.fullname.value,
+      telephone: this.telephone.value,
+      location: this.location.value,
+      workers: this.workers.value,
+      jobtype: jobtypes.join(", ")
+    })
+  })
+  .then(r => r.text())
+  .then(alert);
+});
+</script>
+
 <header>Employer Registration</header>
 <div class="container">
 
