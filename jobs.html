@@ -368,7 +368,18 @@ input, select {
 </div>
 
 <script>
+let isSubmitting = false;
+
 function validateForm() {
+
+    // 🔴 PREVENT DOUBLE SUBMIT
+    if (isSubmitting) return;
+    isSubmitting = true;
+
+    const btn = document.getElementById("submitBtn");
+    btn.disabled = true;
+    btn.innerText = "Submitting...";
+
     let name = document.getElementById("name").value.trim();
     let age = document.getElementById("age").value.trim();
     let phone = document.getElementById("phone").value.trim();
@@ -377,13 +388,19 @@ function validateForm() {
     let education = document.getElementById("education").value;
     let english = document.getElementById("english").value;
 
-    // collect selected jobs
     let selectedJobs = [];
     document.querySelectorAll(".job:checked").forEach(j => {
         selectedJobs.push(j.parentElement.innerText.trim());
     });
 
-    // REQUIRED FIELDS CHECK
+    // 🔴 RESET BORDERS
+    document.getElementById("name").style.border = "1px solid #ccc";
+    document.getElementById("age").style.border = "1px solid #ccc";
+    document.getElementById("phone").style.border = "1px solid #ccc";
+    document.getElementById("emergency").style.border = "1px solid #ccc";
+    document.getElementById("location").style.border = "1px solid #ccc";
+
+    // ❌ VALIDATION
     if (
         !name ||
         !age ||
@@ -394,30 +411,46 @@ function validateForm() {
         !english ||
         selectedJobs.length === 0
     ) {
-        document.getElementById("popupError").style.display = "flex";
-        document.getElementById("popupError").innerText = "Some required fields are still empty";
+        if (!name) document.getElementById("name").style.border = "2px solid red";
+        if (!age) document.getElementById("age").style.border = "2px solid red";
+        if (!phone) document.getElementById("phone").style.border = "2px solid red";
+        if (!emergency) document.getElementById("emergency").style.border = "2px solid red";
+        if (!location) document.getElementById("location").style.border = "2px solid red";
 
-        setTimeout(function () {
+        document.getElementById("popupBoxError").innerText = "Some required fields are still empty";
+        document.getElementById("popupError").style.display = "flex";
+
+        setTimeout(() => {
             document.getElementById("popupError").style.display = "none";
         }, 2500);
+
+        // 🔴 UNLOCK BUTTON
+        isSubmitting = false;
+        btn.disabled = false;
+        btn.innerText = "Submit Details";
 
         return;
     }
 
-    // ⭐ CHECK INTERNET BEFORE SENDING ⭐
+    // 🌐 INTERNET CHECK
     if (!navigator.onLine) {
+        document.getElementById("popupBoxError").innerText = "Good internet connection required";
         document.getElementById("popupError").style.display = "flex";
-        document.getElementById("popupError").innerText = "Good internet connection required";
 
-        setTimeout(function () {
+        setTimeout(() => {
             document.getElementById("popupError").style.display = "none";
         }, 2500);
+
+        // 🔴 UNLOCK BUTTON
+        isSubmitting = false;
+        btn.disabled = false;
+        btn.innerText = "Submit Details";
 
         return;
     }
 
-    // ⭐ SEND DATA TO GOOGLE SHEETS ⭐
-    fetch("https://script.google.com/macros/s/AKfycbzeBZG7TbhlkRD4s9R3GsIFT5mpScqRetDb9yl6HZODaEkvCwgs5XFOJkJtyNjl/exec", {
+    // 🚀 SEND DATA
+    fetch("YOUR_GOOGLE_SCRIPT_URL", {
         method: "POST",
         body: JSON.stringify({
             fullname: name,
@@ -431,23 +464,31 @@ function validateForm() {
         })
     })
     .then(res => res.text())
-    .then(response => console.log("Server:", response))
-    .catch(err => console.error("Error:", err));
+    .then(response => {
 
-    // SUCCESS POPUP
-    document.getElementById("popupSuccess").style.display = "flex";
+        console.log("Server:", response);
 
-    // REDIRECT AFTER 3 SECONDS
-    setTimeout(function () {
-        window.location.href = "index2.html";
-    }, 3000);
+        document.getElementById("popupSuccess").style.display = "flex";
 
-    setTimeout(function () {
-        document.getElementById("popupSuccess").style.display = "none";
-    }, 3000);
+        setTimeout(() => {
+            window.location.href = "index2.html";
+        }, 3000);
+    })
+    .catch(err => {
+
+        document.getElementById("popupBoxError").innerText = "Server error. Try again.";
+        document.getElementById("popupError").style.display = "flex";
+
+        // 🔴 UNLOCK BUTTON
+        isSubmitting = false;
+        btn.disabled = false;
+        btn.innerText = "Submit Details";
+
+        setTimeout(() => {
+            document.getElementById("popupError").style.display = "none";
+        }, 2500);
+    });
 }
-
-
 </script>
 
 
