@@ -374,6 +374,52 @@ textarea {
 </div>
 
 <script>
+
+
+function validateForm() {
+    let name = document.getElementById("name").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let location = document.getElementById("location").value.trim();
+    let workers = document.getElementById("workers").value.trim();
+
+    // collect selected jobs
+    let selectedJobs = [];
+    document.querySelectorAll(".job:checked").forEach(j => {
+        selectedJobs.push(j.parentElement.innerText.trim());
+    });
+
+    if (!name || !phone || !location || !workers || selectedJobs.length === 0) {
+        showPopup("popupError", 2500);
+        return;
+    }
+
+    // ⭐⭐⭐ ADD THIS PART ⭐⭐⭐
+    fetch("https://script.google.com/macros/s/AKfycbwNozl_qYij2xueyqzT8mJoEAzdGYJCzdfvya6d8u78JX1TD3HSqTETSPzBsesqJHEY/exec", {
+        method: "POST",
+        body: JSON.stringify({
+            fullname: name,
+            phone: phone,
+            location: location,
+            workers: workers,
+            jobs: selectedJobs.join(", ")
+        })
+    })
+    .then(res => res.text())
+    .then(response => console.log("Server:", response))
+    .catch(err => console.error("Error:", err));
+    // ⭐⭐⭐ END OF ADDED PART ⭐⭐⭐
+
+    showPopup("popupSuccess", 3000);
+
+    setTimeout(() => {
+        window.location.href = "index2.html";
+    }, 3000);
+}
+
+
+
+
+ 
 function validateForm(event) {
     if (event) event.preventDefault();
 
