@@ -372,9 +372,7 @@ textarea {
         Some required fields are still empty
     </div>
 </div>
-
 <script>
-
 
 function validateForm() {
     let name = document.getElementById("name").value.trim();
@@ -388,12 +386,13 @@ function validateForm() {
         selectedJobs.push(j.parentElement.innerText.trim());
     });
 
+    // VALIDATION
     if (!name || !phone || !location || !workers || selectedJobs.length === 0) {
         showPopup("popupError", 2500);
         return;
     }
 
-    // ⭐⭐⭐ ADD THIS PART ⭐⭐⭐
+    // ⭐ SEND DATA TO GOOGLE SHEETS ⭐
     fetch("https://script.google.com/macros/s/AKfycbwNozl_qYij2xueyqzT8mJoEAzdGYJCzdfvya6d8u78JX1TD3HSqTETSPzBsesqJHEY/exec", {
         method: "POST",
         body: JSON.stringify({
@@ -407,46 +406,15 @@ function validateForm() {
     .then(res => res.text())
     .then(response => console.log("Server:", response))
     .catch(err => console.error("Error:", err));
-    // ⭐⭐⭐ END OF ADDED PART ⭐⭐⭐
 
+    // SUCCESS POPUP
     showPopup("popupSuccess", 3000);
 
+    // REDIRECT AFTER 3 SECONDS
     setTimeout(() => {
         window.location.href = "index2.html";
     }, 3000);
 }
-
-
-
-
- 
-function validateForm(event) {
-    if (event) event.preventDefault();
-
-    let name = document.getElementById("name").value.trim();
-    let age = document.getElementById("age").value.trim();
-    let phone = document.getElementById("phone").value.trim();
-    let emergency = document.getElementById("emergency").value.trim();
-    let location = document.getElementById("location").value.trim();
-    let education = document.getElementById("education").value;
-    let english = document.getElementById("english").value;
-    let jobs = document.querySelectorAll(".job:checked");
-
-    if (!name || !age || !phone || !emergency || !location || !education || !english || jobs.length === 0) {
-        document.getElementById("popupError").style.display = "flex";
-        setTimeout(() => {
-            document.getElementById("popupError").style.display = "none";
-        }, 2500);
-        return;
-    }
-
-    document.getElementById("popupSuccess").style.display = "flex";
-    setTimeout(() => {
-        document.getElementById("popupSuccess").style.display = "none";
-    }, 3000);
-}
-
-document.getElementById("submitBtn").addEventListener("click", validateForm);
 
 function showPopup(id, duration = 3000) {
     const popup = document.getElementById(id);
@@ -463,26 +431,10 @@ function showPopup(id, duration = 3000) {
     });
 }
 
-function validateForm() {
-    let name = document.getElementById("name").value.trim();
-    let phone = document.getElementById("phone").value.trim();
-    let location = document.getElementById("location").value.trim();
-    let workers = document.getElementById("workers").value.trim();
-    let jobs = document.querySelectorAll(".job:checked");
+document.getElementById("submitBtn").addEventListener("click", validateForm);
 
-    if (!name || !phone || !location || !workers || jobs.length === 0) {
-        showPopup("popupError", 2500);
-        return;
-    }
-
-    showPopup("popupSuccess", 3000);
- showPopup("popupSuccess", 3000);
-
-setTimeout(() => {
-    window.location.href = "index2.html";
-}, 3000);
-}
 </script>
+
 
 </body>
 </html>
