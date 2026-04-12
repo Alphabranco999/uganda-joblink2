@@ -368,16 +368,14 @@ input, select {
 </div>
 
 <script>
-<script>
 let isSubmitting = false;
 
 document.getElementById("submitBtn").addEventListener("click", validateForm);
 
 function validateForm() {
 
-    // 🚫 prevent double submit
+    // prevent double submit
     if (isSubmitting) return;
-
     isSubmitting = true;
 
     const btn = document.getElementById("submitBtn");
@@ -392,7 +390,6 @@ function validateForm() {
     let education = document.getElementById("education").value;
     let english = document.getElementById("english").value;
 
-    // collect jobs
     let selectedJobs = [];
     document.querySelectorAll(".job:checked").forEach(j => {
         selectedJobs.push(j.parentElement.innerText.trim());
@@ -405,16 +402,9 @@ function validateForm() {
 
     // validation
     if (
-        !name ||
-        !age ||
-        !phone ||
-        !emergency ||
-        !location ||
-        !education ||
-        !english ||
-        selectedJobs.length === 0
+        !name || !age || !phone || !emergency || !location ||
+        !education || !english || selectedJobs.length === 0
     ) {
-
         if (!name) document.getElementById("name").style.border = "2px solid red";
         if (!age) document.getElementById("age").style.border = "2px solid red";
         if (!phone) document.getElementById("phone").style.border = "2px solid red";
@@ -422,19 +412,16 @@ function validateForm() {
         if (!location) document.getElementById("location").style.border = "2px solid red";
 
         showError("Some required fields are still empty");
-
         resetButton();
         return;
     }
 
-    // internet check
     if (!navigator.onLine) {
         showError("No internet connection");
         resetButton();
         return;
     }
 
-    // send data
     fetch("YOUR_GOOGLE_SCRIPT_URL", {
         method: "POST",
         body: JSON.stringify({
@@ -462,7 +449,7 @@ function validateForm() {
     });
 }
 
-// show error popup
+// ERROR POPUP
 function showError(msg) {
     document.getElementById("popupBoxError").innerText = msg;
     document.getElementById("popupError").style.display = "flex";
@@ -472,17 +459,14 @@ function showError(msg) {
     }, 2500);
 }
 
-// reset button after error
+// RESET BUTTON
 function resetButton() {
     isSubmitting = false;
-
     const btn = document.getElementById("submitBtn");
     btn.disabled = false;
     btn.innerText = "Submit Details";
 }
 </script>
-</script>
-
 
 
 
