@@ -368,7 +368,6 @@ input, select {
 </div>
 
 <script>
-
 function validateForm() {
     let name = document.getElementById("name").value.trim();
     let age = document.getElementById("age").value.trim();
@@ -384,7 +383,7 @@ function validateForm() {
         selectedJobs.push(j.parentElement.innerText.trim());
     });
 
-    // VALIDATION
+    // REQUIRED FIELDS CHECK
     if (
         !name ||
         !age ||
@@ -396,6 +395,19 @@ function validateForm() {
         selectedJobs.length === 0
     ) {
         document.getElementById("popupError").style.display = "flex";
+        document.getElementById("popupError").innerText = "Some required fields are still empty";
+
+        setTimeout(function () {
+            document.getElementById("popupError").style.display = "none";
+        }, 2500);
+
+        return;
+    }
+
+    // ⭐ CHECK INTERNET BEFORE SENDING ⭐
+    if (!navigator.onLine) {
+        document.getElementById("popupError").style.display = "flex";
+        document.getElementById("popupError").innerText = "Good internet connection required";
 
         setTimeout(function () {
             document.getElementById("popupError").style.display = "none";
@@ -406,22 +418,21 @@ function validateForm() {
 
     // ⭐ SEND DATA TO GOOGLE SHEETS ⭐
     fetch("https://script.google.com/macros/s/AKfycbzeBZG7TbhlkRD4s9R3GsIFT5mpScqRetDb9yl6HZODaEkvCwgs5XFOJkJtyNjl/exec", {
-    method: "POST",
-    body: JSON.stringify({
-        fullname: name,
-        age: age,
-        phone: phone,
-        emergency: emergency,
-        location: location,
-        education: education,
-        english: english,
-        jobs: selectedJobs.join(", ")
+        method: "POST",
+        body: JSON.stringify({
+            fullname: name,
+            age: age,
+            phone: phone,
+            emergency: emergency,
+            location: location,
+            education: education,
+            english: english,
+            jobs: selectedJobs.join(", ")
+        })
     })
-})
-.then(res => res.text())
-.then(response => console.log("Server:", response))
-.catch(err => console.error("Error:", err));
-
+    .then(res => res.text())
+    .then(response => console.log("Server:", response))
+    .catch(err => console.error("Error:", err));
 
     // SUCCESS POPUP
     document.getElementById("popupSuccess").style.display = "flex";
@@ -435,6 +446,7 @@ function validateForm() {
         document.getElementById("popupSuccess").style.display = "none";
     }, 3000);
 }
+
 
 </script>
 
