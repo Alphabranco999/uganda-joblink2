@@ -368,6 +368,77 @@ input, select {
 </div>
 
 <script>
+
+<script>
+function validateForm() {
+    let name = document.getElementById("name").value.trim();
+    let age = document.getElementById("age").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+    let emergency = document.getElementById("emergency").value.trim();
+    let location = document.getElementById("location").value.trim();
+    let education = document.getElementById("education").value;
+    let english = document.getElementById("english").value;
+
+    // collect selected jobs
+    let selectedJobs = [];
+    document.querySelectorAll(".job:checked").forEach(j => {
+        selectedJobs.push(j.parentElement.innerText.trim());
+    });
+
+    // VALIDATION
+    if (
+        !name ||
+        !age ||
+        !phone ||
+        !emergency ||
+        !location ||
+        !education ||
+        !english ||
+        selectedJobs.length === 0
+    ) {
+        document.getElementById("popupError").style.display = "flex";
+
+        setTimeout(function () {
+            document.getElementById("popupError").style.display = "none";
+        }, 2500);
+
+        return;
+    }
+
+    // ⭐ SEND DATA TO GOOGLE SHEETS ⭐
+    fetch("https://script.google.com/macros/s/AKfycbzZj98oWuImbwUhas44nhFE9-k0IvWJTrJld0lQas7UuYDNE824zm6AXJXvlJ77zyPyxA/exec", {
+        method: "POST",
+        body: JSON.stringify({
+            fullname: name,
+            age: age,
+            phone: phone,
+            emergency: emergency,
+            location: location,
+            education: education,
+            english: english,
+            jobs: selectedJobs.join(", ")
+        })
+    })
+    .then(res => res.text())
+    .then(response => console.log("Server:", response))
+    .catch(err => console.error("Error:", err));
+
+    // SUCCESS POPUP
+    document.getElementById("popupSuccess").style.display = "flex";
+
+    // REDIRECT AFTER 3 SECONDS
+    setTimeout(function () {
+        window.location.href = "index2.html";
+    }, 3000);
+
+    setTimeout(function () {
+        document.getElementById("popupSuccess").style.display = "none";
+    }, 3000);
+}
+</script>
+
+
+    
 function validateForm() {
 
 <script>
