@@ -375,15 +375,15 @@ textarea {
 
 </div>
  <script>
-function validateForm() {
+  function validateForm() {
     let name = document.getElementById("name").value.trim();
     let phone = document.getElementById("phone").value.trim();
     let location = document.getElementById("location").value.trim();
     let workers = document.getElementById("workers").value.trim();
 
     if (workers <= 0) {
+        document.getElementById("popupBoxError").innerText = "Enter valid number of workers";
         showPopup("popupError", 2500);
-        document.querySelector("#popupBoxError").innerText = "Enter valid number of workers";
         return;
     }
 
@@ -392,25 +392,23 @@ function validateForm() {
         selectedJobs.push(j.parentElement.innerText.trim());
     });
 
-  if (!name || !phone || !location || !workers || selectedJobs.length === 0) {
+    if (!name || !phone || !location || !workers || selectedJobs.length === 0) {
 
-    // Highlight empty fields
-    document.getElementById("name").style.border = name ? "1px solid #ccc" : "2px solid red";
-    document.getElementById("phone").style.border = phone ? "1px solid #ccc" : "2px solid red";
-    document.getElementById("location").style.border = location ? "1px solid #ccc" : "2px solid red";
-    document.getElementById("workers").style.border = workers ? "1px solid #ccc" : "2px solid red";
+        // Highlight empty fields
+        document.getElementById("name").style.border = name ? "1px solid #ccc" : "2px solid red";
+        document.getElementById("phone").style.border = phone ? "1px solid #ccc" : "2px solid red";
+        document.getElementById("location").style.border = location ? "1px solid #ccc" : "2px solid red";
+        document.getElementById("workers").style.border = workers ? "1px solid #ccc" : "2px solid red";
 
-    // Show one popup message
-    document.getElementById("popupBoxError").innerText = "Some required fields are still empty";
-    showPopup("popupError", 2500);
+        document.getElementById("popupBoxError").innerText = "Some required fields are still empty";
+        showPopup("popupError", 2500);
 
-    return;
-}
+        return;
     }
 
     if (!navigator.onLine) {
+        document.getElementById("popupBoxError").innerText = "Good internet connection required";
         showPopup("popupError", 2500);
-        document.querySelector("#popupBoxError").innerText = "Good internet connection required";
         return;
     }
 
@@ -433,8 +431,8 @@ function validateForm() {
         }, 3000);
     })
     .catch(err => {
+        document.getElementById("popupBoxError").innerText = "Server error. Try again.";
         showPopup("popupError", 2500);
-        document.querySelector("#popupBoxError").innerText = "Server error. Try again.";
     });
 }
 
@@ -448,6 +446,7 @@ function showPopup(id, duration = 3000) {
 }
 
 document.getElementById("submitBtn").addEventListener("click", validateForm);
+
  </script>
 </body>
 </html>
