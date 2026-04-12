@@ -372,70 +372,58 @@ textarea {
         Some required fields are still empty
     </div>
 </div>
-<script>
-
+ <script>
 function validateForm() {
     let name = document.getElementById("name").value.trim();
     let phone = document.getElementById("phone").value.trim();
     let location = document.getElementById("location").value.trim();
     let workers = document.getElementById("workers").value.trim();
 
-    // collect selected jobs
     let selectedJobs = [];
     document.querySelectorAll(".job:checked").forEach(j => {
         selectedJobs.push(j.parentElement.innerText.trim());
     });
 
-    // VALIDATION
+    // REQUIRED FIELDS CHECK
     if (!name || !phone || !location || !workers || selectedJobs.length === 0) {
         showPopup("popupError", 2500);
+        document.querySelector("#popupBoxError").innerText = "Some required fields are still empty";
+        return;
+    }
+
+    // ⭐ CHECK INTERNET BEFORE SENDING ⭐
+    if (!navigator.onLine) {
+        showPopup("popupError", 2500);
+        document.querySelector("#popupBoxError").innerText = "Good internet connection required";
         return;
     }
 
     // ⭐ SEND DATA TO GOOGLE SHEETS ⭐
     fetch("https://script.google.com/macros/s/AKfycbxfjPuz_5EHMR2-Fq-oXrZvUovrsaNFhW_42gkFHEv34wlt4Afu-CXmxUQ6H8pFmnMl/exec", {
-    method: "POST",
-    body: JSON.stringify({
-        fullname: name,
-        phone: phone,
-        location: location,
-        workers: workers,
-        jobs: selectedJobs.join(", ")
+        method: "POST",
+        body: JSON.stringify({
+            fullname: name,
+            phone: phone,
+            location: location,
+            workers: workers,
+            jobs: selectedJobs.join(", ")
+        })
     })
-})
-.then(res => res.text())
-.then(response => console.log("Server:", response))
-.catch(err => console.error("Error:", err));
-
+    .then(res => res.text())
+    .then(response => console.log("Server:", response))
+    .catch(err => {
+        showPopup("popupError", 2500);
+        document.querySelector("#popupBoxError").innerText = "Server error. Try again.";
+        console.error("Error:", err);
+    });
 
     // SUCCESS POPUP
     showPopup("popupSuccess", 3000);
 
-    // REDIRECT AFTER 3 SECONDS
     setTimeout(() => {
         window.location.href = "index2.html";
     }, 3000);
 }
-
-function showPopup(id, duration = 3000) {
-    const popup = document.getElementById(id);
-    popup.classList.add("show");
-
-    // auto hide
-    setTimeout(() => {
-        popup.classList.remove("show");
-    }, duration);
-
-    // click to close
-    popup.addEventListener("click", () => {
-        popup.classList.remove("show");
-    });
-}
-
-document.getElementById("submitBtn").addEventListener("click", validateForm);
-
 </script>
-
-
 </body>
 </html>
