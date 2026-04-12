@@ -405,23 +405,23 @@ function validateForm() {
     }
 
     // ⭐ SEND DATA TO GOOGLE SHEETS ⭐
-    fetch("https://script.google.com/macros/s/AKfycbzeBZG7TbhlkRD4s9R3GsIFT5mpScqRetDb9yl6HZODaEkvCwgs5XFOJkJtyNjl/exec
-", {
-        method: "POST",
-        body: JSON.stringify({
-            fullname: name,
-            age: age,
-            phone: phone,
-            emergency: emergency,
-            location: location,
-            education: education,
-            english: english,
-            jobs: selectedJobs.join(", ")
-        })
+    fetch("https://script.google.com/macros/s/AKfycbzeBZG7TbhlkRD4s9R3GsIFT5mpScqRetDb9yl6HZODaEkvCwgs5XFOJkJtyNjl/exec", {
+    method: "POST",
+    body: JSON.stringify({
+        fullname: name,
+        age: age,
+        phone: phone,
+        emergency: emergency,
+        location: location,
+        education: education,
+        english: english,
+        jobs: selectedJobs.join(", ")
     })
-    .then(res => res.text())
-    .then(response => console.log("Server:", response))
-    .catch(err => console.error("Error:", err));
+})
+.then(res => res.text())
+.then(response => console.log("Server:", response))
+.catch(err => console.error("Error:", err));
+
 
     // SUCCESS POPUP
     document.getElementById("popupSuccess").style.display = "flex";
