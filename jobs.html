@@ -372,9 +372,23 @@ let isSubmitting = false;
 
 document.getElementById("submitBtn").addEventListener("click", validateForm);
 
+// ✅ FORMAT PHONE TO START WITH 0
+function formatPhoneUG(phone) {
+    phone = phone.replace(/\s+/g, "");
+
+    if (phone.startsWith("+256")) {
+        return "0" + phone.substring(4);
+    }
+
+    if (phone.startsWith("256")) {
+        return "0" + phone.substring(3);
+    }
+
+    return phone;
+}
+
 function validateForm() {
 
-    // prevent double submit
     if (isSubmitting) return;
     isSubmitting = true;
 
@@ -384,8 +398,11 @@ function validateForm() {
 
     let name = document.getElementById("name").value.trim();
     let age = document.getElementById("age").value.trim();
-    let phone = document.getElementById("phone").value.trim();
-    let emergency = document.getElementById("emergency").value.trim();
+
+    // ✅ APPLY FORMAT HERE
+    let phone = formatPhoneUG(document.getElementById("phone").value.trim());
+    let emergency = formatPhoneUG(document.getElementById("emergency").value.trim());
+
     let location = document.getElementById("location").value.trim();
     let education = document.getElementById("education").value;
     let english = document.getElementById("english").value;
@@ -395,12 +412,16 @@ function validateForm() {
         selectedJobs.push(j.parentElement.innerText.trim());
     });
 
+    // ✅ UPDATE INPUT FIELDS VISUALLY
+    document.getElementById("phone").value = phone;
+    document.getElementById("emergency").value = emergency;
+
     // reset borders
     ["name","age","phone","emergency","location"].forEach(id => {
         document.getElementById(id).style.border = "1px solid #ccc";
     });
 
-    // validation
+    // ✅ VALIDATION
     if (
         !name || !age || !phone || !emergency || !location ||
         !education || !english || selectedJobs.length === 0
@@ -416,42 +437,45 @@ function validateForm() {
         return;
     }
 
+    // ✅ STRICT PHONE VALIDATION
+    if (!/^0\d{9}$/.test(phone) || !/^0\d{9}$/.test(emergency)) {
+        showError("Use valid number like 0712345678");
+        resetButton();
+        return;
+    }
+
     if (!navigator.onLine) {
         showError("No internet connection");
         resetButton();
         return;
     }
 
-   fetch("https://script.google.com/macros/s/AKfycbzH_LeU8KYVZ2435RnGhCwTTK9Ouw2F4_QCE0QLDTQAY-xB6im9tvg4Ccpa71mALgTn/exec", {
-    method: "POST",
-    mode: "no-cors",   // ⚠️ important for Google Sheets
-    body: JSON.stringify({
-        fullname: name,
-        age: age,
-        phone: phone,
-        emergency: emergency,
-        location: location,
-        education: education,
-        english: english,
-        jobs: selectedJobs.join(", ")
+    fetch("https://script.google.com/macros/s/AKfycbzH_LeU8KYVZ2435RnGhCwTTK9Ouw2F4_QCE0QLDTQAY-xB6im9tvg4Ccpa71mALgTn/exec", {
+        method: "POST",
+        mode: "no-cors",
+        body: JSON.stringify({
+            fullname: name,
+            age: age,
+            phone: phone,
+            emergency: emergency,
+            location: location,
+            education: education,
+            english: english,
+            jobs: selectedJobs.join(", ")
+        })
     })
-})
-    .then(res => res.text())
     .then(() => {
 
-    // wait 3 seconds before showing success
-    setTimeout(() => {
-
-        document.getElementById("popupSuccess").style.display = "flex";
-
-        // then wait again before redirect
         setTimeout(() => {
-            window.location.href = "index2.html";
-        }, 2500);
+            document.getElementById("popupSuccess").style.display = "flex";
 
-    }, 3000); // ⏳ delay here
+            setTimeout(() => {
+                window.location.href = "index2.html";
+            }, 2500);
 
-})
+        }, 1000);
+
+    })
     .catch(() => {
         showError("Server error. Try again.");
         resetButton();
