@@ -437,12 +437,20 @@ function validateForm() {
     })
     .then(res => res.text())
     .then(() => {
+
+    // wait 3 seconds before showing success
+    setTimeout(() => {
+
         document.getElementById("popupSuccess").style.display = "flex";
 
+        // then wait again before redirect
         setTimeout(() => {
             window.location.href = "index2.html";
         }, 2500);
-    })
+
+    }, 3000); // ⏳ delay here
+
+})
     .catch(() => {
         showError("Server error. Try again.");
         resetButton();
