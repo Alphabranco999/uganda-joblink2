@@ -375,13 +375,23 @@ textarea {
 
 </div>
 <script>
+function formatPhoneUG(phone) {
+    phone = phone.replace(/\s+/g, "");
+
+    if (phone.startsWith("+256")) return "0" + phone.substring(4);
+    if (phone.startsWith("256")) return "0" + phone.substring(3);
+
+    return phone;
+}
+ 
 function validateForm() {
  
 let notes = document.getElementById("notes").value.trim();
     const btn = document.getElementById("submitBtn");
 
     let name = document.getElementById("name").value.trim();
-    let phone = document.getElementById("phone").value.trim();
+    let phone = formatPhoneUG(document.getElementById("phone").value.trim());
+    document.getElementById("phone").value = phone;
     let location = document.getElementById("location").value.trim();
     let workers = document.getElementById("workers").value.trim();
 
@@ -419,6 +429,12 @@ let notes = document.getElementById("notes").value.trim();
         btn.disabled = false;
         return;
     }
+ if (!/^0\d{9}$/.test(phone)) {
+    showError("Use valid number like 0712345678");
+    btn.innerText = "Submit Details";
+    btn.disabled = false;
+    return;
+}
 
     
        fetch("https://script.google.com/macros/s/AKfycbzypzTzf9NIbpcDIU3fFfGye_lQmP8TVs4mQSJTtERJAYasZ2HZxX7rK3ZuzpOLjq0o/exec", {
