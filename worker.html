@@ -356,7 +356,7 @@ textarea {
         </div>
     </div>
     <label>Additional Notes (Optional)</label>
-    <textarea placeholder="Describe the job or special requirements"></textarea>
+   <textarea id="notes" placeholder="Describe the job or special requirements"></textarea>
 <button type="button" class="submit-btn" id="submitBtn">Submit Details</button>
 
 <!-- SUCCESS POPUP -->
@@ -376,7 +376,8 @@ textarea {
 </div>
 <script>
 function validateForm() {
-
+ 
+let notes = document.getElementById("notes").value.trim();
     const btn = document.getElementById("submitBtn");
 
     let name = document.getElementById("name").value.trim();
@@ -421,22 +422,28 @@ function validateForm() {
 
     fetch("YOUR_URL", {
         method: "POST",
-        body: JSON.stringify({
-            fullname: name,
-            phone: phone,
-            location: location,
-            workers: workers,
-            jobs: selectedJobs.join(", ")
-        })
+       body: JSON.stringify({
+    fullname: name,
+    phone: phone,
+    location: location,
+    workers: workers,
+    jobs: selectedJobs.join(", "),
+    notes: notes   // ✅ ADDED
+})
     })
     .then(res => res.text())
     .then(response => {
+
+    setTimeout(() => {
         showPopup("popupSuccess", 3000);
 
         setTimeout(() => {
             window.location.href = "index2.html";
         }, 3000);
-    })
+
+    }, 3000); // ⏳ delay before showing popup
+
+})
     .catch(err => {
         document.getElementById("popupBoxError").innerText = "Server error. Try again.";
         showPopup("popupError", 2500);
