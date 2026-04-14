@@ -415,6 +415,24 @@ textarea {
 
 </div>
 <script>
+
+// SUCCESS
+document.getElementById("loadingOverlay").style.display = "none";
+
+// show success popup
+showPopup("Submitted successfully. Wait for a company call");
+
+// redirect after 2 seconds
+setTimeout(() => {
+    window.location.href = "index2.html"; // or "back.html" or "home.html"
+}, 2000);
+
+ showPopup("Submitted successfully. Wait for a company call");
+
+setTimeout(() => {
+    window.location.href = "index2.html";
+}, 2500);
+ 
 function formatPhoneUG(phone) {
     phone = phone.replace(/\s+/g, "");
 
