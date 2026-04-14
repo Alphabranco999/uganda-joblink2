@@ -414,18 +414,17 @@ textarea {
 </div>
 
 </div>
-
 <script>
 function formatPhoneUG(phone) {
     phone = phone.replace(/\s+/g, "");
 
-    if (phone.startsWith("+256")) return "0" + phone.substring(4);
-    if (phone.startsWith("256")) return "0" + phone.substring(3);
+    if (phone.startsWith("+256")) return "0" + phone.slice(4);
+    if (phone.startsWith("256")) return "0" + phone.slice(3);
 
     return phone;
 }
 
-function showPopup(id, duration = 3000) {
+function showPopup(id, duration = 2500) {
     const popup = document.getElementById(id);
     popup.classList.add("show");
 
@@ -438,25 +437,32 @@ async function validateForm() {
 
     const btn = document.getElementById("submitBtn");
 
-    let notes = document.getElementById("notes").value.trim();
     let name = document.getElementById("name").value.trim();
-
     let phoneRaw = document.getElementById("phone").value.trim();
+    let location = document.getElementById("location").value.trim();
+    let workers = Number(document.getElementById("workers").value);
+    let notes = document.getElementById("notes").value.trim();
+
     let phone = formatPhoneUG(phoneRaw);
     document.getElementById("phone").value = phone;
 
-    let location = document.getElementById("location").value.trim();
-    let workers = Number(document.getElementById("workers").value);
-
+    // ✅ FIXED JOB SELECTION (this was your main error)
     let selectedJobs = [];
     document.querySelectorAll(".job:checked").forEach(j => {
-        selectedJobs.push(j.parentElement.innerText.trim());
+        selectedJobs.push(j.closest("label").innerText.trim());
     });
 
-    // ❌ VALIDATION
-    if (!name || !phone || !location || selectedJobs.length === 0) {
+    // ❌ VALIDATION FIXED
+    if (!name || !phone || !location || !workers) {
         document.getElementById("popupBoxError").innerText =
-            "Please fill all required fields and select at least one job";
+            "Please fill all required fields";
+        showPopup("popupError", 2500);
+        return;
+    }
+
+    if (selectedJobs.length === 0) {
+        document.getElementById("popupBoxError").innerText =
+            "Please select at least one job";
         showPopup("popupError", 2500);
         return;
     }
@@ -475,8 +481,8 @@ async function validateForm() {
         return;
     }
 
-    // ✅ START LOADING
-    btn.innerText = "Submitting..."; 
+    // ✅ LOADING START
+    btn.innerText = "Submitting...";
     btn.disabled = true;
     document.getElementById("loadingOverlay").style.display = "flex";
 
@@ -502,14 +508,15 @@ async function validateForm() {
 
         setTimeout(() => {
             window.location.href = "index2.html";
-        }, 2000);
+        }, 1500);
 
     } catch (err) {
 
         // ❌ ERROR
         document.getElementById("loadingOverlay").style.display = "none";
 
-     
+        document.getElementById("popupBoxError").innerText =
+            "Network error. Please try again";
 
         showPopup("popupError", 2500);
 
@@ -520,5 +527,3 @@ async function validateForm() {
 
 document.getElementById("submitBtn").addEventListener("click", validateForm);
 </script>
-</body>
-</html>
