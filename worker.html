@@ -70,7 +70,7 @@ header {
     width: 100%;
     max-width: 420px;
     margin: 0 auto;
-    padding: 15px 12px; /* top 
+    padding: 15px 12px;
 }
 
 /* LABELS */
@@ -476,7 +476,7 @@ async function validateForm() {
     }
 
     // ✅ START LOADING
-    btn.innerText = "Submitting...";
+    btn.innerText = "Submitting..."; 
     btn.disabled = true;
     document.getElementById("loadingOverlay").style.display = "flex";
 
@@ -509,8 +509,7 @@ async function validateForm() {
         // ❌ ERROR
         document.getElementById("loadingOverlay").style.display = "none";
 
-        document.getElementById("popupBoxError").innerText =
-            "Network error. Try again.";
+     
 
         showPopup("popupError", 2500);
 
