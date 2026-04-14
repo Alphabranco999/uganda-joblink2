@@ -223,7 +223,41 @@ textarea {
     100% { transform: scale(1); opacity:1; }
 }
 
+#loadingOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 99999;
+}
 
+/* SPINNER */
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #fff;
+    border-top: 5px solid #0057b7;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.loading-text {
+    color: white;
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
  
 
 </style>
@@ -232,6 +266,12 @@ textarea {
 
 
 <header>Employer Registration</header>
+
+ <div id="loadingOverlay">
+    <div class="spinner"></div>
+    <div class="loading-text">Submitting...</div>
+</div>
+ 
 <div class="container">
 
     <label>Full Names of the Boss</label>
@@ -420,6 +460,7 @@ let notes = document.getElementById("notes").value.trim();
     // ✅ CHANGE BUTTON TEXT HERE
     btn.innerText = "Submitting......";
     btn.disabled = true;
+    document.getElementById("loadingOverlay").style.display = "flex";
 
     if (!navigator.onLine) {
         document.getElementById("popupBoxError").innerText = "Good internet connection required";
