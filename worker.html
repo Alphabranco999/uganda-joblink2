@@ -415,30 +415,10 @@ textarea {
 
 </div>
 <script>
-
-// SUCCESS
-document.getElementById("loadingOverlay").style.display = "none";
-
-// show success popup
-showPopup("Submitted successfully. Wait for a company call");
-
-// redirect after 2 seconds
-setTimeout(() => {
-    window.location.href = "index2.html"; // or "back.html" or "home.html"
-}, 2000);
-
- showPopup("Submitted successfully. Wait for a company call");
-
-setTimeout(() => {
-    window.location.href = "index2.html";
-}, 2500);
- 
 function formatPhoneUG(phone) {
     phone = phone.replace(/\s+/g, "");
-
     if (phone.startsWith("+256")) return "0" + phone.slice(4);
     if (phone.startsWith("256")) return "0" + phone.slice(3);
-
     return phone;
 }
 
@@ -466,8 +446,17 @@ async function validateForm() {
         selectedJobs.push(j.closest("label").innerText.trim());
     });
 
-    if (!name || !phone || !location || !workers || selectedJobs.length === 0) {
-        alert("Please fill all fields and select jobs");
+    if (!name || !phone || !location || !workers) {
+        document.getElementById("popupBoxError").innerText =
+            "Please fill all required fields";
+        showPopup("popupError");
+        return;
+    }
+
+    if (selectedJobs.length === 0) {
+        document.getElementById("popupBoxError").innerText =
+            "Please select at least one job";
+        showPopup("popupError");
         return;
     }
 
@@ -488,20 +477,30 @@ async function validateForm() {
             })
         });
 
+        // ✅ STOP LOADING
         document.getElementById("loadingOverlay").style.display = "none";
-        alert("Submitted successfully!");
 
-        window.location.reload();
+        // ✅ SUCCESS POPUP
+        showPopup("popupSuccess");
+
+        // ✅ REDIRECT AFTER SUCCESS
+        setTimeout(() => {
+            window.location.href = "index2.html"; // change if needed
+        }, 2000);
 
     } catch (err) {
+
         document.getElementById("loadingOverlay").style.display = "none";
-        alert("Network error. Check Apps Script deployment.");
+
+        document.getElementById("popupBoxError").innerText =
+            "Network error. Try again";
+
+        showPopup("popupError");
+
         btn.innerText = "Submit Details";
         btn.disabled = false;
     }
 }
-
-document.getElementById("submitBtn").addEventListener("click", validateForm);
 
 document.getElementById("submitBtn").addEventListener("click", validateForm);
 </script>
