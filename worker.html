@@ -477,13 +477,14 @@ let notes = document.getElementById("notes").value.trim();
     document.getElementById("popupBoxError").innerText = "Use valid number like 0712345678";
 showPopup("popupError", 2500);
 document.getElementById("loadingOverlay").style.display = "none";
-    btn.innerText = "Submit Details";
-    btn.disabled = false;
-    return;
-}
 
-    
-       fetch("https://script.google.com/macros/s/AKfycbzypzTzf9NIbpcDIU3fFfGye_lQmP8TVs4mQSJTtERJAYasZ2HZxX7rK3ZuzpOLjq0o/exec", {
+
+// SHOW spinner ONLY when submitting starts
+btn.innerText = "Submitting......";
+btn.disabled = true;
+document.getElementById("loadingOverlay").style.display = "flex";
+
+fetch("https://script.google.com/macros/s/AKfycbzypzTzf9NIbpcDIU3fFfGye_lQmP8TVs4mQSJTtERJAYasZ2HZxX7rK3ZuzpOLjq0o/exec", {
     method: "POST",
     mode: "no-cors",
     body: JSON.stringify({
@@ -495,34 +496,30 @@ document.getElementById("loadingOverlay").style.display = "none";
         notes: notes
     })
 })
-     document.getElementById("loadingOverlay").style.display = "none";   
-    .then(res => res.text())
-    .then(response => {
+.then(() => {
+    // ✅ SUCCESS FLOW
 
-    // ✅ HIDE spinner first
     document.getElementById("loadingOverlay").style.display = "none";
 
-    // ✅ SHOW success
+    showPopup("popupSuccess", 3000);
+
     setTimeout(() => {
-        showPopup("popupSuccess", 3000);
-
-        setTimeout(() => {
-            window.location.href = "index2.html";
-        }, 3000);
-
-    }, 300);
-
+        window.location.href = "index2.html";
+    }, 3000);
 })
-     document.getElementById("loadingOverlay").style.display = "none";
-    .catch(err => {
-        document.getElementById("popupBoxError").innerText = "Server error. Try again.";
-        showPopup("popupError", 2500);
+.catch(err => {
+    // ❌ ERROR FLOW
 
-        // reset button on error
-        btn.innerText = "Submit Details";
-        btn.disabled = false;
-     
-    });
+    document.getElementById("loadingOverlay").style.display = "none";
+
+    document.getElementById("popupBoxError").innerText = "Server error. Try again.";
+    showPopup("popupError", 2500);
+
+    btn.innerText = "Submit Details";
+    btn.disabled = false;
+});
+
+  
 }
 
 function showPopup(id, duration = 3000) {
