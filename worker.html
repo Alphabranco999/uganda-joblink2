@@ -438,61 +438,29 @@ async function validateForm() {
     const btn = document.getElementById("submitBtn");
 
     let name = document.getElementById("name").value.trim();
-    let phoneRaw = document.getElementById("phone").value.trim();
+    let phone = document.getElementById("phone").value.trim();
     let location = document.getElementById("location").value.trim();
     let workers = Number(document.getElementById("workers").value);
     let notes = document.getElementById("notes").value.trim();
 
-    let phone = formatPhoneUG(phoneRaw);
-    document.getElementById("phone").value = phone;
-
-    // ✅ FIXED JOB SELECTION (this was your main error)
     let selectedJobs = [];
     document.querySelectorAll(".job:checked").forEach(j => {
         selectedJobs.push(j.closest("label").innerText.trim());
     });
 
-    // ❌ VALIDATION FIXED
-    if (!name || !phone || !location || !workers) {
-        document.getElementById("popupBoxError").innerText =
-            "Please fill all required fields";
-        showPopup("popupError", 2500);
+    if (!name || !phone || !location || !workers || selectedJobs.length === 0) {
+        alert("Please fill all fields and select jobs");
         return;
     }
 
-    if (selectedJobs.length === 0) {
-        document.getElementById("popupBoxError").innerText =
-            "Please select at least one job";
-        showPopup("popupError", 2500);
-        return;
-    }
-
-    if (workers <= 0 || isNaN(workers)) {
-        document.getElementById("popupBoxError").innerText =
-            "Enter a valid number of workers";
-        showPopup("popupError", 2500);
-        return;
-    }
-
-    if (!/^0\d{9}$/.test(phone)) {
-        document.getElementById("popupBoxError").innerText =
-            "Use valid number like 0712345678";
-        showPopup("popupError", 2500);
-        return;
-    }
-
-    // ✅ LOADING START
     btn.innerText = "Submitting...";
     btn.disabled = true;
     document.getElementById("loadingOverlay").style.display = "flex";
 
     try {
-        await fetch("https://script.google.com/macros/s/AKfycbyPKStIMWABDzDZpjq6736_u13IkZAnOVul_fPYaefTu8Q-ue-kIw6nwPSi5D6or7Ci/exec", {
+        await fetch("https://script.google.com/macros/s/AKfycbwpc2A37wvs1fmPKy2Eo0g9t_6X3j7HGVG-Sn3D0lYaLodd98yTw6fbP1WD1Cr1YGIz/exec", {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
+            body: new URLSearchParams({
                 fullname: name,
                 phone: phone,
                 location: location,
@@ -502,28 +470,20 @@ async function validateForm() {
             })
         });
 
-        // ✅ SUCCESS
         document.getElementById("loadingOverlay").style.display = "none";
-        showPopup("popupSuccess", 3000);
+        alert("Submitted successfully!");
 
-        setTimeout(() => {
-            window.location.href = "index2.html";
-        }, 1500);
+        window.location.reload();
 
     } catch (err) {
-
-        // ❌ ERROR
         document.getElementById("loadingOverlay").style.display = "none";
-
-        document.getElementById("popupBoxError").innerText =
-            "Network error. Please try again";
-
-        showPopup("popupError", 2500);
-
+        alert("Network error. Check Apps Script deployment.");
         btn.innerText = "Submit Details";
         btn.disabled = false;
     }
 }
+
+document.getElementById("submitBtn").addEventListener("click", validateForm);
 
 document.getElementById("submitBtn").addEventListener("click", validateForm);
 </script>
