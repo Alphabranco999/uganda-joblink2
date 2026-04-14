@@ -435,25 +435,47 @@ input, select {
 
 <script>
 let isSubmitting = false;
- 
-document.getElementById("loadingOverlay").style.display = "flex";
-document.getElementById("submitBtn").addEventListener("click", validateForm);
 
-// ✅ FORMAT PHONE TO START WITH 0
+// FORMAT UG PHONE NUMBER
 function formatPhoneUG(phone) {
     phone = phone.replace(/\s+/g, "");
 
-    if (phone.startsWith("+256")) {
-        return "0" + phone.substring(4);
-    }
-
-    if (phone.startsWith("256")) {
-        return "0" + phone.substring(3);
-    }
+    if (phone.startsWith("+256")) return "0" + phone.slice(4);
+    if (phone.startsWith("256")) return "0" + phone.slice(3);
 
     return phone;
 }
 
+// SHOW ERROR POPUP
+function showError(msg) {
+    document.getElementById("popupBoxError").innerText = msg;
+    document.getElementById("popupError").style.display = "flex";
+
+    setTimeout(() => {
+        document.getElementById("popupError").style.display = "none";
+    }, 2500);
+}
+
+// SHOW SUCCESS POPUP
+function showSuccess() {
+    document.getElementById("popupSuccess").style.display = "flex";
+
+    setTimeout(() => {
+        document.getElementById("popupSuccess").style.display = "none";
+    }, 2000);
+}
+
+// RESET BUTTON
+function resetButton() {
+    isSubmitting = false;
+    const btn = document.getElementById("submitBtn");
+    btn.disabled = false;
+    btn.innerText = "Submit Details";
+
+    document.getElementById("loadingOverlay").style.display = "none";
+}
+
+// MAIN SUBMIT FUNCTION
 function validateForm() {
 
     if (isSubmitting) return;
@@ -466,7 +488,6 @@ function validateForm() {
     let name = document.getElementById("name").value.trim();
     let age = document.getElementById("age").value.trim();
 
-    // ✅ APPLY FORMAT HERE
     let phone = formatPhoneUG(document.getElementById("phone").value.trim());
     let emergency = formatPhoneUG(document.getElementById("emergency").value.trim());
 
@@ -479,32 +500,23 @@ function validateForm() {
         selectedJobs.push(j.parentElement.innerText.trim());
     });
 
-    // ✅ UPDATE INPUT FIELDS VISUALLY
+    // UPDATE INPUTS
     document.getElementById("phone").value = phone;
     document.getElementById("emergency").value = emergency;
 
-    // reset borders
-    ["name","age","phone","emergency","location"].forEach(id => {
-        document.getElementById(id).style.border = "1px solid #ccc";
-    });
-
-    // ✅ VALIDATION
-    if (
-        !name || !age || !phone || !emergency || !location ||
-        !education || !english || selectedJobs.length === 0
-    ) {
-        if (!name) document.getElementById("name").style.border = "2px solid red";
-        if (!age) document.getElementById("age").style.border = "2px solid red";
-        if (!phone) document.getElementById("phone").style.border = "2px solid red";
-        if (!emergency) document.getElementById("emergency").style.border = "2px solid red";
-        if (!location) document.getElementById("location").style.border = "2px solid red";
-
-        showError("Some required fields are still empty");
+    // VALIDATION
+    if (!name || !age || !phone || !emergency || !location || !education || !english) {
+        showError("Please fill all required fields");
         resetButton();
         return;
     }
 
-    // ✅ STRICT PHONE VALIDATION
+    if (selectedJobs.length === 0) {
+        showError("Select at least one job");
+        resetButton();
+        return;
+    }
+
     if (!/^0\d{9}$/.test(phone) || !/^0\d{9}$/.test(emergency)) {
         showError("Use valid number like 0712345678");
         resetButton();
@@ -516,6 +528,9 @@ function validateForm() {
         resetButton();
         return;
     }
+
+    // SHOW LOADING
+    document.getElementById("loadingOverlay").style.display = "flex";
 
     fetch("https://script.google.com/macros/s/AKfycbzH_LeU8KYVZ2435RnGhCwTTK9Ouw2F4_QCE0QLDTQAY-xB6im9tvg4Ccpa71mALgTn/exec", {
         method: "POST",
@@ -533,14 +548,16 @@ function validateForm() {
     })
     .then(() => {
 
+        // STOP LOADING
+        document.getElementById("loadingOverlay").style.display = "none";
+
+        // SHOW SUCCESS
+        showSuccess();
+
+        // REDIRECT AFTER SUCCESS
         setTimeout(() => {
-            document.getElementById("popupSuccess").style.display = "flex";
-
-            setTimeout(() => {
-                window.location.href = "index2.html";
-            }, 2500);
-
-        }, 1000);
+            window.location.href = "index2.html";
+        }, 2500);
 
     })
     .catch(() => {
@@ -549,27 +566,9 @@ function validateForm() {
     });
 }
 
-// ERROR POPUP
-function showError(msg) {
-    document.getElementById("popupBoxError").innerText = msg;
-    document.getElementById("popupError").style.display = "flex";
-
-    setTimeout(() => {
-        document.getElementById("popupError").style.display = "none";
-    }, 2500);
-}
-
-// RESET BUTTON
-function resetButton() {
-    isSubmitting = false;
-    const btn = document.getElementById("submitBtn");
-    btn.disabled = false;
-    btn.innerText = "Submit Details";
-
-    document.getElementById("loadingOverlay").style.display = "none";
-}
+// BUTTON CLICK
+document.getElementById("submitBtn").addEventListener("click", validateForm);
 </script>
-
 
 
 </body>
