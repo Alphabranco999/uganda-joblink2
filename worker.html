@@ -425,13 +425,14 @@ function formatPhoneUG(phone) {
 }
  
 function validateForm() {
- 
-let notes = document.getElementById("notes").value.trim();
+
+    let notes = document.getElementById("notes").value.trim();
     const btn = document.getElementById("submitBtn");
 
     let name = document.getElementById("name").value.trim();
     let phone = formatPhoneUG(document.getElementById("phone").value.trim());
     document.getElementById("phone").value = phone;
+
     let location = document.getElementById("location").value.trim();
     let workers = document.getElementById("workers").value.trim();
 
@@ -440,6 +441,7 @@ let notes = document.getElementById("notes").value.trim();
         selectedJobs.push(j.parentElement.innerText.trim());
     });
 
+    // ❌ validation
     if (workers <= 0) {
         document.getElementById("popupBoxError").innerText = "Enter valid number of workers";
         showPopup("popupError", 2500);
@@ -447,81 +449,59 @@ let notes = document.getElementById("notes").value.trim();
     }
 
     if (!name || !phone || !location || !workers || selectedJobs.length === 0) {
-        document.getElementById("name").style.border = name ? "1px solid #ccc" : "2px solid red";
-        document.getElementById("phone").style.border = phone ? "1px solid #ccc" : "2px solid red";
-        document.getElementById("location").style.border = location ? "1px solid #ccc" : "2px solid red";
-        document.getElementById("workers").style.border = workers ? "1px solid #ccc" : "2px solid red";
-
         document.getElementById("popupBoxError").innerText = "Some required fields are still empty";
         showPopup("popupError", 2500);
         return;
     }
 
-    // ✅ CHANGE BUTTON TEXT HERE
+    if (!/^0\d{9}$/.test(phone)) {
+        document.getElementById("popupBoxError").innerText = "Use valid number like 0712345678";
+        showPopup("popupError", 2500);
+        return;
+    }
+
+    // ✅ START SUBMIT (ONLY HERE spinner starts)
     btn.innerText = "Submitting......";
     btn.disabled = true;
     document.getElementById("loadingOverlay").style.display = "flex";
 
- 
+    fetch("https://script.google.com/macros/s/AKfycbzypzTzf9NIbpcDIU3fFfGye_lQmP8TVs4mQSJTtERJAYasZ2HZxX7rK3ZuzpOLjq0o/exec", {
+        method: "POST",
+        mode: "no-cors",
+        body: JSON.stringify({
+            fullname: name,
+            phone: phone,
+            location: location,
+            workers: workers,
+            jobs: selectedJobs.join(", "),
+            notes: notes
+        })
+    })
+    .then(() => {
+
+        // ✅ STOP SPINNER
         document.getElementById("loadingOverlay").style.display = "none";
-    if (!navigator.onLine) {
-        document.getElementById("popupBoxError").innerText = "Good internet connection required";
+
+        // SUCCESS POPUP
+        showPopup("popupSuccess", 3000);
+
+        setTimeout(() => {
+            window.location.href = "index2.html";
+        }, 3000);
+
+    })
+    .catch(err => {
+
+        // ❌ STOP SPINNER
+        document.getElementById("loadingOverlay").style.display = "none";
+
+        document.getElementById("popupBoxError").innerText = "Server error. Try again.";
         showPopup("popupError", 2500);
 
         btn.innerText = "Submit Details";
         btn.disabled = false;
-        return;
-    }
-    document.getElementById("loadingOverlay").style.display = "none";
- if (!/^0\d{9}$/.test(phone)) {
-    document.getElementById("popupBoxError").innerText = "Use valid number like 0712345678";
-showPopup("popupError", 2500);
-document.getElementById("loadingOverlay").style.display = "none";
-
-
-// SHOW spinner ONLY when submitting starts
-btn.innerText = "Submitting......";
-btn.disabled = true;
-document.getElementById("loadingOverlay").style.display = "flex";
-
-fetch("https://script.google.com/macros/s/AKfycbzypzTzf9NIbpcDIU3fFfGye_lQmP8TVs4mQSJTtERJAYasZ2HZxX7rK3ZuzpOLjq0o/exec", {
-    method: "POST",
-    mode: "no-cors",
-    body: JSON.stringify({
-        fullname: name,
-        phone: phone,
-        location: location,
-        workers: workers,
-        jobs: selectedJobs.join(", "),
-        notes: notes
-    })
-})
-.then(() => {
-    // ✅ SUCCESS FLOW
-
-    document.getElementById("loadingOverlay").style.display = "none";
-
-    showPopup("popupSuccess", 3000);
-
-    setTimeout(() => {
-        window.location.href = "index2.html";
-    }, 3000);
-})
-.catch(err => {
-    // ❌ ERROR FLOW
-
-    document.getElementById("loadingOverlay").style.display = "none";
-
-    document.getElementById("popupBoxError").innerText = "Server error. Try again.";
-    showPopup("popupError", 2500);
-
-    btn.innerText = "Submit Details";
-    btn.disabled = false;
-});
-
-  
+    });
 }
-
 function showPopup(id, duration = 3000) {
     const popup = document.getElementById(id);
     popup.classList.add("show");
