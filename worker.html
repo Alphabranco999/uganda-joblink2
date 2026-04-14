@@ -446,7 +446,7 @@ async function validateForm() {
     document.getElementById("phone").value = phone;
 
     let location = document.getElementById("location").value.trim();
-    let workers = document.getElementById("workers").value.trim();
+    let workers = Number(document.getElementById("workers").value);
 
     let selectedJobs = [];
     document.querySelectorAll(".job:checked").forEach(j => {
@@ -454,14 +454,14 @@ async function validateForm() {
     });
 
     // ❌ VALIDATION
-    if (!name || !phone || !location || !workers || selectedJobs.length === 0) {
+    if (!name || !phone || !location || selectedJobs.length === 0) {
         document.getElementById("popupBoxError").innerText =
             "Please fill all required fields and select at least one job";
         showPopup("popupError", 2500);
         return;
     }
 
-    if (Number(workers) <= 0) {
+    if (workers <= 0 || isNaN(workers)) {
         document.getElementById("popupBoxError").innerText =
             "Enter a valid number of workers";
         showPopup("popupError", 2500);
