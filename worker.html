@@ -462,6 +462,8 @@ let notes = document.getElementById("notes").value.trim();
     btn.disabled = true;
     document.getElementById("loadingOverlay").style.display = "flex";
 
+ 
+        document.getElementById("loadingOverlay").style.display = "none";
     if (!navigator.onLine) {
         document.getElementById("popupBoxError").innerText = "Good internet connection required";
         showPopup("popupError", 2500);
@@ -470,8 +472,11 @@ let notes = document.getElementById("notes").value.trim();
         btn.disabled = false;
         return;
     }
+    document.getElementById("loadingOverlay").style.display = "none";
  if (!/^0\d{9}$/.test(phone)) {
-    showError("Use valid number like 0712345678");
+    document.getElementById("popupBoxError").innerText = "Use valid number like 0712345678";
+showPopup("popupError", 2500);
+document.getElementById("loadingOverlay").style.display = "none";
     btn.innerText = "Submit Details";
     btn.disabled = false;
     return;
@@ -490,9 +495,14 @@ let notes = document.getElementById("notes").value.trim();
         notes: notes
     })
 })
+     document.getElementById("loadingOverlay").style.display = "none";   
     .then(res => res.text())
     .then(response => {
 
+    // ✅ HIDE spinner first
+    document.getElementById("loadingOverlay").style.display = "none";
+
+    // ✅ SHOW success
     setTimeout(() => {
         showPopup("popupSuccess", 3000);
 
@@ -500,9 +510,10 @@ let notes = document.getElementById("notes").value.trim();
             window.location.href = "index2.html";
         }, 3000);
 
-    }, 3000); // ⏳ delay before showing popup
+    }, 300);
 
 })
+     document.getElementById("loadingOverlay").style.display = "none";
     .catch(err => {
         document.getElementById("popupBoxError").innerText = "Server error. Try again.";
         showPopup("popupError", 2500);
@@ -510,6 +521,7 @@ let notes = document.getElementById("notes").value.trim();
         // reset button on error
         btn.innerText = "Submit Details";
         btn.disabled = false;
+     
     });
 }
 
