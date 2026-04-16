@@ -294,6 +294,20 @@ window.onload = () => {
     }, 1500);
 };
 
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("/service-worker.js")
+      .then(function (registration) {
+        console.log("Service Worker registered:", registration.scope);
+      })
+      .catch(function (error) {
+        console.log("Service Worker failed:", error);
+      });
+  });
+}
+    
+
 </script>
 
 </body>
