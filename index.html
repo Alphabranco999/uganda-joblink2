@@ -6,18 +6,42 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Uganda JobsLink</title>
 
-<script src="https://unpkg.com/lucide@latest"></script>
-
 <style>
 
-/* ===== BODY ===== */
 body {
     margin: 0;
     height: 100vh;
     background: #001A33;
     font-family: Arial, sans-serif;
-    color: white;
     overflow: hidden;
+}
+
+/* ===== YOUR UI ALWAYS ON TOP ===== */
+.wrapper {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: white;
+}
+
+/* ===== LOGO BOX (UNCHANGED) ===== */
+.image-box {
+    width: 90%;
+    max-width: 400px;
+    height: 260px;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.image-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* ===== BACKGROUND ===== */
@@ -27,126 +51,43 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    overflow: hidden;
     z-index: -1;
-    pointer-events: none;
-}
-
-/* 🌈 Gradient */
-.gradient-layer {
-    position: absolute;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle at 30% 30%, #0a66c2, transparent),
-                radial-gradient(circle at 70% 70%, #00d4ff, transparent),
-                radial-gradient(circle at 50% 80%, #001a33, #000);
-    animation: gradientMove 12s infinite alternate ease-in-out;
-}
-
-@keyframes gradientMove {
-    0% { transform: translate(0,0); }
-    100% { transform: translate(-10%, -10%); }
-}
-
-/* ✨ Particles */
-.particles span {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: white;
-    border-radius: 50%;
-    animation: float linear infinite;
-}
-
-@keyframes float {
-    from { transform: translateY(100vh); }
-    to { transform: translateY(-10vh); }
-}
-
-/* 💼 Falling icons */
-.fall-item {
-    position: absolute;
-    top: -50px;
-    animation: fall linear infinite;
-}
-
-.fall-item svg {
-    width: 22px;
-    height: 22px;
-    stroke: currentColor;
-    opacity: 0.1;
-    filter: blur(0.5px) drop-shadow(0 0 6px currentColor);
-}
-
-@keyframes fall {
-    0% { transform: translateY(-50px); opacity: 0; }
-    20% { opacity: 0.2; }
-    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
-}
-
-/* ===== UI CONTENT ===== */
-.wrapper {
-    position: relative;
-    z-index: 10;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-/* IMAGE */
-.image-box {
-    width: 90%;
-    max-width: 400px;
-    height: 260px;
-    border-radius: 20px;
     overflow: hidden;
-    animation: imageEnter 1.2s ease-out forwards;
 }
 
-@keyframes imageEnter {
-    0% { opacity: 0; transform: translateY(-80px) scale(0.7); }
-    100% { opacity: 1; transform: translateY(-20px) scale(1); }
-}
-
-.image-box img {
+/* STACK AREA */
+.stack-area {
+    position: absolute;
+    bottom: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
 }
 
-/* TEXT */
-.welcome {
-    font-size: clamp(18px, 5vw, 26px);
-    font-weight: bold;
-    margin-top: 20px;
+/* ICON BLOCK */
+.icon-box {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: white;
+    animation: drop 0.5s ease forwards;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
-/* LOADING */
-.loading-text {
-    margin-top: 20px;
-    font-size: 14px;
-}
-
-.percent {
-    margin-top: 5px;
-}
-
-/* BAR */
-.progress-container {
-    width: 80%;
-    height: 8px;
-    background: rgba(255,255,255,0.2);
-    border-radius: 20px;
-    margin-top: 10px;
-}
-
-.progress-bar {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #00FFA3, #00D4FF, #0084FF);
-    border-radius: 20px;
+/* DROP ANIMATION */
+@keyframes drop {
+    from {
+        transform: translateY(-120vh);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
 
 </style>
@@ -154,99 +95,76 @@ body {
 
 <body>
 
-<!-- 🌌 BACKGROUND -->
-<div class="premium-bg">
-    <div class="gradient-layer"></div>
-    <div class="particles"></div>
-    <div class="bg-animation"></div>
-</div>
+<!-- BACKGROUND -->
+<div class="premium-bg"></div>
 
-<!-- 🎯 CONTENT -->
+<!-- UI -->
 <div class="wrapper">
 
     <div class="image-box">
         <img src="image_666.png">
     </div>
 
-    <div class="welcome">Connecting Workers and Employers</div>
-
-    <div class="loading-text">Loading...</div>
-    <div class="percent" id="percent">0%</div>
-
-    <div class="progress-container">
-        <div class="progress-bar"></div>
-    </div>
+    <h2>Connecting Workers and Employers</h2>
 
 </div>
 
 <script>
 
-/* ===== PARTICLES ===== */
-const particleContainer = document.querySelector(".particles");
+/* ===== CREATE STACK LAYER ===== */
+const bg = document.querySelector(".premium-bg");
 
-for (let i = 0; i < 40; i++) {
-    const dot = document.createElement("span");
-    dot.style.left = Math.random() * 100 + "vw";
-    dot.style.animationDuration = (5 + Math.random() * 10) + "s";
-    dot.style.opacity = Math.random();
-    particleContainer.appendChild(dot);
-}
+const stackArea = document.createElement("div");
+stackArea.className = "stack-area";
+bg.appendChild(stackArea);
 
-/* ===== ICONS ===== */
-const bg = document.querySelector(".bg-animation");
-
+/* ===== REALISTIC APP ICONS ===== */
 const icons = [
-    "briefcase","file-text","bar-chart","user",
-    "folder","bookmark","building","clipboard",
-    "layers","pie-chart","users","award"
+    "💼","📱","📊","🧑‍💻","📁",
+    "🏢","📦","📝","📈","💡",
+    "🖥️","📂","📌","📋"
 ];
 
+/* COLORS */
 const colors = [
-    "#00FFA3","#00D4FF","#0084FF",
-    "#FFD700","#FF6B6B","#A66CFF","#00C9A7"
+    "#0a66c2","#00d4ff","#28a745",
+    "#ff6b6b","#6f42c1","#ff9f1c"
 ];
 
-let i = 0;
+const size = 50;
+const columns = Math.floor(window.innerWidth / size);
+let heights = new Array(columns).fill(0);
 
-function createIcon() {
-    const item = document.createElement("div");
-    item.classList.add("fall-item");
+/* ===== DROP + STACK ===== */
+function dropIcon() {
 
-    const icon = icons[i];
-    i = (i + 1) % icons.length;
+    const col = Math.floor(Math.random() * columns);
+    const x = col * size;
+    const y = heights[col] * size;
 
-    const color = colors[Math.floor(Math.random() * colors.length)];
+    const box = document.createElement("div");
+    box.className = "icon-box";
 
-    item.innerHTML = `<i data-lucide="${icon}"></i>`;
-    item.style.color = color;
+    box.innerText = icons[Math.floor(Math.random() * icons.length)];
 
-    item.style.left = Math.random() * 100 + "vw";
-    item.style.animationDuration = (5 + Math.random() * 5) + "s";
+    box.style.background = colors[Math.floor(Math.random() * colors.length)];
 
-    bg.appendChild(item);
-    lucide.createIcons();
+    box.style.left = x + "px";
+    box.style.bottom = y + "px";
 
-    setTimeout(() => item.remove(), 10000);
+    stackArea.appendChild(box);
+
+    heights[col]++;
+
+    /* stop when full screen */
+    const maxHeight = Math.max(...heights) * size;
+    if (maxHeight > window.innerHeight) {
+        clearInterval(loop);
+    }
 }
 
-setInterval(createIcon, 300);
-
-/* ===== LOADING ===== */
-let percent = 0;
-const bar = document.querySelector(".progress-bar");
-
-let interval = setInterval(() => {
-    percent++;
-    document.getElementById("percent").innerText = percent + "%";
-    bar.style.width = percent + "%";
-
-    if (percent >= 100) {
-        clearInterval(interval);
-        setTimeout(() => {
-            window.location.href = "index2.html";
-        }, 500);
-    }
-}, 30);
+/* SPEED CONTROL */
+const loop = setInterval(dropIcon, 120);
 
 </script>
 
