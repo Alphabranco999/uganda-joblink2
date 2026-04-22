@@ -14,25 +14,60 @@ body {
     background: #001A33;
     font-family: Arial, sans-serif;
     overflow: hidden;
+    color: white;
 }
 
-/* ===== YOUR UI ALWAYS ON TOP ===== */
+/* ===== BACKGROUND ===== */
+.premium-bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.stack-area {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+}
+
+/* ICONS */
+.icon-box {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    animation: drop 0.4s linear forwards;
+    color: white;
+}
+
+@keyframes drop {
+    from { transform: translateY(-120vh); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* ===== UI ===== */
 .wrapper {
     position: relative;
     z-index: 10;
+    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100%;
-    color: white;
 }
 
-/* ===== LOGO BOX (UNCHANGED) ===== */
+/* LOGO */
 .image-box {
     width: 90%;
-    max-width: 400px;
-    height: 260px;
+    max-width: 380px;
+    height: 240px;
     background: white;
     border-radius: 20px;
     overflow: hidden;
@@ -44,50 +79,42 @@ body {
     object-fit: cover;
 }
 
-/* ===== BACKGROUND ===== */
-.premium-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
+/* TEXT */
+.welcome {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 20px;
+    text-align: center;
+    max-width: 90%;
+}
+
+/* LOADING */
+.loading {
+    margin-top: 15px;
+    font-size: 14px;
+    opacity: 0.8;
+}
+
+.percent {
+    margin-top: 5px;
+}
+
+/* BAR */
+.progress-container {
+    width: 80%;
+    height: 10px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 20px;
+    margin-top: 10px;
     overflow: hidden;
 }
 
-/* STACK AREA */
-.stack-area {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
+.progress-bar {
     height: 100%;
-}
-
-/* ICON BLOCK */
-.icon-box {
-    position: absolute;
-    width: 45px;
-    height: 45px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    color: white;
-    animation: drop 0.5s ease forwards;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-/* DROP ANIMATION */
-@keyframes drop {
-    from {
-        transform: translateY(-120vh);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+    width: 0%;
+    background: linear-gradient(90deg,#00FFA3,#00D4FF,#0084FF);
+    border-radius: 20px;
+    transition: width 0.1s linear;
 }
 
 </style>
@@ -96,7 +123,9 @@ body {
 <body>
 
 <!-- BACKGROUND -->
-<div class="premium-bg"></div>
+<div class="premium-bg">
+    <div class="stack-area"></div>
+</div>
 
 <!-- UI -->
 <div class="wrapper">
@@ -105,66 +134,97 @@ body {
         <img src="image_666.png">
     </div>
 
-    <h2>Connecting Workers and Employers</h2>
+    <div class="welcome" id="text"></div>
+
+    <div class="loading">Loading...</div>
+    <div class="percent" id="percent">0%</div>
+
+    <div class="progress-container">
+        <div class="progress-bar"></div>
+    </div>
 
 </div>
 
 <script>
 
-/* ===== CREATE STACK LAYER ===== */
-const bg = document.querySelector(".premium-bg");
+/* ===== STACK BACKGROUND ===== */
+const area = document.querySelector(".stack-area");
 
-const stackArea = document.createElement("div");
-stackArea.className = "stack-area";
-bg.appendChild(stackArea);
-
-/* ===== REALISTIC APP ICONS ===== */
-const icons = [
-    "💼","📱","📊","🧑‍💻","📁",
-    "🏢","📦","📝","📈","💡",
-    "🖥️","📂","📌","📋"
-];
-
-/* COLORS */
-const colors = [
-    "#0a66c2","#00d4ff","#28a745",
-    "#ff6b6b","#6f42c1","#ff9f1c"
-];
+const icons = ["💼","📱","📊","🧑‍💻","📁","🏢","📦","📝","📈","💡"];
+const colors = ["#0a66c2","#00d4ff","#28a745","#ff6b6b","#6f42c1","#ff9f1c"];
 
 const size = 50;
-const columns = Math.floor(window.innerWidth / size);
-let heights = new Array(columns).fill(0);
+const cols = Math.floor(window.innerWidth / size);
+let heights = new Array(cols).fill(0);
 
-/* ===== DROP + STACK ===== */
-function dropIcon() {
+/* FAST FALL CONTROL */
+function dropIcon(speed) {
 
-    const col = Math.floor(Math.random() * columns);
-    const x = col * size;
-    const y = heights[col] * size;
+    const col = Math.floor(Math.random() * cols);
 
     const box = document.createElement("div");
     box.className = "icon-box";
 
     box.innerText = icons[Math.floor(Math.random() * icons.length)];
-
     box.style.background = colors[Math.floor(Math.random() * colors.length)];
 
-    box.style.left = x + "px";
-    box.style.bottom = y + "px";
+    box.style.left = (col * size) + "px";
+    box.style.bottom = (heights[col] * size) + "px";
 
-    stackArea.appendChild(box);
+    box.style.animationDuration = (0.3 + Math.random() * 0.2) + "s";
 
+    area.appendChild(box);
     heights[col]++;
 
-    /* stop when full screen */
-    const maxHeight = Math.max(...heights) * size;
-    if (maxHeight > window.innerHeight) {
-        clearInterval(loop);
-    }
 }
 
-/* SPEED CONTROL */
-const loop = setInterval(dropIcon, 120);
+/* ===== TEXT ANIMATION ===== */
+const text = "Connecting Workers and Employers";
+const container = document.getElementById("text");
+
+text.split("").forEach((c, i) => {
+    const span = document.createElement("span");
+    span.innerHTML = c === " " ? "&nbsp;" : c;
+    span.style.display = "inline-block";
+    span.style.opacity = "0";
+    span.style.transform = "translateY(-20px)";
+    span.style.transition = "all 0.2s ease";
+    container.appendChild(span);
+});
+
+/* ===== LOADING SYSTEM ===== */
+let percent = 0;
+const bar = document.querySelector(".progress-bar");
+const letters = container.children;
+
+let interval = setInterval(() => {
+
+    percent++;
+
+    document.getElementById("percent").innerText = percent + "%";
+    bar.style.width = percent + "%";
+
+    /* TEXT FALL SYNC WITH LOADING */
+    let letterIndex = Math.floor((percent / 100) * letters.length);
+    if (letters[letterIndex]) {
+        letters[letterIndex].style.opacity = "1";
+        letters[letterIndex].style.transform = "translateY(0)";
+    }
+
+    /* FAST ICON DROP */
+    for (let i = 0; i < 3; i++) {
+        dropIcon();
+    }
+
+    if (percent >= 100) {
+        clearInterval(interval);
+
+        setTimeout(() => {
+            window.location.href = "index2.html";
+        }, 600);
+    }
+
+}, 30);
 
 </script>
 
