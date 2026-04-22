@@ -2,43 +2,97 @@
 <html lang="en">
 <head>
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1643408490792413"
- crossorigin="anonymous"></script>
-
 <meta charset="UTF-8">
-<title>Uganda JobsLink</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Uganda JobsLink</title>
 
-<link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#0a66c2">
+<script src="https://unpkg.com/lucide@latest"></script>
 
 <style>
+
+/* ===== BODY ===== */
 body {
     margin: 0;
     height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background: #001A33;
     font-family: Arial, sans-serif;
     color: white;
-    text-align: center;
     overflow: hidden;
 }
 
-/* FADE OUT */
-.fade-out {
-    animation: fadeOutScreen 0.8s ease forwards;
-}
-@keyframes fadeOutScreen {
-    to { opacity: 0; transform: scale(0.95); }
+/* ===== BACKGROUND ===== */
+.premium-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+    pointer-events: none;
 }
 
+/* 🌈 Gradient */
+.gradient-layer {
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 30%, #0a66c2, transparent),
+                radial-gradient(circle at 70% 70%, #00d4ff, transparent),
+                radial-gradient(circle at 50% 80%, #001a33, #000);
+    animation: gradientMove 12s infinite alternate ease-in-out;
+}
+
+@keyframes gradientMove {
+    0% { transform: translate(0,0); }
+    100% { transform: translate(-10%, -10%); }
+}
+
+/* ✨ Particles */
+.particles span {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    animation: float linear infinite;
+}
+
+@keyframes float {
+    from { transform: translateY(100vh); }
+    to { transform: translateY(-10vh); }
+}
+
+/* 💼 Falling icons */
+.fall-item {
+    position: absolute;
+    top: -50px;
+    animation: fall linear infinite;
+}
+
+.fall-item svg {
+    width: 22px;
+    height: 22px;
+    stroke: currentColor;
+    opacity: 0.1;
+    filter: blur(0.5px) drop-shadow(0 0 6px currentColor);
+}
+
+@keyframes fall {
+    0% { transform: translateY(-50px); opacity: 0; }
+    20% { opacity: 0.2; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+/* ===== UI CONTENT ===== */
 .wrapper {
+    position: relative;
+    z-index: 10;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    width: 100%;
 }
 
 /* IMAGE */
@@ -46,18 +100,14 @@ body {
     width: 90%;
     max-width: 400px;
     height: 260px;
-    background: #fff;
     border-radius: 20px;
     overflow: hidden;
-    opacity: 0;
     animation: imageEnter 1.2s ease-out forwards;
-    box-shadow: 0 0 30px rgba(255,255,255,0.3);
 }
 
 @keyframes imageEnter {
     0% { opacity: 0; transform: translateY(-80px) scale(0.7); }
-    70% { opacity: 1; transform: translateY(-20px) scale(1.05); }
-    100% { opacity: 1; transform: translateY(-30px) scale(1); }
+    100% { opacity: 1; transform: translateY(-20px) scale(1); }
 }
 
 .image-box img {
@@ -66,96 +116,30 @@ body {
     object-fit: cover;
 }
 
-/* TEXT CONTAINER */
-#fit-box {
-    width: 100%;
-    padding: 0 10px;
-    box-sizing: border-box;
-}
-
-/* LETTER ANIMATION */
-.welcome span {
-    display: inline-block;
-    opacity: 0;
-    transform: translateY(-60px);
-    animation: dropStay 0.7s cubic-bezier(0.25, 1.5, 0.5, 1) forwards;
-}
-
-@keyframes dropStay {
-    0% { opacity: 0; transform: translateY(-60px); }
-    70% { opacity: 1; transform: translateY(8px); }
-    85% { transform: translateY(-3px); }
-    100% { opacity: 1; transform: translateY(0); }
-}
-
-/* ✅ RESPONSIVE TEXT (FIXED ISSUE) */
+/* TEXT */
 .welcome {
-    font-size: clamp(16px, 5vw, 24px);
-    font-weight: 700;
-    letter-spacing: 1px;
-    white-space: nowrap;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    font-size: clamp(18px, 5vw, 26px);
+    font-weight: bold;
+    margin-top: 20px;
 }
 
 /* LOADING */
 .loading-text {
-    font-size: 14px;
     margin-top: 20px;
-    opacity: 0;
-    animation: fadeInText 1s ease-out forwards;
-    animation-delay: 1.5s;
-    color: #D0D8E0;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    font-size: 14px;
 }
 
-@keyframes fadeInText {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-.dots::after {
-    content: '';
-    animation: dots 1.5s infinite;
-}
-
-@keyframes dots {
-    0% { content: ''; }
-    33% { content: '.'; }
-    66% { content: '..'; }
-    100% { content: '...'; }
-}
-
-/* PERCENT */
 .percent {
-    font-size: 15px;
-    margin-top: 6px;
-    opacity: 0;
-    animation: fadeInPercent 1s ease-out forwards;
-    animation-delay: 1.7s;
+    margin-top: 5px;
 }
 
-@keyframes fadeInPercent {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* PROGRESS BAR */
+/* BAR */
 .progress-container {
     width: 80%;
-    height: 10px;
-    background: rgba(255,255,255,0.15);
+    height: 8px;
+    background: rgba(255,255,255,0.2);
     border-radius: 20px;
-    margin-top: 12px;
-    overflow: hidden;
-    opacity: 0;
-    animation: fadeInBar 1s ease-out forwards;
-    animation-delay: 1.9s;
-}
-
-@keyframes fadeInBar {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    margin-top: 10px;
 }
 
 .progress-bar {
@@ -163,25 +147,30 @@ body {
     width: 0%;
     background: linear-gradient(90deg, #00FFA3, #00D4FF, #0084FF);
     border-radius: 20px;
-    transition: width 0.2s linear;
 }
+
 </style>
 </head>
 
 <body>
 
+<!-- 🌌 BACKGROUND -->
+<div class="premium-bg">
+    <div class="gradient-layer"></div>
+    <div class="particles"></div>
+    <div class="bg-animation"></div>
+</div>
+
+<!-- 🎯 CONTENT -->
 <div class="wrapper">
 
     <div class="image-box">
-        <img src="image_666.png" alt="Uganda JobsLink">
+        <img src="image_666.png">
     </div>
 
-    <div id="fit-box">
-        <h2 class="welcome" id="welcomeText"></h2>
-    </div>
+    <div class="welcome">Connecting Workers and Employers</div>
 
-    <div class="loading-text"><span class="dots">Loading</span></div>
-
+    <div class="loading-text">Loading...</div>
     <div class="percent" id="percent">0%</div>
 
     <div class="progress-container">
@@ -192,61 +181,72 @@ body {
 
 <script>
 
-/* TEXT CONTENT */
-const text = "Connecting Workers and Employers";
-const container = document.getElementById("welcomeText");
+/* ===== PARTICLES ===== */
+const particleContainer = document.querySelector(".particles");
 
-/* CREATE LETTERS */
-text.split("").forEach((char, i) => {
-    const span = document.createElement("span");
-    span.innerHTML = char === " " ? "&nbsp;" : char;
-    span.style.animationDelay = (i * 0.03) + "s";
-    container.appendChild(span);
-});
-
-/* PROGRESS SYSTEM (SYNCED) */
-window.onload = () => {
-
-    setTimeout(() => {
-        let percent = 0;
-        const bar = document.querySelector(".progress-bar");
-
-        let counter = setInterval(() => {
-            percent++;
-            document.getElementById("percent").innerText = percent + "%";
-            bar.style.width = percent + "%";
-
-            if (percent >= 100) {
-                clearInterval(counter);
-                document.body.classList.add("fade-out");
-
-                setTimeout(() => {
-                    window.location.href = "index2.html";
-                }, 800);
-            }
-        }, 30);
-
-    }, 1500);
-};
-
-/* SERVICE WORKER */
-if ("serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/service-worker.js");
+for (let i = 0; i < 40; i++) {
+    const dot = document.createElement("span");
+    dot.style.left = Math.random() * 100 + "vw";
+    dot.style.animationDuration = (5 + Math.random() * 10) + "s";
+    dot.style.opacity = Math.random();
+    particleContainer.appendChild(dot);
 }
 
-/* INSTALL PROMPT */
-let deferredPrompt;
-window.addEventListener("beforeinstallprompt", (e) => {
-  e.preventDefault();
-  deferredPrompt = e;
+/* ===== ICONS ===== */
+const bg = document.querySelector(".bg-animation");
 
-  setTimeout(() => {
-    if (deferredPrompt) {
-      deferredPrompt.prompt();
-      deferredPrompt.userChoice.then(() => deferredPrompt = null);
+const icons = [
+    "briefcase","file-text","bar-chart","user",
+    "folder","bookmark","building","clipboard",
+    "layers","pie-chart","users","award"
+];
+
+const colors = [
+    "#00FFA3","#00D4FF","#0084FF",
+    "#FFD700","#FF6B6B","#A66CFF","#00C9A7"
+];
+
+let i = 0;
+
+function createIcon() {
+    const item = document.createElement("div");
+    item.classList.add("fall-item");
+
+    const icon = icons[i];
+    i = (i + 1) % icons.length;
+
+    const color = colors[Math.floor(Math.random() * colors.length)];
+
+    item.innerHTML = `<i data-lucide="${icon}"></i>`;
+    item.style.color = color;
+
+    item.style.left = Math.random() * 100 + "vw";
+    item.style.animationDuration = (5 + Math.random() * 5) + "s";
+
+    bg.appendChild(item);
+    lucide.createIcons();
+
+    setTimeout(() => item.remove(), 10000);
+}
+
+setInterval(createIcon, 300);
+
+/* ===== LOADING ===== */
+let percent = 0;
+const bar = document.querySelector(".progress-bar");
+
+let interval = setInterval(() => {
+    percent++;
+    document.getElementById("percent").innerText = percent + "%";
+    bar.style.width = percent + "%";
+
+    if (percent >= 100) {
+        clearInterval(interval);
+        setTimeout(() => {
+            window.location.href = "index2.html";
+        }, 500);
     }
-  }, 3000);
-});
+}, 30);
 
 </script>
 
