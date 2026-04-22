@@ -26,30 +26,27 @@ body {
     overflow: hidden;
 }
 
-.stack-area {
+/* SOFT PARTICLES */
+.particle {
     position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 100%;
+    width: 6px;
+    height: 6px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 50%;
+    animation: fall linear infinite;
+    filter: blur(1px);
 }
 
-/* ICONS */
-.icon-box {
-    position: absolute;
-    width: 45px;
-    height: 45px;
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 22px;
-    animation: drop 0.4s linear forwards;
-    color: white;
-}
-
-@keyframes drop {
-    from { transform: translateY(-120vh); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+@keyframes fall {
+    from {
+        transform: translateY(-10vh);
+        opacity: 0;
+    }
+    20% { opacity: 0.4; }
+    to {
+        transform: translateY(110vh);
+        opacity: 0;
+    }
 }
 
 /* ===== UI ===== */
@@ -123,9 +120,7 @@ body {
 <body>
 
 <!-- BACKGROUND -->
-<div class="premium-bg">
-    <div class="stack-area"></div>
-</div>
+<div class="premium-bg"></div>
 
 <!-- UI -->
 <div class="wrapper">
@@ -147,55 +142,44 @@ body {
 
 <script>
 
-/* ===== STACK BACKGROUND ===== */
-const area = document.querySelector(".stack-area");
+/* ===== SOFT PARTICLES ===== */
+const bg = document.querySelector(".premium-bg");
 
-const icons = ["💼","📱","📊","🧑‍💻","📁","🏢","📦","📝","📈","💡"];
-const colors = ["#0a66c2","#00d4ff","#28a745","#ff6b6b","#6f42c1","#ff9f1c"];
+function createParticle() {
+    const p = document.createElement("div");
+    p.className = "particle";
 
-const size = 50;
-const cols = Math.floor(window.innerWidth / size);
-let heights = new Array(cols).fill(0);
+    p.style.left = Math.random() * 100 + "vw";
+    p.style.animationDuration = (4 + Math.random() * 6) + "s";
+    p.style.width = p.style.height = (3 + Math.random() * 4) + "px";
+    p.style.opacity = Math.random() * 0.5;
 
-/* FAST FALL CONTROL */
-function dropIcon(speed) {
+    bg.appendChild(p);
 
-    const col = Math.floor(Math.random() * cols);
-
-    const box = document.createElement("div");
-    box.className = "icon-box";
-
-    box.innerText = icons[Math.floor(Math.random() * icons.length)];
-    box.style.background = colors[Math.floor(Math.random() * colors.length)];
-
-    box.style.left = (col * size) + "px";
-    box.style.bottom = (heights[col] * size) + "px";
-
-    box.style.animationDuration = (0.3 + Math.random() * 0.2) + "s";
-
-    area.appendChild(box);
-    heights[col]++;
-
+    setTimeout(() => p.remove(), 10000);
 }
+
+setInterval(createParticle, 120);
 
 /* ===== TEXT ANIMATION ===== */
 const text = "Connecting Workers and Employers";
 const container = document.getElementById("text");
 
-text.split("").forEach((c, i) => {
+text.split("").forEach((c) => {
     const span = document.createElement("span");
     span.innerHTML = c === " " ? "&nbsp;" : c;
-    span.style.display = "inline-block";
     span.style.opacity = "0";
-    span.style.transform = "translateY(-20px)";
-    span.style.transition = "all 0.2s ease";
+    span.style.display = "inline-block";
+    span.style.transform = "translateY(-10px)";
+    span.style.transition = "0.25s ease";
     container.appendChild(span);
 });
 
-/* ===== LOADING SYSTEM ===== */
+const letters = container.children;
+
+/* ===== LOADING ===== */
 let percent = 0;
 const bar = document.querySelector(".progress-bar");
-const letters = container.children;
 
 let interval = setInterval(() => {
 
@@ -204,16 +188,10 @@ let interval = setInterval(() => {
     document.getElementById("percent").innerText = percent + "%";
     bar.style.width = percent + "%";
 
-    /* TEXT FALL SYNC WITH LOADING */
-    let letterIndex = Math.floor((percent / 100) * letters.length);
-    if (letters[letterIndex]) {
-        letters[letterIndex].style.opacity = "1";
-        letters[letterIndex].style.transform = "translateY(0)";
-    }
-
-    /* FAST ICON DROP */
-    for (let i = 0; i < 3; i++) {
-        dropIcon();
+    let index = Math.floor((percent / 100) * letters.length);
+    if (letters[index]) {
+        letters[index].style.opacity = "1";
+        letters[index].style.transform = "translateY(0)";
     }
 
     if (percent >= 100) {
@@ -221,7 +199,7 @@ let interval = setInterval(() => {
 
         setTimeout(() => {
             window.location.href = "index2.html";
-        }, 600);
+        }, 500);
     }
 
 }, 30);
