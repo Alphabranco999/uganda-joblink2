@@ -18,7 +18,7 @@ body {
     color: white;
 }
 
-/* ===== CINEMATIC BACKGROUND ===== */
+/* ===== BACKGROUND ===== */
 .bg {
     position: fixed;
     width: 100%;
@@ -26,16 +26,10 @@ body {
     background: radial-gradient(circle at center, #0a66c2 0%, transparent 60%),
                 radial-gradient(circle at 30% 70%, #00d4ff33, transparent 60%),
                 #000814;
-    animation: glowMove 8s ease-in-out infinite alternate;
     z-index: -1;
 }
 
-@keyframes glowMove {
-    0% { transform: scale(1); filter: blur(0px); }
-    100% { transform: scale(1.1); filter: blur(2px); }
-}
-
-/* ===== CENTER WRAPPER ===== */
+/* ===== CENTER ===== */
 .wrapper {
     height: 100%;
     display: flex;
@@ -43,15 +37,16 @@ body {
     align-items: center;
     justify-content: center;
     text-align: center;
+    padding: 0 15px;
 }
 
-/* ===== LOGO (CINEMATIC) ===== */
+/* ===== LOGO ===== */
 .logo {
-    width: 180px;
-    height: 180px;
-    border-radius: 30px;
+    width: 160px;
+    height: 160px;
+    border-radius: 25px;
     overflow: hidden;
-    box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+    box-shadow: 0 25px 70px rgba(0,0,0,0.6);
 
     opacity: 0;
     transform: scale(0.6);
@@ -68,12 +63,12 @@ body {
 @keyframes logoIn {
     0% {
         opacity: 0;
-        transform: scale(0.5) translateY(30px);
+        transform: scale(0.5) translateY(20px);
         filter: blur(10px);
     }
     60% {
         opacity: 1;
-        transform: scale(1.1);
+        transform: scale(1.05);
         filter: blur(0px);
     }
     100% {
@@ -82,22 +77,33 @@ body {
     }
 }
 
-/* ===== TITLE ===== */
+/* ===== TITLE (FIXED ONE LINE MOBILE SAFE) ===== */
 .title {
-    margin-top: 25px;
-    font-size: 20px;
-    letter-spacing: 2px;
+    margin-top: 20px;
+    font-size: clamp(13px, 4.2vw, 18px);
+    letter-spacing: 1px;
+
+    white-space: nowrap;       /* 🔥 FORCE ONE LINE */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 92vw;
+
     opacity: 0;
     animation: fadeIn 1.2s ease forwards;
     animation-delay: 1.2s;
 }
 
+/* FADE */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 /* ===== LOADING ===== */
 .loading {
-    margin-top: 20px;
+    margin-top: 18px;
     font-size: 13px;
     opacity: 0.7;
-    letter-spacing: 1px;
 }
 
 .percent {
@@ -105,6 +111,7 @@ body {
     font-size: 13px;
 }
 
+/* BAR */
 .bar {
     width: 220px;
     height: 6px;
@@ -117,14 +124,8 @@ body {
 .fill {
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg, #00d4ff, #0a66c2);
+    background: linear-gradient(90deg,#00d4ff,#0a66c2);
     transition: width 0.1s linear;
-}
-
-/* FADE IN */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 </style>
@@ -140,7 +141,7 @@ body {
         <img src="image_666.png">
     </div>
 
-    <div class="title">Connecting Workers & Employers</div>
+    <div class="title">Connecting Workers and Employers</div>
 
     <div class="loading">Loading</div>
     <div class="percent" id="percent">0%</div>
@@ -153,12 +154,13 @@ body {
 
 <script>
 
-/* ===== LOADING ===== */
+/* ===== LOADING SYSTEM ===== */
 let percent = 0;
+
 const fill = document.getElementById("fill");
 const text = document.getElementById("percent");
 
-let loader = setInterval(() => {
+let load = setInterval(() => {
 
     percent++;
 
@@ -166,7 +168,7 @@ let loader = setInterval(() => {
     fill.style.width = percent + "%";
 
     if (percent >= 100) {
-        clearInterval(loader);
+        clearInterval(load);
 
         setTimeout(() => {
             window.location.href = "index2.html";
