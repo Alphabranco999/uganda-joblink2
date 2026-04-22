@@ -29,7 +29,7 @@ body {
     z-index: -1;
 }
 
-/* ===== CENTER ===== */
+/* ===== CENTER WRAPPER ===== */
 .wrapper {
     height: 100%;
     display: flex;
@@ -40,23 +40,32 @@ body {
     padding: 0 15px;
 }
 
-/* ===== LOGO ===== */
+/* ===== LOGO BOX (UPDATED) ===== */
 .logo {
-    width: 160px;
-    height: 160px;
-    border-radius: 25px;
-    overflow: hidden;
-    box-shadow: 0 25px 70px rgba(0,0,0,0.6);
+    width: 240px;              /* ⬆️ bigger */
+    height: 240px;             /* ⬆️ bigger */
+
+    background: white;         /* ⬜ white background box */
+    border-radius: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 12px;
+
+    box-shadow: 0 30px 80px rgba(0,0,0,0.65);
 
     opacity: 0;
     transform: scale(0.6);
     animation: logoIn 1.5s ease forwards;
 }
 
+/* LOGO IMAGE */
 .logo img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 /* LOGO ANIMATION */
@@ -77,13 +86,13 @@ body {
     }
 }
 
-/* ===== TITLE (FIXED ONE LINE MOBILE SAFE) ===== */
+/* ===== TITLE (ONE LINE FIX) ===== */
 .title {
     margin-top: 20px;
     font-size: clamp(13px, 4.2vw, 18px);
     letter-spacing: 1px;
 
-    white-space: nowrap;       /* 🔥 FORCE ONE LINE */
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 92vw;
@@ -93,7 +102,6 @@ body {
     animation-delay: 1.2s;
 }
 
-/* FADE */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
