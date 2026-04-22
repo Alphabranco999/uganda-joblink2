@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1643408490792413"
-     crossorigin="anonymous"></script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1643408490792413"
+ crossorigin="anonymous"></script>
+
 <meta charset="UTF-8">
 <title>Uganda JobsLink</title>
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#0a66c2"> 
-<script>console.log("PAGE IS LOADING");</script>   
+<meta name="theme-color" content="#0a66c2">
+
 <style>
 body {
     margin: 0;
-    padding: 0;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -28,12 +29,8 @@ body {
 .fade-out {
     animation: fadeOutScreen 0.8s ease forwards;
 }
-
 @keyframes fadeOutScreen {
-    to {
-        opacity: 0;
-        transform: scale(0.95);
-    }
+    to { opacity: 0; transform: scale(0.95); }
 }
 
 .wrapper {
@@ -55,72 +52,52 @@ body {
     animation: imageEnter 1.2s ease-out forwards;
     box-shadow: 0 0 30px rgba(255,255,255,0.3);
 }
-
 @keyframes imageEnter {
     0% { opacity: 0; transform: translateY(-80px) scale(0.7); }
     70% { opacity: 1; transform: translateY(-20px) scale(1.05); }
     100% { opacity: 1; transform: translateY(-30px) scale(1); }
 }
-
 .image-box img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-/* TEXT CONTAINER */
+/* TEXT FIT */
 #fit-box {
     display: inline-block;
     transform-origin: center;
     white-space: nowrap;
 }
 
-/* LETTER ANIMATION (FIXED) */
+/* LETTER ANIMATION */
 .welcome span {
     display: inline-block;
     opacity: 0;
     transform: translateY(-60px);
     animation: dropStay 0.7s cubic-bezier(0.25, 1.5, 0.5, 1) forwards;
 }
-
 @keyframes dropStay {
-    0% {
-        opacity: 0;
-        transform: translateY(-60px);
-    }
-    70% {
-        opacity: 1;
-        transform: translateY(8px);
-    }
-    85% {
-        transform: translateY(-3px);
-    }
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    0% { opacity: 0; transform: translateY(-60px); }
+    70% { opacity: 1; transform: translateY(8px); }
+    85% { transform: translateY(-3px); }
+    100% { opacity: 1; transform: translateY(0); }
 }
 
-/* IMPROVED TEXT SIZE (SLIGHTLY BIGGER) */
 .welcome {
-    font-size: 24px; /* increased a bit */
+    font-size: 24px;
     font-weight: 700;
     letter-spacing: 1px;
-    text-shadow: 0 2px 10px rgba(0,0,0,0.4);
 }
 
-/* LOADING */
+/* LOADING TEXT */
 .loading-text {
     font-size: 14px;
     margin-top: 20px;
     opacity: 0;
     animation: fadeInText 1s ease-out forwards;
     animation-delay: 1.5s;
-    color: #D0D8E0;
-    letter-spacing: 1px;
-    text-transform: uppercase;
 }
-
 @keyframes fadeInText {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -130,7 +107,6 @@ body {
     content: '';
     animation: dots 1.5s infinite;
 }
-
 @keyframes dots {
     0% { content: ''; }
     33% { content: '.'; }
@@ -146,7 +122,6 @@ body {
     animation: fadeInPercent 1s ease-out forwards;
     animation-delay: 1.7s;
 }
-
 @keyframes fadeInPercent {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -164,7 +139,6 @@ body {
     animation: fadeInBar 1s ease-out forwards;
     animation-delay: 1.9s;
 }
-
 @keyframes fadeInBar {
     from { opacity: 0; }
     to { opacity: 1; }
@@ -174,24 +148,9 @@ body {
     height: 100%;
     width: 0%;
     background: linear-gradient(90deg, #00FFA3, #00D4FF, #0084FF);
-    background-size: 300% 100%;
-    animation: loadBar 3.5s ease-out forwards, glowShift 3s linear infinite;
-    animation-delay: 2.1s;
     border-radius: 20px;
+    transition: width 0.2s linear;
 }
-
-@keyframes loadBar {
-    0% { width: 0%; }
-    30% { width: 45%; }
-    60% { width: 80%; }
-    100% { width: 100%; }
-}
-
-@keyframes glowShift {
-    0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; }
-}
-
 </style>
 </head>
 
@@ -204,57 +163,10 @@ body {
     </div>
 
     <div id="fit-box">
-        <h2 class="welcome">
-
-            <!-- SAME TEXT, JUST FASTER TIMING -->
-            <!-- Connecting -->
-            <span style="animation-delay:0.03s">C</span>
-            <span style="animation-delay:0.06s">o</span>
-            <span style="animation-delay:0.09s">n</span>
-            <span style="animation-delay:0.12s">n</span>
-            <span style="animation-delay:0.15s">e</span>
-            <span style="animation-delay:0.18s">c</span>
-            <span style="animation-delay:0.21s">t</span>
-            <span style="animation-delay:0.24s">i</span>
-            <span style="animation-delay:0.27s">n</span>
-            <span style="animation-delay:0.30s">g</span>
-
-            <span style="animation-delay:0.33s">&nbsp;</span>
-
-            <!-- Workers -->
-            <span style="animation-delay:0.36s">W</span>
-            <span style="animation-delay:0.39s">o</span>
-            <span style="animation-delay:0.42s">r</span>
-            <span style="animation-delay:0.45s">k</span>
-            <span style="animation-delay:0.48s">e</span>
-            <span style="animation-delay:0.51s">r</span>
-            <span style="animation-delay:0.54s">s</span>
-
-            <span style="animation-delay:0.57s">&nbsp;</span>
-
-            <!-- and -->
-            <span style="animation-delay:0.60s">a</span>
-            <span style="animation-delay:0.63s">n</span>
-            <span style="animation-delay:0.66s">d</span>
-
-            <span style="animation-delay:0.69s">&nbsp;</span>
-
-            <!-- Employers -->
-            <span style="animation-delay:0.72s">E</span>
-            <span style="animation-delay:0.75s">m</span>
-            <span style="animation-delay:0.78s">p</span>
-            <span style="animation-delay:0.81s">l</span>
-            <span style="animation-delay:0.84s">o</span>
-            <span style="animation-delay:0.87s">y</span>
-            <span style="animation-delay:0.90s">e</span>
-            <span style="animation-delay:0.93s">r</span>
-            <span style="animation-delay:0.96s">s</span>
-
-        </h2>
+        <h2 class="welcome" id="welcomeText"></h2>
     </div>
 
     <div class="loading-text"><span class="dots">Loading</span></div>
-
     <div class="percent" id="percent">0%</div>
 
     <div class="progress-container">
@@ -265,25 +177,52 @@ body {
 
 <script>
 
+/* TEXT CONTENT */
+const text = "Connecting Workers and Employers";
+const container = document.getElementById("welcomeText");
+
+/* CREATE LETTERS DYNAMICALLY (better than hardcoding spans) */
+text.split("").forEach((char, i) => {
+    const span = document.createElement("span");
+    span.innerHTML = char === " " ? "&nbsp;" : char;
+    span.style.animationDelay = (i * 0.03) + "s";
+    container.appendChild(span);
+});
+
+/* FIT TEXT (ANDROID SAFE) */
 function fitText() {
     const box = document.getElementById("fit-box");
     let scale = 1;
 
-    while (box.scrollWidth > window.innerWidth - 20) {
-        scale -= 0.02;
-        box.style.transform = "scale(" + scale + ")";
-        if (scale <= 0.5) break;
+    function adjust() {
+        if (box.scrollWidth > window.innerWidth - 20 && scale > 0.5) {
+            scale -= 0.02;
+            box.style.transform = `scale(${scale})`;
+            requestAnimationFrame(adjust);
+        }
     }
+    adjust();
 }
 
+/* LOAD */
 window.onload = () => {
-    fitText();
 
+    // Wait for animation to settle before fitting
+    setTimeout(() => {
+        fitText();
+    }, 800);
+
+    window.addEventListener("resize", fitText);
+
+    // PROGRESS SYSTEM (SYNCED)
     setTimeout(() => {
         let percent = 0;
+        const bar = document.querySelector(".progress-bar");
+
         let counter = setInterval(() => {
             percent++;
             document.getElementById("percent").innerText = percent + "%";
+            bar.style.width = percent + "%";
 
             if (percent >= 100) {
                 clearInterval(counter);
@@ -294,22 +233,18 @@ window.onload = () => {
                 }, 800);
             }
         }, 30);
+
     }, 1500);
 };
 
-
+/* SERVICE WORKER */
 if ("serviceWorker" in navigator) {
   window.addEventListener("load", function () {
     navigator.serviceWorker.register("/service-worker.js")
-      .then(function (registration) {
-        console.log("Service Worker registered:", registration.scope);
-      })
-      .catch(function (error) {
-        console.log("Service Worker failed:", error);
-      });
+      .then(reg => console.log("Service Worker registered:", reg.scope))
+      .catch(err => console.log("Service Worker failed:", err));
   });
 }
-    
 
 </script>
 
