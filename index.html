@@ -8,110 +8,123 @@
 
 <style>
 
+/* ===== BASE ===== */
 body {
     margin: 0;
     height: 100vh;
-    background: #001A33;
-    font-family: Arial, sans-serif;
     overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: #000814;
     color: white;
 }
 
-/* ===== BACKGROUND ===== */
-.premium-bg {
+/* ===== CINEMATIC BACKGROUND ===== */
+.bg {
     position: fixed;
     width: 100%;
     height: 100%;
+    background: radial-gradient(circle at center, #0a66c2 0%, transparent 60%),
+                radial-gradient(circle at 30% 70%, #00d4ff33, transparent 60%),
+                #000814;
+    animation: glowMove 8s ease-in-out infinite alternate;
     z-index: -1;
-    overflow: hidden;
 }
 
-/* SOFT PARTICLES */
-.particle {
-    position: absolute;
-    width: 6px;
-    height: 6px;
-    background: rgba(255,255,255,0.25);
-    border-radius: 50%;
-    animation: fall linear infinite;
-    filter: blur(1px);
+@keyframes glowMove {
+    0% { transform: scale(1); filter: blur(0px); }
+    100% { transform: scale(1.1); filter: blur(2px); }
 }
 
-@keyframes fall {
-    from {
-        transform: translateY(-10vh);
-        opacity: 0;
-    }
-    20% { opacity: 0.4; }
-    to {
-        transform: translateY(110vh);
-        opacity: 0;
-    }
-}
-
-/* ===== UI ===== */
+/* ===== CENTER WRAPPER ===== */
 .wrapper {
-    position: relative;
-    z-index: 10;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    text-align: center;
 }
 
-/* LOGO */
-.image-box {
-    width: 90%;
-    max-width: 380px;
-    height: 240px;
-    background: white;
-    border-radius: 20px;
+/* ===== LOGO (CINEMATIC) ===== */
+.logo {
+    width: 180px;
+    height: 180px;
+    border-radius: 30px;
     overflow: hidden;
+    box-shadow: 0 30px 80px rgba(0,0,0,0.6);
+
+    opacity: 0;
+    transform: scale(0.6);
+    animation: logoIn 1.5s ease forwards;
 }
 
-.image-box img {
+.logo img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-/* TEXT */
-.welcome {
-    font-size: 22px;
-    font-weight: bold;
-    margin-top: 20px;
-    text-align: center;
-    max-width: 90%;
+/* LOGO ANIMATION */
+@keyframes logoIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) translateY(30px);
+        filter: blur(10px);
+    }
+    60% {
+        opacity: 1;
+        transform: scale(1.1);
+        filter: blur(0px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
-/* LOADING */
+/* ===== TITLE ===== */
+.title {
+    margin-top: 25px;
+    font-size: 20px;
+    letter-spacing: 2px;
+    opacity: 0;
+    animation: fadeIn 1.2s ease forwards;
+    animation-delay: 1.2s;
+}
+
+/* ===== LOADING ===== */
 .loading {
-    margin-top: 15px;
-    font-size: 14px;
-    opacity: 0.8;
+    margin-top: 20px;
+    font-size: 13px;
+    opacity: 0.7;
+    letter-spacing: 1px;
 }
 
 .percent {
     margin-top: 5px;
+    font-size: 13px;
 }
 
-/* BAR */
-.progress-container {
-    width: 80%;
-    height: 10px;
-    background: rgba(255,255,255,0.2);
+.bar {
+    width: 220px;
+    height: 6px;
+    background: rgba(255,255,255,0.15);
     border-radius: 20px;
     margin-top: 10px;
     overflow: hidden;
 }
 
-.progress-bar {
+.fill {
     height: 100%;
     width: 0%;
-    background: linear-gradient(90deg,#00FFA3,#00D4FF,#0084FF);
-    border-radius: 20px;
+    background: linear-gradient(90deg, #00d4ff, #0a66c2);
     transition: width 0.1s linear;
+}
+
+/* FADE IN */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 </style>
@@ -119,87 +132,45 @@ body {
 
 <body>
 
-<!-- BACKGROUND -->
-<div class="premium-bg"></div>
+<div class="bg"></div>
 
-<!-- UI -->
 <div class="wrapper">
 
-    <div class="image-box">
+    <div class="logo">
         <img src="image_666.png">
     </div>
 
-    <div class="welcome" id="text"></div>
+    <div class="title">Connecting Workers & Employers</div>
 
-    <div class="loading">Loading...</div>
+    <div class="loading">Loading</div>
     <div class="percent" id="percent">0%</div>
 
-    <div class="progress-container">
-        <div class="progress-bar"></div>
+    <div class="bar">
+        <div class="fill" id="fill"></div>
     </div>
 
 </div>
 
 <script>
 
-/* ===== SOFT PARTICLES ===== */
-const bg = document.querySelector(".premium-bg");
-
-function createParticle() {
-    const p = document.createElement("div");
-    p.className = "particle";
-
-    p.style.left = Math.random() * 100 + "vw";
-    p.style.animationDuration = (4 + Math.random() * 6) + "s";
-    p.style.width = p.style.height = (3 + Math.random() * 4) + "px";
-    p.style.opacity = Math.random() * 0.5;
-
-    bg.appendChild(p);
-
-    setTimeout(() => p.remove(), 10000);
-}
-
-setInterval(createParticle, 120);
-
-/* ===== TEXT ANIMATION ===== */
-const text = "Connecting Workers and Employers";
-const container = document.getElementById("text");
-
-text.split("").forEach((c) => {
-    const span = document.createElement("span");
-    span.innerHTML = c === " " ? "&nbsp;" : c;
-    span.style.opacity = "0";
-    span.style.display = "inline-block";
-    span.style.transform = "translateY(-10px)";
-    span.style.transition = "0.25s ease";
-    container.appendChild(span);
-});
-
-const letters = container.children;
-
 /* ===== LOADING ===== */
 let percent = 0;
-const bar = document.querySelector(".progress-bar");
+const fill = document.getElementById("fill");
+const text = document.getElementById("percent");
 
-let interval = setInterval(() => {
+let loader = setInterval(() => {
 
     percent++;
 
-    document.getElementById("percent").innerText = percent + "%";
-    bar.style.width = percent + "%";
-
-    let index = Math.floor((percent / 100) * letters.length);
-    if (letters[index]) {
-        letters[index].style.opacity = "1";
-        letters[index].style.transform = "translateY(0)";
-    }
+    text.innerText = percent + "%";
+    fill.style.width = percent + "%";
 
     if (percent >= 100) {
-        clearInterval(interval);
+        clearInterval(loader);
 
         setTimeout(() => {
             window.location.href = "index2.html";
-        }, 500);
+        }, 600);
     }
 
 }, 30);
